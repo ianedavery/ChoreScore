@@ -9,7 +9,7 @@ const jsonParser = bodyParser.json();
 
 router.post('/', jsonParser, (req, res) => {
 	//checking that all required fields are included in request body
-	const requiredFields = ['username', 'password', 'firstName', 'lastName'];
+	const requiredFields = ['username', 'password'];
 	const missingField = requiredFields.find(field => !(field in req.body));
 	if(missingField) {
 		return res.status(422).json({
@@ -44,7 +44,52 @@ router.post('/', jsonParser, (req, res) => {
 	};
 	const fieldTooSmall = Object.keys(fieldSizes).find(field => 
 		'min' in fieldSizes[field] && req.body[field].trim().length < fieldSizes[field].min);
+	if(fieldTooSmall) {
+		return res.status(422).json({
+			message: `${fieldTooSmall}` is not long enough.
+		});
+	}
 	const fieldTooBig = Object.keys(fieldSizes).find(field =>
 		'max' in fieldSizes[field] && req.body[field].trim().length > fieldSizes[field].max);
+	if(fieldTooBig) {
+		return res.status(422).json({
+			message: `${fieldTooBig}` is too long.
+		});
+	}
+	//check that the username is unique. if it is, create the user.
+	let {username, password, firstName = '', lastName = ''} = req.body;
+	//trim any whitespace from the first and last names
+	firstName = firstName.trim();
+	lastName = lastName.trim();
+	return User.find({username})
+		.count()
+		.then(count => {
+			//if the username already exists, return error message
+			if(count > 0) {
+				return Promise.reject({
+					message: username already taken
+				});
+			}
+			//if username is unique, pass the password to the hashPassword function in users/models.js
+			return User.hashPassword(password);
+		})
+		//then create the user
+		.then(hash => {
+			return User.create({
+				username,
+				password: hash,
+				firstName,
+				lastName
+			});
+		})
+		//then return response object to user
+		.then(user => {
+			return res.status(201).json(user.serialize());
+		})
+		.catch(err => {
+			console.error(err);
+        	res.status(500).json({message: 'Internal server error'});
+		});
+});
 
-})
+module.exports = {router};

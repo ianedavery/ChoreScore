@@ -19,21 +19,21 @@ const UserSchema = mongoose.Schema({
 		required: true
 	},
 	firstName: {
-		type: String, 
-		required: true
+		type: String,
+		default: '' 
 	},
 	lastName: {
 		type: String,
-		required: true
+		default: ''
 	}
 });
 
 //specifies what response objects should look like
 UserSchema.methods.serialize = function() {
 	return {
-		username: this.username,
-		firstName: this.firstName,
-		lastName: this.lastName
+		username: this.username || '',
+		firstName: this.firstName || '',
+		lastName: this.lastName || ''
 	};
 };
 
