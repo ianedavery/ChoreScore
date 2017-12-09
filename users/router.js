@@ -13,7 +13,7 @@ router.post('/', jsonParser, (req, res) => {
 	const missingField = requiredFields.find(field => !(field in req.body));
 	if(missingField) {
 		return res.status(422).json({
-			message: `${missingField}` is missing from your request.
+			message: '`${missingField}` is missing from your request.'
 		});
 	}
 	//checking that all fields are of the 'string' type
@@ -21,7 +21,7 @@ router.post('/', jsonParser, (req, res) => {
 	const nonStringField = stringFields.find(field => field in req.body && typeof req.body[field] !== 'string');
 	if(nonStringField) {
 		return res.status(422).json({
-			message: `${nonStringField}` is not a string.
+			message: '`${nonStringField}` is not a string.'
 		});
 	}
 	//checking there is no whitespace in the username or password
@@ -29,7 +29,7 @@ router.post('/', jsonParser, (req, res) => {
 	const nonTrimmedField = trimmedFields.find(field => req.body[field].trim() !== req.body[field]);
 	if(nonTrimmedField) {
 		return res.status(422).json({
-			message: `${nonTrimmedField}` cannot contain whitespace.
+			message: '`${nonTrimmedField}` cannot contain whitespace.'
 		});
 	}
 	//set, and check, minimum and maximum lenghts for username and password
@@ -46,14 +46,14 @@ router.post('/', jsonParser, (req, res) => {
 		'min' in fieldSizes[field] && req.body[field].trim().length < fieldSizes[field].min);
 	if(fieldTooSmall) {
 		return res.status(422).json({
-			message: `${fieldTooSmall}` is not long enough.
+			message: '`${fieldTooSmall}` is not long enough.'
 		});
 	}
 	const fieldTooBig = Object.keys(fieldSizes).find(field =>
 		'max' in fieldSizes[field] && req.body[field].trim().length > fieldSizes[field].max);
 	if(fieldTooBig) {
 		return res.status(422).json({
-			message: `${fieldTooBig}` is too long.
+			message: '`${fieldTooBig}` is too long.'
 		});
 	}
 	//check that the username is unique. if it is, create the user.
@@ -67,7 +67,7 @@ router.post('/', jsonParser, (req, res) => {
 			//if the username already exists, return error message
 			if(count > 0) {
 				return Promise.reject({
-					message: username already taken
+					message: 'username already taken'
 				});
 			}
 			//if username is unique, pass the password to the hashPassword function in users/models.js
