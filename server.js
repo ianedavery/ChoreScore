@@ -7,18 +7,18 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const {router: usersRouter} = require('./users');
 const {router: authRouter, localStrategy, jwtStrategy} = require('./auth');
+const choreRouter = require('./choreRouter');
 const {PORT, DATABASE_URL} = require('./config');
 
 mongoose.Promise = global.Promise;
 
 app.use(morgan('common'));
+
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
-/*app.use(express.static('public'));
+app.use('/api/chore', choreRouter);
 
-app.get('/', (req, res) => {
-	res.sendFile(_dirname + '/views/index.html');
-});*/
+app.use(express.static('public'));
 
 passport.use(localStrategy);
 passport.use(jwtStrategy);
@@ -33,6 +33,10 @@ app.use(function (req, res, next) {
   next();
 });
 
+/*app.get('/', (req, res) => {
+  res.sendFile(_dirname + '/views/index.html');
+});*/
+
 const jwtAuth = passport.authenticate('jwt', {session: false});
 
 app.get('/api/protected', jwtAuth, (req, res) => {
@@ -42,7 +46,6 @@ app.get('/api/protected', jwtAuth, (req, res) => {
 let server;
 
 function runServer() {
-  //const port = process.env.PORT || 8080;
   return new Promise((resolve, reject) => {
     mongoose.connect(DATABASE_URL, {useMongoClient: true}, err => {
       if(err) {

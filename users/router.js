@@ -7,6 +7,7 @@ const {User} = require('./models');
 const router = express.Router();
 const jsonParser = bodyParser.json();
 
+//create a new user
 router.post('/', jsonParser, (req, res) => {
 	//checking that all required fields are included in request body
 	const requiredFields = ['username', 'password'];

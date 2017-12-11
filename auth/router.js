@@ -20,13 +20,16 @@ const localAuth = passport.authenticate('local', {session: false});
 
 router.use(bodyParser.json());
 
+//login and create a JWT
 router.post('/login', localAuth, (req, res) => {
 	const authToken = createAuthToken(req.user.serialize());
 	res.json({authToken});
+	//res.redirect('/api/protected');
 });
 
 const jwtAuth = passport.authenticate('jwt', {session: false});
 
+//refresh the JWT
 router.post('/refresh', jwtAuth, (req,res) => {
 	const authToken = createAuthToken(req.user);
 	res.json({authToken});
