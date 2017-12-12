@@ -52,6 +52,7 @@ router.post('/', jsonParser, (req, res) => {
 	Badge
 	  .create({
 		  badgename: req.body.badgename,
+		  badgeCost: req.body.badgeCost,
 		  createdBy: req.user.userId
 	  })
 	  .then(badge => res.status(201).json(badge.serialize()))

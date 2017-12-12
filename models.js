@@ -22,6 +22,10 @@ const BadgeSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
+	badgeCost: {
+		type: Number,
+		required: true
+	},
 	createdBy: {
 		type: String,
 		required: true
@@ -54,7 +58,8 @@ ChoreSchema.methods.serialize = function() {
 
 BadgeSchema.methods.serialize = function() {
 	return {
-		badgename: this.badgename
+		badgename: this.badgename,
+		badgeCost: this.badgeCost
 	};
 };
 
