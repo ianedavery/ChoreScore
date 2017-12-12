@@ -24,6 +24,23 @@ const BadgeSchema = mongoose.Schema({
 	}
 });
 
+const FamilySchema = mongoose.Schema({
+	name: {
+		type: String,
+		required: true
+	},
+	createdBy: {
+		type: String,
+		required: true
+	}
+});
+
+FamilySchema.methods.serialize = function() {
+	return {
+		name: this.name
+	};
+};
+
 ChoreSchema.methods.serialize = function() {
 	return {
 		chore: this.chore
@@ -36,7 +53,8 @@ BadgeSchema.methods.serialize = function() {
 	};
 };
 
+const Family = mongoose.model('Family', FamilySchema);
 const Badge = mongoose.model('Badge', BadgeSchema);
 const Chore = mongoose.model('Chore', ChoreSchema);
 
-module.exports = {Badge, Chore};
+module.exports = {Badge, Chore, Family};

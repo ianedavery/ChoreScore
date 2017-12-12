@@ -11,6 +11,7 @@ const {router: usersRouter} = require('./users');
 const {router: authRouter, localStrategy, jwtStrategy} = require('./auth');
 const choreRouter = require('./choreRouter');
 const badgeRouter = require('./badgeRouter');
+const familyRouter = require('./familyRouter');
 const {PORT, DATABASE_URL} = require('./config');
 
 mongoose.Promise = global.Promise;
@@ -48,6 +49,7 @@ app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/chore', jwtAuth, choreRouter);
 app.use('/api/badge', jwtAuth, badgeRouter);
+app.use('/api/family', jwtAuth, familyRouter);
 
 let server;
 
