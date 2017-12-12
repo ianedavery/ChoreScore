@@ -20,12 +20,6 @@ app.use(morgan('common'));
 
 app.use(express.static('public'));
 
-app.use(session({
-  secret: 'work hard',
-  resave: true,
-  saveUninitialized: false
-}));
-
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 

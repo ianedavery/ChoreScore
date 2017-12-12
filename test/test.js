@@ -20,6 +20,7 @@ describe('Root', function() {
 			.then(function (res) {
 				res.should.have.status(200);
 				res.should.be.html;
-			});
+			})
+			.catch(err => res.status(500).json({message: "something went wrong"}));
 	});
 });
