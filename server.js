@@ -1,5 +1,7 @@
 'use strict';
+
 require('dotenv').config();
+const session = require('client-sessions');
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
@@ -8,17 +10,20 @@ const mongoose = require('mongoose');
 const {router: usersRouter} = require('./users');
 const {router: authRouter, localStrategy, jwtStrategy} = require('./auth');
 const choreRouter = require('./choreRouter');
+const badgeRouter = require('./badgeRouter');
 const {PORT, DATABASE_URL} = require('./config');
 
 mongoose.Promise = global.Promise;
 
 app.use(morgan('common'));
 
-app.use('/api/users', usersRouter);
-app.use('/api/auth', authRouter);
-app.use('/api/chore', choreRouter);
-
 app.use(express.static('public'));
+
+app.use(session({
+  secret: 'work hard',
+  resave: true,
+  saveUninitialized: false
+}));
 
 passport.use(localStrategy);
 passport.use(jwtStrategy);
@@ -39,9 +44,10 @@ app.use(function (req, res, next) {
 
 const jwtAuth = passport.authenticate('jwt', {session: false});
 
-app.get('/api/protected', jwtAuth, (req, res) => {
-  return res.json({data: 'Hello world'});
-});
+app.use('/api/users', usersRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/chore', jwtAuth, choreRouter);
+app.use('/api/badge', jwtAuth, badgeRouter);
 
 let server;
 

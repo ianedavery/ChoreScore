@@ -18,7 +18,7 @@ function displayProtectedEndpoint() {
 
 function handleLogInRequests() {
 	$('#login-form').submit(event => {
-		event.preventDefault();
+		//event.preventDefault();
 		let usernameTarget = $(event.currentTarget).find('#username');
 		let username = usernameTarget.val();
 		usernameTarget.val('');

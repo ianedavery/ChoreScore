@@ -31,6 +31,7 @@ const UserSchema = mongoose.Schema({
 //specifies what response objects should look like
 UserSchema.methods.serialize = function() {
 	return {
+		userId: this._id || '',
 		username: this.username || '',
 		firstName: this.firstName || '',
 		lastName: this.lastName || ''

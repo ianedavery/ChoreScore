@@ -5,15 +5,15 @@ const config = require('./config');
 const jwt = require('express-jwt');
 const express = require('express');
 const bodyParser = require('body-parser');
-const {Chore} = require('./models');
+const {Badge} = require('./models');
 const router = express.Router();
 const jsonParser = bodyParser.json();
 
-router.get('/', (req, res) => {
-	Chore
-	  .find()
-	  .then(chores => {
-	  	res.json(chores.map(chore => chore.serialize()));
+router.get('/:userId', (req, res) => {
+	Badge
+	  .find({"userId": req.params.userId})
+	  .then(badges => {
+	  	res.json(badges.map(badge => badge.serialize()));
 	  })
 	  .catch(err => {
 	  	console.error(err);
@@ -22,14 +22,14 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', jsonParser, (req, res) => {
-	const requiredFields = ['chore'];
+	const requiredFields = ['badgename'];
 	const missingField = requiredFields.find(field => !(field in req.body));
 	if(missingField) {
 		return res.status(422).json({
 			message: `\`${missingField}\` is missing from your request.`
 		});
 	}
-	const stringFields = ['chore'];
+	const stringFields = ['badgename'];
 	const nonStringField = stringFields.find(field => field in req.body && typeof req.body[field] !== 'string');
 	if(nonStringField) {
 		return res.status(422).json({
@@ -37,7 +37,7 @@ router.post('/', jsonParser, (req, res) => {
 		});
 	}
 	const fieldSizes = {
-		chore: {
+		badgename: {
 			min: 1
 		}
 	};
@@ -49,12 +49,12 @@ router.post('/', jsonParser, (req, res) => {
 		});
 	}
 	jwt({secret: config.JWT_SECRET});
-	Chore
+	Badge
 	  .create({
-		  chore: req.body.chore,
+		  badgename: req.body.badgename,
 		  createdBy: req.user.userId
 	  })
-	  .then(chore => res.status(201).json(chore.serialize()))
+	  .then(badge => res.status(201).json(badge.serialize()))
 	  .catch(err => {
         console.error(err);
         res.status(500).json({message: 'Internal Server Error'});
@@ -62,7 +62,7 @@ router.post('/', jsonParser, (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-	Chore
+	Badge
 	  .findByIdAndRemove(req.params.id)
 	  .then(() => {
 	  	res.status(204).json({message: 'success'});
