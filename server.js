@@ -33,9 +33,9 @@ app.use(function (req, res, next) {
   next();
 });
 
-/*app.get('/', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(_dirname + '/views/index.html');
-});*/
+});
 
 const jwtAuth = passport.authenticate('jwt', {session: false});
 
