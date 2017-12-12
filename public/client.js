@@ -13,7 +13,7 @@ function userLogIn(user) {
 }
 
 function displayProtectedEndpoint() {
-
+	res.redirect('./api/badges');
 }
 
 function handleLogInRequests() {

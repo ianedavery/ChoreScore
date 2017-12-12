@@ -58,6 +58,7 @@ FamilySchema.methods.serialize = function() {
 
 ChoreSchema.methods.serialize = function() {
 	return {
+		id: this._id,
 		chore: this.chore,
 		pointValue: this.pointValue
 	};
@@ -65,6 +66,7 @@ ChoreSchema.methods.serialize = function() {
 
 BadgeSchema.methods.serialize = function() {
 	return {
+		id: this._id,
 		badgename: this.badgename,
 		badgeCost: this.badgeCost
 	};
