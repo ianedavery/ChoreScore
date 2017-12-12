@@ -9,9 +9,9 @@ const {Badge} = require('./models');
 const router = express.Router();
 const jsonParser = bodyParser.json();
 
-router.get('/:userId', (req, res) => {
+router.get('/', (req, res) => {
 	Badge
-	  .find({"userId": req.params.userId})
+	  .find()
 	  .then(badges => {
 	  	res.json(badges.map(badge => badge.serialize()));
 	  })

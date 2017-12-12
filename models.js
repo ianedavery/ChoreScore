@@ -1,6 +1,7 @@
 'use strict';
 
 const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 
 const ChoreSchema = mongoose.Schema({
 	chore: {
@@ -37,6 +38,10 @@ const FamilySchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
+	pointsAccrued: {
+		type: Number,
+		required: true
+	},
 	createdBy: {
 		type: String,
 		required: true
@@ -45,7 +50,9 @@ const FamilySchema = mongoose.Schema({
 
 FamilySchema.methods.serialize = function() {
 	return {
-		name: this.name
+		id: this._id,
+		name: this.name,
+		pointsAccrued: this.pointsAccrued
 	};
 };
 

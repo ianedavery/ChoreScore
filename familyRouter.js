@@ -8,6 +8,10 @@ const bodyParser = require('body-parser');
 const {Family} = require('./models');
 const router = express.Router();
 const jsonParser = bodyParser.json();
+const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+
+router.use(bodyParser.json());
 
 router.get('/', (req, res) => {
 	Family
@@ -52,6 +56,7 @@ router.post('/', jsonParser, (req, res) => {
 	Family
 	  .create({
 		  name: req.body.name,
+		  pointsAccrued: 0,
 		  createdBy: req.user.userId
 	  })
 	  .then(kid => res.status(201).json(kid.serialize()))
@@ -59,6 +64,25 @@ router.post('/', jsonParser, (req, res) => {
         console.error(err);
         res.status(500).json({message: 'Internal Server Error'});
     });
+});
+
+router.put('/:id', (req, res) => {
+	if(!(req.params.id && req.body.id && req.params.id === req.body.id)) {
+		res.status(400).json({
+			error: 'Request path id and request body id values must match'
+		});
+	}
+	const updated = {};
+	const updatableFields = ['pointsAccrued', 'name'];
+	updatableFields.forEach(field => {
+		if(field in req.body) {
+			updated[field] = req.body[field];
+		}
+	});
+	Family
+		.findByIdAndUpdate(req.params.id, {$set: updated}, {new: true})
+		.then(updatedFamily => res.status(204).end())
+		.catch(err => res.status(500).json({error: 'Something went wrong'}));
 });
 
 router.delete('/:id', (req, res) => {
