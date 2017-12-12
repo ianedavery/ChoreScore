@@ -7,6 +7,10 @@ const ChoreSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
+	pointValue: {
+		type: Number,
+		required: true
+	},
 	createdBy: {
 		type: String,
 		required: true
@@ -43,7 +47,8 @@ FamilySchema.methods.serialize = function() {
 
 ChoreSchema.methods.serialize = function() {
 	return {
-		chore: this.chore
+		chore: this.chore,
+		pointValue: this.pointValue
 	};
 };
 
