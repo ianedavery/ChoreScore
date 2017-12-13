@@ -41,8 +41,8 @@ const jwtAuth = passport.authenticate('jwt', {session: false});
 
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
-app.use('/api/chore', jwtAuth, choreRouter);
-app.use('/api/badge', jwtAuth, badgeRouter);
+app.use('/api/chore', /*jwtAuth,*/ choreRouter);
+app.use('/api/badge', /*jwtAuth,*/ badgeRouter);
 app.use('/api/family', jwtAuth, familyRouter);
 
 let server;
