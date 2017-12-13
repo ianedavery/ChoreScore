@@ -14,9 +14,11 @@ mongoose.Promise = global.Promise;
 
 router.use(bodyParser.json());
 
+jwt({secret: config.JWT_SECRET});
+
 router.get('/', (req, res) => {
 	Family
-	  .find()
+	  .find({"createdBy": req.user.userId})
 	  .then(kids => {
 	  	res.json(kids.map(kid => kid.serialize()));
 	  })
@@ -53,7 +55,6 @@ router.post('/', jsonParser, (req, res) => {
 			message: `\`${fieldTooSmall}\` is not long enough.`
 		});
 	}
-	jwt({secret: config.JWT_SECRET});
 	Family
 	  .create({
 		  name: req.body.name,

@@ -14,9 +14,11 @@ mongoose.Promise = global.Promise;
 
 router.use(bodyParser.json());
 
+jwt({secret: config.JWT_SECRET});
+
 router.get('/', (req, res) => {
 	Badge
-	  .find()
+	  .find({"createdBy": req.user.userId})
 	  .then(badges => {
 	  	res.json(badges.map(badge => badge.serialize()));
 	  })
@@ -53,7 +55,6 @@ router.post('/', jsonParser, (req, res) => {
 			message: `\`${fieldTooSmall}\` is not long enough.`
 		});
 	}
-	jwt({secret: config.JWT_SECRET});
 	Badge
 	  .create({
 		  badgename: req.body.badgename,
