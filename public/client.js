@@ -28,18 +28,23 @@ function displayProtectedEndpoint() {
 function handleRegistrationRequests() {
 	$('#registration-form').submit(event => {
 		event.preventDefault();
+
 		let usernameTarget = $(event.currentTarget).find('#reg-username');
 		let username = usernameTarget.val();
 		usernameTarget.val('');
+
 		let passwordTarget = $(event.currentTarget).find('#reg-password');
 		let password = passwordTarget.val();
 		passwordTarget.val('');
+
 		let firstNameTarget = $(event.currentTarget).find('#firstName');
 		let firstName = firstNameTarget.val();
 		firstNameTarget.val('');
+
 		let lastNameTarget = $(event.currentTarget).find('#lastName');
 		let lastName = lastNameTarget.val();
 		lastNameTarget.val('');
+
 		let user = {'"username"': username, '"password"': password, '"firstName"': firstName, '"lastName"': lastName};
 		console.log(user);
 		userRegistration(user);
@@ -82,7 +87,7 @@ function handleChoreButtonClicks() {
 	});
 }
 
-$(handleLogInRequests);
+//$(handleLogInRequests);
 $(handleRegistrationRequests);
 $(handleBadgeButtonClicks);
 $(handleChoreButtonClicks);
