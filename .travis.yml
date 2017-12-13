@@ -1,5 +1,7 @@
 language: node_js
 node_js: node
+services: 
+  mongodb
 deploy:
   app: serene-dawn-85745
   provider: heroku
