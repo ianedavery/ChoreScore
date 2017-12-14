@@ -18,7 +18,7 @@ jwt({secret: config.JWT_SECRET});
 
 router.get('/', (req, res) => {
 	Family
-	  .find({"createdBy": req.user.userId})
+	  .find(/*{"createdBy": req.user.userId}*/)
 	  .then(kids => {
 	  	res.json(kids.map(kid => kid.serialize()));
 	  })
