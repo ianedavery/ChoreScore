@@ -11,11 +11,11 @@ const ChoreSchema = mongoose.Schema({
 	pointValue: {
 		type: Number,
 		required: true
-	},
+	}/*,
 	createdBy: {
 		type: String,
 		required: true
-	}
+	}*/
 });
 
 const BadgeSchema = mongoose.Schema({
@@ -26,11 +26,11 @@ const BadgeSchema = mongoose.Schema({
 	badgeCost: {
 		type: Number,
 		required: true
-	},
+	}/*,
 	createdBy: {
 		type: String,
 		required: true
-	}
+	}*/
 });
 
 const FamilySchema = mongoose.Schema({
@@ -41,11 +41,11 @@ const FamilySchema = mongoose.Schema({
 	pointsAccrued: {
 		type: Number,
 		required: true
-	},
+	}/*,
 	createdBy: {
 		type: String,
 		required: true
-	}
+	}*/
 });
 
 FamilySchema.methods.serialize = function() {

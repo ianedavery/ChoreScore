@@ -58,8 +58,8 @@ router.post('/', jsonParser, (req, res) => {
 	Chore
 	  .create({
 		  chore: req.body.chore,
-		  pointValue: req.body.pointValue,
-		  createdBy: req.user.userId
+		  pointValue: req.body.pointValue/*,
+		  createdBy: req.user.userId*/
 	  })
 	  .then(chore => res.status(201).json(chore.serialize()))
 	  .catch(err => {

@@ -20,18 +20,56 @@ function userRegistration(user) {
 	});
 }
 
-/*function userLogIn(user) {
+function userLogIn(user) {
 	$.ajax({
 		method: 'POST',
 		url: USER_LOGIN_URL,
-		data: user,
+		data: JSON.stringify(user),
 		datatype: 'json',
-		contentType: 'application/json'
+		contentType: 'application/json',
+		success: function() {
+			console.log('success');
+		}
 	});
-}*/
+}
 
-function displayProtectedEndpoint() {
-	res.redirect('./api/badges');
+function createBadge(data) {
+	$.ajax({
+		method: 'POST',
+		url: BADGE_LIST_URL,
+		data: JSON.stringify(data),
+		datatype: 'json',
+		contentType: 'application/json',
+		success: function() {
+			console.log('success');
+		}
+	});
+}
+
+function createFamily(name) {
+	$.ajax({
+		method: 'POST',
+		url: FAMILY_URL,
+		data: JSON.stringify(name),
+		datatype: 'json',
+		contentType: 'application/json',
+		success: function() {
+			console.log('success');
+		}
+	});
+}
+
+function createChore(chore) {
+	$.ajax({
+		method: 'POST',
+		url: CHORE_LIST_URL,
+		data: JSON.stringify(chore),
+		datatype: 'json',
+		contentType: 'application/json',
+		success: function() {
+			console.log('success');
+		}
+	});
 }
 
 function handleRegistrationRequests() {
@@ -56,10 +94,10 @@ function handleRegistrationRequests() {
 		user.lastName = lastName;
 		console.log(user);
 		userRegistration(user);
-	})
+	});
 }
 
-/*function handleLogInRequests() {
+function handleLogInRequests() {
 	$('#login-form').submit(event => {
 		event.preventDefault();
 		let usernameTarget = $(event.currentTarget).find('#username');
@@ -68,24 +106,61 @@ function handleRegistrationRequests() {
 		let passwordTarget = $(event.currentTarget).find('#password');
 		let password = passwordTarget.val();
 		passwordTarget.val('');
-		let user = {
-			'"username"': username,
-			'"password"': password
-		};
+		let user = {};
+		user.username = username;
+		user.password = password;
 		console.log(user);
 		userLogIn(user);
-	})
-}*/
+	});
+}
 
 function handleBadgeCreationClicks() {
 	$('#badge-form').submit(event => {
 		event.preventDefault();
 		console.log('badge creation button clicked');
-		let badgeName = $(event.currentTarget).find('#badge-name').val();
-		let badgeCost = $(event.currentTarget).find('#badge-cost').val();
-		let data = ({'"badgename"': badgeName, '"badgeCost"': badgeCost});
+		let badgeNameTarget = $(event.currentTarget).find('#badge-name');
+		let badgeName = badgeNameTarget.val();
+		badgeNameTarget.val('');
+		let badgeCostTarget = $(event.currentTarget).find('#badge-cost');
+		let badgeCost = badgeCostTarget.val();
+		badgeCostTarget.val('');
+		let data = {};
+		data.badgename = badgeName;
+		data.badgeCost = badgeCost;
 		console.log(data);
-		$.post(BADGE_LIST_URL, data);
+		createBadge(data);
+	});
+}
+
+function handleFamilyCreationClicks() {
+	$('#family-form').submit(event => {
+		event.preventDefault();
+		console.log('family creation button clicked');
+		let familyNameTarget = $(event.currentTarget).find('#family-name');
+		let familyName = familyNameTarget.val();
+		familyNameTarget.val('');
+		let name = {};
+		name.name = familyName;
+		console.log(name);
+		createFamily(name);
+	});
+}
+
+function handleChoreCreationClicks() {
+	$('#chore-form').submit(event => {
+		event.preventDefault();
+		console.log('chore creation button clicked');
+		let choreNameTarget = $(event.currentTarget).find('#chore-name');
+		let choreName = choreNameTarget.val();
+		choreNameTarget.val('');
+		let pointValueTarget = $(event.currentTarget).find('#point-value');
+		let pointValue = pointValueTarget.val();
+		pointValueTarget.val('');
+		let chore = {};
+		chore.chore = choreName;
+		chore.pointValue = pointValue;
+		console.log(chore);
+		createChore(chore);
 	});
 }
 
@@ -116,9 +191,11 @@ function handleFamilyButtonClicks() {
 	});
 }
 
-//$(handleLogInRequests);
+$(handleLogInRequests);
 $(handleRegistrationRequests);
 $(handleBadgeButtonClicks);
 $(handleChoreButtonClicks);
 $(handleBadgeCreationClicks);
 $(handleFamilyButtonClicks);
+$(handleFamilyCreationClicks);
+$(handleChoreCreationClicks);
