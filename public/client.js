@@ -34,9 +34,15 @@ function userLogIn(user) {
 }
 
 function createBadge(data) {
+	//console.log(document.cookie);
+	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+	//console.log(cookieValue)
 	$.ajax({
 		method: 'POST',
 		url: BADGE_LIST_URL,
+		beforeSend: function(xhr, settings) { 
+			xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+		},
 		data: JSON.stringify(data),
 		datatype: 'json',
 		contentType: 'application/json',
@@ -47,9 +53,15 @@ function createBadge(data) {
 }
 
 function createFamily(name) {
+	//console.log(document.cookie);
+	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+	//console.log(cookieValue);
 	$.ajax({
 		method: 'POST',
 		url: FAMILY_URL,
+		beforeSend: function(xhr, settings) { 
+			xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+		},
 		data: JSON.stringify(name),
 		datatype: 'json',
 		contentType: 'application/json',
@@ -60,9 +72,15 @@ function createFamily(name) {
 }
 
 function createChore(chore) {
+	//console.log(document.cookie);
+	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+	//console.log(cookieValue);
 	$.ajax({
 		method: 'POST',
 		url: CHORE_LIST_URL,
+		beforeSend: function(xhr, settings) { 
+			xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+		},
 		data: JSON.stringify(chore),
 		datatype: 'json',
 		contentType: 'application/json',
@@ -168,7 +186,7 @@ function handleBadgeButtonClicks() {
 	$('#badges').on('click', event => {
 		console.log('retrieving badges');
 		//console.log(document.cookie);
-		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)test2\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		//console.log(cookieValue);
 		$.get({
 			url: BADGE_LIST_URL,
@@ -186,7 +204,7 @@ function handleChoreButtonClicks() {
 	$('#chores').on('click', event => {
 		console.log('retrieving chores');
 		//console.log(document.cookie);
-		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)test2\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		//console.log(cookieValue);
 		$.get({
 			url: CHORE_LIST_URL,
@@ -204,7 +222,7 @@ function handleFamilyButtonClicks() {
 	$('#family').on('click', event => {
 		console.log('retrieving family');
 		//console.log(document.cookie);
-		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)test2\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		//console.log(cookieValue);
 		$.get({
 			url: FAMILY_URL,

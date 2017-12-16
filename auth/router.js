@@ -26,7 +26,7 @@ router.use(bodyParser.json());
 //login and create a JWT
 router.post('/login', localAuth, (req, res) => {
 	const authToken = createAuthToken(req.user.serialize());
-	res.cookie('test2', authToken);
+	res.cookie('token', authToken);
   	res.json({authToken}); 
 });
 
