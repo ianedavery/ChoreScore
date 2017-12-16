@@ -21,6 +21,14 @@ app.use(morgan('common'));
 
 app.use(express.static('public'));
 
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + '/views/splash.html');
+});
+
+app.get('/api/signup', (req,res) => {
+  res.sendFile(__dirname + '/views/register.html');
+});
+
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 
@@ -32,10 +40,6 @@ app.use(function (req, res, next) {
     return res.send(204);
   }
   next();
-});
-
-app.get('/', (req, res) => {
-  res.sendFile(_dirname + '/views/index.html');
 });
 
 const jwtAuth = passport.authenticate('jwt', {session: false});

@@ -5,6 +5,7 @@ const USER_REGISTRATION_URL = '/api/users';
 const BADGE_LIST_URL = 'api/badge';
 const CHORE_LIST_URL = 'api/chore';
 const FAMILY_URL = 'api/family';
+const SIGNUP_URL = '/api/signup';
 
 function userRegistration(user) {
 	console.log('registration called');
@@ -34,9 +35,7 @@ function userLogIn(user) {
 }
 
 function createBadge(data) {
-	//console.log(document.cookie);
 	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-	//console.log(cookieValue)
 	$.ajax({
 		method: 'POST',
 		url: BADGE_LIST_URL,
@@ -53,9 +52,7 @@ function createBadge(data) {
 }
 
 function createFamily(name) {
-	//console.log(document.cookie);
 	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-	//console.log(cookieValue);
 	$.ajax({
 		method: 'POST',
 		url: FAMILY_URL,
@@ -72,9 +69,7 @@ function createFamily(name) {
 }
 
 function createChore(chore) {
-	//console.log(document.cookie);
 	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-	//console.log(cookieValue);
 	$.ajax({
 		method: 'POST',
 		url: CHORE_LIST_URL,
@@ -185,9 +180,7 @@ function handleChoreCreationClicks() {
 function handleBadgeButtonClicks() {
 	$('#badges').on('click', event => {
 		console.log('retrieving badges');
-		//console.log(document.cookie);
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-		//console.log(cookieValue);
 		$.get({
 			url: BADGE_LIST_URL,
 			beforeSend: function(xhr, settings) { 
@@ -203,9 +196,7 @@ function handleBadgeButtonClicks() {
 function handleChoreButtonClicks() {
 	$('#chores').on('click', event => {
 		console.log('retrieving chores');
-		//console.log(document.cookie);
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-		//console.log(cookieValue);
 		$.get({
 			url: CHORE_LIST_URL,
 			beforeSend: function(xhr, settings) { 
@@ -221,9 +212,7 @@ function handleChoreButtonClicks() {
 function handleFamilyButtonClicks() {
 	$('#family').on('click', event => {
 		console.log('retrieving family');
-		//console.log(document.cookie);
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-		//console.log(cookieValue);
 		$.get({
 			url: FAMILY_URL,
 			beforeSend: function(xhr, settings) { 
@@ -231,6 +220,18 @@ function handleFamilyButtonClicks() {
 			},
 			success: function(family) {
 				console.log(family)
+			}
+		});
+	});
+}
+
+function handleSignUpButtonClicks() {
+	$('#splash-signup').on('click', event => {
+		console.log('signup button clicked');
+		$.get({
+			url: SIGNUP_URL,
+			success: function() {
+				window.location.href = '/api/signup';
 			}
 		});
 	});
@@ -244,3 +245,4 @@ $(handleBadgeCreationClicks);
 $(handleFamilyButtonClicks);
 $(handleFamilyCreationClicks);
 $(handleChoreCreationClicks);
+$(handleSignUpButtonClicks);
