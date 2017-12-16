@@ -18,7 +18,7 @@ jwt({secret: config.JWT_SECRET});
 
 router.get('/', (req, res) => {
 	Family
-	  .find(/*{"createdBy": req.user.userId}*/)
+	  .find({"createdBy": req.user.userId})
 	  .then(kids => {
 	  	res.json(kids.map(kid => kid.serialize()));
 	  })
@@ -58,8 +58,8 @@ router.post('/', jsonParser, (req, res) => {
 	Family
 	  .create({
 		  name: req.body.name,
-		  pointsAccrued: 0/*,
-		  createdBy: req.user.userId*/
+		  pointsAccrued: 0,
+		  createdBy: req.user.userId
 	  })
 	  .then(kid => res.status(201).json(kid.serialize()))
 	  .catch(err => {

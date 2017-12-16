@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const config = require('../config');
 const router = express.Router();
+const cookieParser = require('cookie-parser');
 
 //function for creating a JWT for the user
 const createAuthToken = function(user) {
@@ -18,12 +19,15 @@ const createAuthToken = function(user) {
 
 const localAuth = passport.authenticate('local', {session: false});
 
+router.use(cookieParser());
+
 router.use(bodyParser.json());
 
 //login and create a JWT
 router.post('/login', localAuth, (req, res) => {
 	const authToken = createAuthToken(req.user.serialize());
-	res.json({authToken});
+	res.cookie('test2', authToken);
+  	res.json({authToken}); 
 });
 
 const jwtAuth = passport.authenticate('jwt', {session: false});
