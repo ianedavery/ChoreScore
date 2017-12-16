@@ -18,7 +18,7 @@ jwt({secret: config.JWT_SECRET});
 
 router.get('/', (req, res) => {
 	Badge
-	  .find(/*{"createdBy": req.user.userId}*/)
+	  .find({"createdBy": req.user.userId})
 	  .then(badges => {
 	  	res.json(badges.map(badge => badge.serialize()));
 	  })
@@ -58,8 +58,8 @@ router.post('/', jsonParser, (req, res) => {
 	Badge
 	  .create({
 		  badgename: req.body.badgename,
-		  badgeCost: req.body.badgeCost/*,
-		  createdBy: req.user.userId*/
+		  badgeCost: req.body.badgeCost,
+		  createdBy: req.user.userId
 	  })
 	  .then(badge => res.status(201).json(badge.serialize()))
 	  .catch(err => {
