@@ -12,6 +12,8 @@ const {router: authRouter, localStrategy, jwtStrategy} = require('./auth');
 const choreRouter = require('./choreRouter');
 const badgeRouter = require('./badgeRouter');
 const familyRouter = require('./familyRouter');
+const signUpRouter = require('./signUpRouter');
+const loginRouter = require('./loginRouter');
 const {PORT, DATABASE_URL} = require('./config');
 const cookieParser = require('cookie-parser')
 
@@ -23,10 +25,6 @@ app.use(express.static('public'));
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + '/views/splash.html');
-});
-
-app.get('/api/signup', (req,res) => {
-  res.sendFile(__dirname + '/views/register.html');
 });
 
 passport.use(localStrategy);
@@ -44,11 +42,14 @@ app.use(function (req, res, next) {
 
 const jwtAuth = passport.authenticate('jwt', {session: false});
 
+//
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/chore', jwtAuth, choreRouter);
 app.use('/api/badge', jwtAuth, badgeRouter);
 app.use('/api/family', jwtAuth, familyRouter);
+app.use('/api/signup', signUpRouter);
+app.use('/api/login', loginRouter);
 
 let server;
 

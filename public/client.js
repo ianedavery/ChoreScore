@@ -6,6 +6,7 @@ const BADGE_LIST_URL = 'api/badge';
 const CHORE_LIST_URL = 'api/chore';
 const FAMILY_URL = 'api/family';
 const SIGNUP_URL = '/api/signup';
+const LOGIN_URL = '/api/login';
 
 function userRegistration(user) {
 	console.log('registration called');
@@ -237,6 +238,18 @@ function handleSignUpButtonClicks() {
 	});
 }
 
+function handleLoginButtonClicks() {
+	$('#splash-login').on('click', event => {
+		console.log('login button clicked');
+		$.get({
+			url: LOGIN_URL,
+			success: function() {
+				window.location.href = '/api/login';
+			}
+		});
+	});
+}
+
 $(handleLogInRequests);
 $(handleRegistrationRequests);
 $(handleBadgeButtonClicks);
@@ -246,3 +259,4 @@ $(handleFamilyButtonClicks);
 $(handleFamilyCreationClicks);
 $(handleChoreCreationClicks);
 $(handleSignUpButtonClicks);
+$(handleLoginButtonClicks);
