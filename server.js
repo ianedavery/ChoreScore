@@ -14,6 +14,7 @@ const badgeRouter = require('./badgeRouter');
 const familyRouter = require('./familyRouter');
 const signUpRouter = require('./signUpRouter');
 const loginRouter = require('./loginRouter');
+const dashboardRouter = require('./dashboardRouter');
 const {PORT, DATABASE_URL} = require('./config');
 const cookieParser = require('cookie-parser')
 
@@ -42,14 +43,14 @@ app.use(function (req, res, next) {
 
 const jwtAuth = passport.authenticate('jwt', {session: false});
 
-//
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
-app.use('/api/chore', jwtAuth, choreRouter);
-app.use('/api/badge', jwtAuth, badgeRouter);
-app.use('/api/family', jwtAuth, familyRouter);
+app.use('/api/api/chore', jwtAuth, choreRouter);
+app.use('/api/api/badge', jwtAuth, badgeRouter);
+app.use('/api/api/family', jwtAuth, familyRouter);
 app.use('/api/signup', signUpRouter);
 app.use('/api/login', loginRouter);
+app.use('/api/dashboard', dashboardRouter);
 
 let server;
 

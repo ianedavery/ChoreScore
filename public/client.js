@@ -18,6 +18,7 @@ function userRegistration(user) {
 		contentType: 'application/json',
 		success: function() {
 			console.log('success');
+			userLogIn(user);
 		}
 	});
 }
@@ -31,6 +32,7 @@ function userLogIn(user) {
 		contentType: 'application/json',
 		success: function() {
 			console.log('success');
+			window.location.href = '/api/dashboard';
 		}
 	});
 }
