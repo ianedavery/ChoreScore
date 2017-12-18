@@ -7,6 +7,7 @@ const CHORE_LIST_URL = 'api/chore';
 const FAMILY_URL = 'api/family';
 const SIGNUP_URL = '/api/signup';
 const LOGIN_URL = '/api/login';
+const DASHBOARD_URL = '/api/dashboard';
 
 function userRegistration(user) {
 	console.log('registration called');
@@ -23,6 +24,19 @@ function userRegistration(user) {
 	});
 }
 
+function renderDashboard() {
+	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+	$.get({
+		url: DASHBOARD_URL,
+		beforeSend: function(xhr, settings) { 
+			xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+		},
+		success: function() {
+			window.location.href = '/api/dashboard';
+		}
+	});
+}
+
 function userLogIn(user) {
 	$.ajax({
 		method: 'POST',
@@ -31,13 +45,12 @@ function userLogIn(user) {
 		datatype: 'json',
 		contentType: 'application/json',
 		success: function() {
-			console.log('success');
-			window.location.href = '/api/dashboard';
+			renderDashboard();
 		}
 	});
 }
 
-function createBadge(data) {
+/*function createBadge(data) {
 	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 	$.ajax({
 		method: 'POST',
@@ -52,9 +65,9 @@ function createBadge(data) {
 			console.log('success');
 		}
 	});
-}
+}*/
 
-function createFamily(name) {
+/*function createFamily(name) {
 	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 	$.ajax({
 		method: 'POST',
@@ -69,9 +82,9 @@ function createFamily(name) {
 			console.log('success');
 		}
 	});
-}
+}*/
 
-function createChore(chore) {
+/*function createChore(chore) {
 	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 	$.ajax({
 		method: 'POST',
@@ -86,7 +99,7 @@ function createChore(chore) {
 			console.log('success');
 		}
 	});
-}
+}*/
 
 function handleRegistrationRequests() {
 	$('#registration-form').submit(event => {
@@ -130,7 +143,7 @@ function handleLogInRequests() {
 	});
 }
 
-function handleBadgeCreationClicks() {
+/*function handleBadgeCreationClicks() {
 	$('#badge-form').submit(event => {
 		event.preventDefault();
 		console.log('badge creation button clicked');
@@ -146,9 +159,9 @@ function handleBadgeCreationClicks() {
 		console.log(data);
 		createBadge(data);
 	});
-}
+}*/
 
-function handleFamilyCreationClicks() {
+/*function handleFamilyCreationClicks() {
 	$('#family-form').submit(event => {
 		event.preventDefault();
 		console.log('family creation button clicked');
@@ -160,9 +173,9 @@ function handleFamilyCreationClicks() {
 		console.log(name);
 		createFamily(name);
 	});
-}
+}*/
 
-function handleChoreCreationClicks() {
+/*function handleChoreCreationClicks() {
 	$('#chore-form').submit(event => {
 		event.preventDefault();
 		console.log('chore creation button clicked');
@@ -178,7 +191,7 @@ function handleChoreCreationClicks() {
 		console.log(chore);
 		createChore(chore);
 	});
-}
+}*/
 
 function handleBadgeButtonClicks() {
 	$('#badges').on('click', event => {
@@ -190,7 +203,13 @@ function handleBadgeButtonClicks() {
 				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
 			},
 			success: function(badge) {
+				window.location.href = '/api/badgedashboard';
 				console.log(badge);
+				for(let i=0; i<badge.length; i++) {
+					let badgeList = `<p>${badge[i].badgename}</p><p>Badge Cost: ${badge[i].badgeCost}</p>`;
+					console.log(badgeList);
+				}
+				$('#badge-container').append(badgeList); 
 			}
 		});
 	});
@@ -240,13 +259,13 @@ function handleSignUpButtonClicks() {
 	});
 }
 
-function handleLoginButtonClicks() {
+function handleSplashLoginButtonClicks() {
 	$('#splash-login').on('click', event => {
 		console.log('login button clicked');
 		$.get({
 			url: LOGIN_URL,
 			success: function() {
-				window.location.href = '/api/login';
+				window.location.href = '/api/login';	
 			}
 		});
 	});
@@ -256,9 +275,9 @@ $(handleLogInRequests);
 $(handleRegistrationRequests);
 $(handleBadgeButtonClicks);
 $(handleChoreButtonClicks);
-$(handleBadgeCreationClicks);
+//$(handleBadgeCreationClicks);
 $(handleFamilyButtonClicks);
-$(handleFamilyCreationClicks);
-$(handleChoreCreationClicks);
+//$(handleFamilyCreationClicks);
+//$(handleChoreCreationClicks);
 $(handleSignUpButtonClicks);
-$(handleLoginButtonClicks);
+$(handleSplashLoginButtonClicks);
