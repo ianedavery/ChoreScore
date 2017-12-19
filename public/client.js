@@ -8,6 +8,9 @@ const FAMILY_URL = 'api/family';
 const SIGNUP_URL = '/api/signup';
 const LOGIN_URL = '/api/login';
 const DASHBOARD_URL = '/api/dashboard';
+const CREATE_BADGES_URL = '/api/createbadge';
+const CREATE_CHORES_URL = '/api/createchore';
+const CREATE_FAMILY_URL = '/api/createfamily';
 
 function userRegistration(user) {
 	console.log('registration called');
@@ -50,7 +53,7 @@ function userLogIn(user) {
 	});
 }
 
-/*function createBadge(data) {
+function createBadge(data) {
 	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 	$.ajax({
 		method: 'POST',
@@ -65,9 +68,9 @@ function userLogIn(user) {
 			console.log('success');
 		}
 	});
-}*/
+}
 
-/*function createFamily(name) {
+function createFamily(name) {
 	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 	$.ajax({
 		method: 'POST',
@@ -82,9 +85,9 @@ function userLogIn(user) {
 			console.log('success');
 		}
 	});
-}*/
+}
 
-/*function createChore(chore) {
+function createChore(chore) {
 	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 	$.ajax({
 		method: 'POST',
@@ -99,7 +102,7 @@ function userLogIn(user) {
 			console.log('success');
 		}
 	});
-}*/
+}
 
 function handleRegistrationRequests() {
 	$('#registration-form').submit(event => {
@@ -143,7 +146,7 @@ function handleLogInRequests() {
 	});
 }
 
-/*function handleBadgeCreationClicks() {
+function handleBadgeCreationClicks() {
 	$('#badge-form').submit(event => {
 		event.preventDefault();
 		console.log('badge creation button clicked');
@@ -159,9 +162,9 @@ function handleLogInRequests() {
 		console.log(data);
 		createBadge(data);
 	});
-}*/
+}
 
-/*function handleFamilyCreationClicks() {
+function handleFamilyCreationClicks() {
 	$('#family-form').submit(event => {
 		event.preventDefault();
 		console.log('family creation button clicked');
@@ -173,9 +176,9 @@ function handleLogInRequests() {
 		console.log(name);
 		createFamily(name);
 	});
-}*/
+}
 
-/*function handleChoreCreationClicks() {
+function handleChoreCreationClicks() {
 	$('#chore-form').submit(event => {
 		event.preventDefault();
 		console.log('chore creation button clicked');
@@ -191,11 +194,27 @@ function handleLogInRequests() {
 		console.log(chore);
 		createChore(chore);
 	});
-}*/
+}
+
+function handleCreateBadgeButtonClicks() {
+	$('#create-badge').on('click', event => {
+		console.log('create badge clicked');
+		$.get({
+			url: CREATE_BADGES_URL,
+			success: function() {
+				console.log('success');
+				window.location.href = '/api/createbadge';
+			}
+		});
+	});
+}
 
 function handleBadgeButtonClicks() {
 	$('#badges').on('click', event => {
 		console.log('retrieving badges');
+		$('#create-badge').prop('hidden', false);
+		$('#create-chore').prop('hidden', true);
+		$('#create-family').prop('hidden', true);
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
 			url: BADGE_LIST_URL,
@@ -215,9 +234,25 @@ function handleBadgeButtonClicks() {
 	});
 }
 
+function handleCreateChoreButtonClicks() {
+	$('#create-chore').on('click', event => {
+		console.log('create chore clicked');
+		$.get({
+			url: CREATE_CHORES_URL,
+			success: function() {
+				console.log('success');
+				window.location.href = '/api/createchore';
+			}
+		});
+	});
+}
+
 function handleChoreButtonClicks() {
 	$('#chores').on('click', event => {
 		console.log('retrieving chores');
+		$('#create-badge').prop('hidden', true);
+		$('#create-chore').prop('hidden', false);
+		$('#create-family').prop('hidden', true);
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
 			url: CHORE_LIST_URL,
@@ -237,9 +272,25 @@ function handleChoreButtonClicks() {
 	});
 }
 
+function handleCreateFamilyButtonClicks() {
+	$('#create-family').on('click', event => {
+		console.log('create chore clicked');
+		$.get({
+			url: CREATE_FAMILY_URL,
+			success: function() {
+				console.log('success');
+				window.location.href = '/api/createfamily';
+			}
+		});
+	});
+}
+
 function handleFamilyButtonClicks() {
 	$('#family').on('click', event => {
 		console.log('retrieving family');
+		$('#create-badge').prop('hidden', true);
+		$('#create-chore').prop('hidden', true);
+		$('#create-family').prop('hidden', false);
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
 			url: FAMILY_URL,
@@ -287,9 +338,12 @@ $(handleLogInRequests);
 $(handleRegistrationRequests);
 $(handleBadgeButtonClicks);
 $(handleChoreButtonClicks);
-//$(handleBadgeCreationClicks);
+$(handleBadgeCreationClicks);
 $(handleFamilyButtonClicks);
-//$(handleFamilyCreationClicks);
-//$(handleChoreCreationClicks);
+$(handleFamilyCreationClicks);
+$(handleChoreCreationClicks);
 $(handleSignUpButtonClicks);
 $(handleSplashLoginButtonClicks);
+$(handleCreateBadgeButtonClicks);
+$(handleCreateChoreButtonClicks);
+$(handleCreateFamilyButtonClicks);

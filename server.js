@@ -16,6 +16,8 @@ const signUpRouter = require('./signUpRouter');
 const loginRouter = require('./loginRouter');
 const dashboardRouter = require('./dashboardRouter');
 const createBadgesRouter = require('./createBadgesRouter');
+const createChoresRouter = require('./createChoresRouter');
+const createFamilyRouter = require('./createFamilyRouter');
 const {PORT, DATABASE_URL} = require('./config');
 const cookieParser = require('cookie-parser')
 
@@ -53,6 +55,8 @@ app.use('/api/signup', signUpRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/dashboard', dashboardRouter);
 app.use('/api/createbadge', createBadgesRouter);
+app.use('/api/createchore', createChoresRouter);
+app.use('/api/createfamily', createFamilyRouter);
 
 let server;
 
