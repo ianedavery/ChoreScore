@@ -196,6 +196,22 @@ function handleChoreCreationClicks() {
 	});
 }
 
+function handleDoneButtonClicks() {
+	$('#done-button').on('click', event => {
+		console.log('done button clicked');
+		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+		$.get({
+			url: DASHBOARD_URL,
+			beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+			},
+			success: function() {
+				window.location.href = '/api/dashboard';
+			}
+		});
+	});
+}
+
 function handleCreateBadgeButtonClicks() {
 	$('#create-badge').on('click', event => {
 		console.log('create badge clicked');
@@ -347,3 +363,4 @@ $(handleSplashLoginButtonClicks);
 $(handleCreateBadgeButtonClicks);
 $(handleCreateChoreButtonClicks);
 $(handleCreateFamilyButtonClicks);
+$(handleDoneButtonClicks);

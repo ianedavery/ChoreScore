@@ -1,7 +1,6 @@
 'use strict';
 
 require('dotenv').config();
-const session = require('client-sessions');
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
@@ -19,7 +18,6 @@ const createBadgesRouter = require('./createBadgesRouter');
 const createChoresRouter = require('./createChoresRouter');
 const createFamilyRouter = require('./createFamilyRouter');
 const {PORT, DATABASE_URL} = require('./config');
-const cookieParser = require('cookie-parser')
 
 mongoose.Promise = global.Promise;
 
