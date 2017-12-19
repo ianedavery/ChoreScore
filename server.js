@@ -1,7 +1,6 @@
 'use strict';
 
 require('dotenv').config();
-const session = require('client-sessions');
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
@@ -12,8 +11,13 @@ const {router: authRouter, localStrategy, jwtStrategy} = require('./auth');
 const choreRouter = require('./choreRouter');
 const badgeRouter = require('./badgeRouter');
 const familyRouter = require('./familyRouter');
+const signUpRouter = require('./signUpRouter');
+const loginRouter = require('./loginRouter');
+const dashboardRouter = require('./dashboardRouter');
+const createBadgesRouter = require('./createBadgesRouter');
+const createChoresRouter = require('./createChoresRouter');
+const createFamilyRouter = require('./createFamilyRouter');
 const {PORT, DATABASE_URL} = require('./config');
-const cookieParser = require('cookie-parser')
 
 mongoose.Promise = global.Promise;
 
@@ -23,10 +27,6 @@ app.use(express.static('public'));
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + '/views/splash.html');
-});
-
-app.get('/api/signup', (req,res) => {
-  res.sendFile(__dirname + '/views/register.html');
 });
 
 passport.use(localStrategy);
@@ -46,9 +46,15 @@ const jwtAuth = passport.authenticate('jwt', {session: false});
 
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
-app.use('/api/chore', jwtAuth, choreRouter);
-app.use('/api/badge', jwtAuth, badgeRouter);
-app.use('/api/family', jwtAuth, familyRouter);
+app.use('/api/api/chore', jwtAuth, choreRouter);
+app.use('/api/api/badge', jwtAuth, badgeRouter);
+app.use('/api/api/family', jwtAuth, familyRouter);
+app.use('/api/signup', signUpRouter);
+app.use('/api/login', loginRouter);
+app.use('/api/dashboard', dashboardRouter);
+app.use('/api/createbadge', createBadgesRouter);
+app.use('/api/createchore', createChoresRouter);
+app.use('/api/createfamily', createFamilyRouter);
 
 let server;
 

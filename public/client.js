@@ -6,6 +6,11 @@ const BADGE_LIST_URL = 'api/badge';
 const CHORE_LIST_URL = 'api/chore';
 const FAMILY_URL = 'api/family';
 const SIGNUP_URL = '/api/signup';
+const LOGIN_URL = '/api/login';
+const DASHBOARD_URL = '/api/dashboard';
+const CREATE_BADGES_URL = '/api/createbadge';
+const CREATE_CHORES_URL = '/api/createchore';
+const CREATE_FAMILY_URL = '/api/createfamily';
 
 function userRegistration(user) {
 	console.log('registration called');
@@ -17,6 +22,20 @@ function userRegistration(user) {
 		contentType: 'application/json',
 		success: function() {
 			console.log('success');
+			userLogIn(user);
+		}
+	});
+}
+
+function renderDashboard() {
+	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+	$.get({
+		url: DASHBOARD_URL,
+		beforeSend: function(xhr, settings) { 
+			xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+		},
+		success: function() {
+			window.location.href = '/api/dashboard';
 		}
 	});
 }
@@ -29,7 +48,7 @@ function userLogIn(user) {
 		datatype: 'json',
 		contentType: 'application/json',
 		success: function() {
-			console.log('success');
+			renderDashboard();
 		}
 	});
 }
@@ -177,9 +196,41 @@ function handleChoreCreationClicks() {
 	});
 }
 
+function handleDoneButtonClicks() {
+	$('#done-button').on('click', event => {
+		console.log('done button clicked');
+		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+		$.get({
+			url: DASHBOARD_URL,
+			beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+			},
+			success: function() {
+				window.location.href = '/api/dashboard';
+			}
+		});
+	});
+}
+
+function handleCreateBadgeButtonClicks() {
+	$('#create-badge').on('click', event => {
+		console.log('create badge clicked');
+		$.get({
+			url: CREATE_BADGES_URL,
+			success: function() {
+				console.log('success');
+				window.location.href = '/api/createbadge';
+			}
+		});
+	});
+}
+
 function handleBadgeButtonClicks() {
 	$('#badges').on('click', event => {
 		console.log('retrieving badges');
+		$('#create-badge').prop('hidden', false);
+		$('#create-chore').prop('hidden', true);
+		$('#create-family').prop('hidden', true);
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
 			url: BADGE_LIST_URL,
@@ -188,6 +239,25 @@ function handleBadgeButtonClicks() {
 			},
 			success: function(badge) {
 				console.log(badge);
+				let badgeList = [];
+				for(let i=0; i<badge.length; i++) {
+					let badges = `<p>${badge[i].badgename}</br><span>Badge Cost: ${badge[i].badgeCost}</span></p>`;
+					badgeList.push(badges);
+				}
+				$('#badge-container').html(badgeList); 
+			}
+		});
+	});
+}
+
+function handleCreateChoreButtonClicks() {
+	$('#create-chore').on('click', event => {
+		console.log('create chore clicked');
+		$.get({
+			url: CREATE_CHORES_URL,
+			success: function() {
+				console.log('success');
+				window.location.href = '/api/createchore';
 			}
 		});
 	});
@@ -196,6 +266,9 @@ function handleBadgeButtonClicks() {
 function handleChoreButtonClicks() {
 	$('#chores').on('click', event => {
 		console.log('retrieving chores');
+		$('#create-badge').prop('hidden', true);
+		$('#create-chore').prop('hidden', false);
+		$('#create-family').prop('hidden', true);
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
 			url: CHORE_LIST_URL,
@@ -204,6 +277,25 @@ function handleChoreButtonClicks() {
 			},
 			success: function(chore) {
 				console.log(chore);
+				let choreList = [];
+				for(let i=0; i<chore.length; i++) {
+					let chores = `<p>${chore[i].chore}</br><span>Point Value: ${chore[i].pointValue}</span></p>`;
+					choreList.push(chores);
+				}
+				$('#badge-container').html(choreList);
+			}
+		});
+	});
+}
+
+function handleCreateFamilyButtonClicks() {
+	$('#create-family').on('click', event => {
+		console.log('create chore clicked');
+		$.get({
+			url: CREATE_FAMILY_URL,
+			success: function() {
+				console.log('success');
+				window.location.href = '/api/createfamily';
 			}
 		});
 	});
@@ -212,6 +304,9 @@ function handleChoreButtonClicks() {
 function handleFamilyButtonClicks() {
 	$('#family').on('click', event => {
 		console.log('retrieving family');
+		$('#create-badge').prop('hidden', true);
+		$('#create-chore').prop('hidden', true);
+		$('#create-family').prop('hidden', false);
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
 			url: FAMILY_URL,
@@ -219,7 +314,13 @@ function handleFamilyButtonClicks() {
 				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
 			},
 			success: function(family) {
-				console.log(family)
+				console.log(family);
+				let familyList = [];
+				for(let i=0; i<family.length; i++) {
+					let families = `<p>${family[i].name}</br><span>Points Accrued: ${family[i].pointsAccrued}</span></p>`;
+					familyList.push(families);
+				}
+				$('#badge-container').html(familyList);
 			}
 		});
 	});
@@ -237,6 +338,18 @@ function handleSignUpButtonClicks() {
 	});
 }
 
+function handleSplashLoginButtonClicks() {
+	$('#splash-login').on('click', event => {
+		console.log('login button clicked');
+		$.get({
+			url: LOGIN_URL,
+			success: function() {
+				window.location.href = '/api/login';	
+			}
+		});
+	});
+}
+
 $(handleLogInRequests);
 $(handleRegistrationRequests);
 $(handleBadgeButtonClicks);
@@ -246,3 +359,8 @@ $(handleFamilyButtonClicks);
 $(handleFamilyCreationClicks);
 $(handleChoreCreationClicks);
 $(handleSignUpButtonClicks);
+$(handleSplashLoginButtonClicks);
+$(handleCreateBadgeButtonClicks);
+$(handleCreateChoreButtonClicks);
+$(handleCreateFamilyButtonClicks);
+$(handleDoneButtonClicks);

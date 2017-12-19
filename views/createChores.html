@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+	<title>ChoreScore</title>
+	<meta charset='utf-8' content='create chores' name='description'>
+	<link rel='stylesheet' type='text/css' href='/styles.css'>
+</head>
+
+	<header>
+		<h1>ChoreScore</h1>
+	</header>
+
+	<form id='chore-form'>
+		<fieldset>
+			<legend>Create Chore</legend>
+
+			<label for='chore-name'>Chore</label>
+			<input type='text' name='chore-name' id='chore-name' required autocomplete>
+
+			<label for='point-value'>Point Value</label>
+			<input type='number' name='point-value' id='point-value' required autocomplete>
+
+		</fieldset>
+
+		<button type='submit'>Do it</button>
+	</form>
+
+	<button id='done-button'>Done</button>
+
+<script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+<script type='text/javascript' src='/client.js'></script>		
+
+<body>
+
+</body>
+</html>
