@@ -203,13 +203,13 @@ function handleBadgeButtonClicks() {
 				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
 			},
 			success: function(badge) {
-				window.location.href = '/api/badgedashboard';
 				console.log(badge);
+				let badgeList = [];
 				for(let i=0; i<badge.length; i++) {
-					let badgeList = `<p>${badge[i].badgename}</p><p>Badge Cost: ${badge[i].badgeCost}</p>`;
-					console.log(badgeList);
+					let badges = `<p>${badge[i].badgename}</br><span>Badge Cost: ${badge[i].badgeCost}</span></p>`;
+					badgeList.push(badges);
 				}
-				$('#badge-container').append(badgeList); 
+				$('#badge-container').html(badgeList); 
 			}
 		});
 	});
@@ -226,6 +226,12 @@ function handleChoreButtonClicks() {
 			},
 			success: function(chore) {
 				console.log(chore);
+				let choreList = [];
+				for(let i=0; i<chore.length; i++) {
+					let chores = `<p>${chore[i].chore}</br><span>Point Value: ${chore[i].pointValue}</span></p>`;
+					choreList.push(chores);
+				}
+				$('#badge-container').html(choreList);
 			}
 		});
 	});
@@ -241,7 +247,13 @@ function handleFamilyButtonClicks() {
 				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
 			},
 			success: function(family) {
-				console.log(family)
+				console.log(family);
+				let familyList = [];
+				for(let i=0; i<family.length; i++) {
+					let families = `<p>${family[i].name}</br><span>Points Accrued: ${family[i].pointsAccrued}</span></p>`;
+					familyList.push(families);
+				}
+				$('#badge-container').html(familyList);
 			}
 		});
 	});
