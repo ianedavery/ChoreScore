@@ -11,6 +11,7 @@ const DASHBOARD_URL = '/api/dashboard';
 const CREATE_BADGES_URL = '/api/createbadge';
 const CREATE_CHORES_URL = '/api/createchore';
 const CREATE_FAMILY_URL = '/api/createfamily';
+const EDIT_BADGE_URL = '/api/editbadge';
 
 function userRegistration(user) {
 	console.log('registration called');
@@ -246,9 +247,38 @@ function editBadge(data, badgeId) {
 		datatype: 'json',
 		contentType: 'application/json',
 		success: function() {
-			console.log('success');
-		}
-	});
+			let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+		$.get({
+			url: BADGE_LIST_URL,
+			beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+			},
+			success: function(badge) {
+				console.log(badge);
+				let badgeList = [];
+				for(let i=0; i<badge.length; i++) {
+					let badges = `<p>${badge[i].badgename}</br><span>${badge[i].badgeCost} Points</span></p>`;
+					badgeList.push(badges);
+				}
+				$('#edit-page-badge-container').html(badgeList);
+			}	
+		});
+		$.get({
+			url: BADGE_LIST_URL,
+			beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+			},
+			success: function(badge) {
+				console.log(badge);
+				let badgeList = [];
+				for(let i=0; i<badge.length; i++) {
+					let badges = `<option>${badge[i].badgename}</option>`;
+					badgeList.push(badges);
+				}
+				$('#edit-dropdown').html(badgeList);
+			}
+		});
+	}});
 }
 
 function handleBadgeEditItButtonClicks() {
@@ -294,12 +324,8 @@ function handleBadgeEditItButtonClicks() {
 	});
 }
 
-function handleEditBadgeButtonClicks() {
-	$('#edit-badge').on('click', event => {
-		console.log('edit badge button clicked');
-		$('#edit-badge-form').prop('hidden', false);
-		$('#dashboard-controls').prop('hidden', true);
-		$('#edit-badge').prop('hidden', true);
+function populateEditBadgePage() {
+	$('#edit-badge-form').load('/views/editBadge.html', event => {
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
 			url: BADGE_LIST_URL,
@@ -314,6 +340,32 @@ function handleEditBadgeButtonClicks() {
 					badgeList.push(badges);
 				}
 				$('#edit-dropdown').html(badgeList);
+			}
+		});
+				$.get({
+			url: BADGE_LIST_URL,
+			beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+			},
+			success: function(badge) {
+				console.log(badge);
+				let badgeList = [];
+				for(let i=0; i<badge.length; i++) {
+					let badges = `<p>${badge[i].badgename}</br><span>${badge[i].badgeCost} Points</span></p>`;
+					badgeList.push(badges);
+				}
+				$('#edit-page-badge-container').html(badgeList);
+			}	
+		});
+	})
+}
+
+function handleEditBadgeButtonClicks() {
+	$('#edit-badge').on('click', event => {
+		$.get({
+			url: EDIT_BADGE_URL,
+			success: function() {
+				window.location.href = '/api/editbadge';
 			}
 		});
 	});
@@ -465,3 +517,4 @@ $(handleCreateFamilyButtonClicks);
 $(handleDoneButtonClicks);
 $(handleEditBadgeButtonClicks);
 $(handleBadgeEditItButtonClicks);
+$(populateEditBadgePage);
