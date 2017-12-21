@@ -42,6 +42,10 @@ const FamilySchema = mongoose.Schema({
 		type: Number,
 		required: true
 	},
+	badgesEarned: {
+		type: String,
+		required: true
+	},
 	createdBy: {
 		type: String,
 		required: true
@@ -52,7 +56,8 @@ FamilySchema.methods.serialize = function() {
 	return {
 		id: this._id,
 		name: this.name,
-		pointsAccrued: this.pointsAccrued
+		pointsAccrued: this.pointsAccrued,
+		badgesEarned: this.badgesEarned
 	};
 };
 

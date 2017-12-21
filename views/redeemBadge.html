@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+	<title>ChoreScore</title>
+	<meta charset='utf-8' content='redeem badges' name='description'>
+	<link rel='stylesheet' type='text/css' href='/styles.css'>
+</head>
+<body>
+
+	<header>
+		<h1>ChoreScore</h1>
+	</header>
+
+	<form id='redeem-badge-form'>
+		<fieldset>
+			<legend>Redeem Badge</legend>
+
+			<select form='redeem-badge-form' name='badge-to-redeem' id='redeem-dropdown' autofocus required>
+			</select>
+
+			<select form='redeem-badge-form' name='family-to-redeem' id='family-dropdown' autofocus required>
+			</select>
+
+			<!--<label for='badge-name'>New Badge Name</label>
+			<input type='text' name='badge-name' id='badge-name' autocomplete>
+
+			<label for='badge-cost'>New Badge Cost</label>
+			<input type='number' name='badge-cost' id='badge-cost' autocomplete>-->
+
+		</fieldset>
+
+		<button type='submit'>Redeem it</button>
+	</form>
+
+	<button id='done-button'>Done</button>
+
+	<div id='redeem-page-badge-container'></div>
+
+<script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+<script type='text/javascript' src='/client.js'></script>		
+</body>
+</html>

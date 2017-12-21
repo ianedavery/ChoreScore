@@ -12,6 +12,7 @@ const CREATE_BADGES_URL = '/api/createbadge';
 const CREATE_CHORES_URL = '/api/createchore';
 const CREATE_FAMILY_URL = '/api/createfamily';
 const EDIT_BADGE_URL = '/api/editbadge';
+const REDEEM_BADGE_URL = '/api/redeembadge';
 
 function userRegistration(user) {
 	console.log('registration called');
@@ -226,13 +227,68 @@ function handleCreateBadgeButtonClicks() {
 	});
 }
 
-function findObjectByKey(array, key, value) {
-	for(let i=0; i<array.length; i++) {
-		if(array[i][key] === value) {
-			return array[i].id;
-		}
-	}
-	return null;
+function populateRedeemBadgePage() {
+		$('#redeem-badge-form').load('/views/redeemBadge.html', event => {
+		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+		$.get({
+			url: BADGE_LIST_URL,
+			beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+			},
+			success: function(badge) {
+				console.log(badge);
+				let badgeList = [];
+				for(let i=0; i<badge.length; i++) {
+					let badges = `<option>${badge[i].badgename}</option>`;
+					badgeList.push(badges);
+				}
+				$('#redeem-dropdown').html(badgeList);
+			}
+		});
+		$.get({
+			url: BADGE_LIST_URL,
+			beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+			},
+			success: function(badge) {
+				console.log(badge);
+				let badgeList = [];
+				for(let i=0; i<badge.length; i++) {
+					let badges = `<p>${badge[i].badgename}</br><span>${badge[i].badgeCost} Points</span></p>`;
+					badgeList.push(badges);
+				}
+				$('#redeem-page-badge-container').html(badgeList);
+			}	
+		});
+		$.get({
+			url: FAMILY_URL,
+			beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+			},
+			success: function(family) {
+				console.log(family);
+				let familyList = [];
+				for(let i=0; i<family.length; i++) {
+					let families = `<option>${family[i].name}</option>`;
+					familyList.push(families);
+				}
+				$('#family-dropdown').html(familyList);
+			}
+		});
+	})
+}
+
+function handleRedeemBadgeButtonClick() {
+	$('#redeem-badge').on('click', event => {
+		console.log('redeem badge clicked');
+		$.get({
+			url: REDEEM_BADGE_URL,
+			success: function() {
+				console.log('success');
+				window.location.href = '/api/redeembadge';
+			}
+		});
+	});
 }
 
 function editBadge(data, badgeId) {
@@ -279,6 +335,15 @@ function editBadge(data, badgeId) {
 			}
 		});
 	}});
+}
+
+function findObjectByKey(array, key, value) {
+	for(let i=0; i<array.length; i++) {
+		if(array[i][key] === value) {
+			return array[i].id;
+		}
+	}
+	return null;
 }
 
 function handleBadgeEditItButtonClicks() {
@@ -468,7 +533,7 @@ function handleFamilyButtonClicks() {
 				console.log(family);
 				let familyList = [];
 				for(let i=0; i<family.length; i++) {
-					let families = `<p>${family[i].name}</br><span>Points Accrued: ${family[i].pointsAccrued}</span></p>`;
+					let families = `<p>${family[i].name}</br><span>Points Accrued: ${family[i].pointsAccrued}</span></br><span>Badges Earned: ${family[i].badgesEarned}</span></p>`;
 					familyList.push(families);
 				}
 				$('#badge-container').html(familyList);
@@ -518,3 +583,5 @@ $(handleDoneButtonClicks);
 $(handleEditBadgeButtonClicks);
 $(handleBadgeEditItButtonClicks);
 $(populateEditBadgePage);
+$(handleRedeemBadgeButtonClick);
+$(populateRedeemBadgePage);
