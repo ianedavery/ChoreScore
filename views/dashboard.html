@@ -11,57 +11,40 @@
 		<h1>ChoreScore</h1>
 	</header>
 
-	<!--<form id='badge-form'>
+	<div id='dashboard-controls'>
+		<button type='button' id='badges'>Badges</button>
+
+		<button type='button' id='chores'>Chores</button>
+
+		<button type='button' id='family'>Family</button>
+	</div>
+
+	<button type='button' id='create-badge' class='create-buttons' aria-live='passive' hidden>Create a new badge</button>
+	<button type='button' id='edit-badge' class='edit-buttons' aria-live='passive' hidden>Edit a badge</button>
+	<button type='button' id='redeem-badge' aria-live='passive' hidden>Redeem a badge</button>
+	<!--<button type='button' id='delete-badge' aria-live='passive' hidden>Delete a badge</button>-->
+
+	<form id='edit-badge-form' aria-live='assertive' hidden>
 		<fieldset>
-			<legend>Create Badge</legend>
+			<legend>Edit Badge</legend>
 
-			<label for='badge-name'>Badge Name</label>
-			<input type='text' name='badge-name' id='badge-name' required autocomplete>
+			<select form='edit-badge-form' name='badge_to_edit' id='edit-dropdown' autofocus required>
+			</select>
 
-			<label for='badge-cost'>Badge Cost</label>
-			<input type='number' name='badge-cost' id='badge-cost' required autocomplete>
+			<label for='badge-name'>New Badge Name</label>
+			<input type='text' name='badge-name' id='badge-name' autocomplete>
+
+			<label for='badge-cost'>New Badge Cost</label>
+			<input type='number' name='badge-cost' id='badge-cost' autocomplete>
 
 		</fieldset>
 
-		<button type='submit'>Make it</button>
+		<button type='submit' id='edit-it-button'>Edit it</button>
 	</form>
 
-	<form id='family-form'>
-		<fieldset>
-			<legend>Create Family</legend>
 
-			<label for='family-name'>Name</label>
-			<input type='text' name='family-name' id='family-name' required autocomplete>
-
-		</fieldset>
-
-		<button type='submit'>Add 'em</button>
-	</form>
-
-	<form id='chore-form'>
-		<fieldset>
-			<legend>Create Chore</legend>
-
-			<label for='chore-name'>Chore</label>
-			<input type='text' name='chore-name' id='chore-name' required autocomplete>
-
-			<label for='point-value'>Point Value</label>
-			<input type='number' name='point-value' id='point-value' required autocomplete>
-
-		</fieldset>
-
-		<button type='submit'>Do it</button>
-	</form>-->
-
-	<button type='button' id='badges'>Badges</button>
-
-	<button type='button' id='chores'>Chores</button>
-
-	<button type='button' id='family'>Family</button>
-
-	<button type='button' id='create-badge' aria-live='passive' hidden>Create a new badge</button>
-	<button type='button' id='create-chore' aria-live='passive' hidden>Create a new chore</button>
-	<button type='button' id='create-family' aria-live='passive' hidden>Add a family member</button>
+	<button type='button' id='create-chore' class='create-buttons' aria-live='passive' hidden>Create a new chore</button>
+	<button type='button' id='create-family' class='create-buttons' aria-live='passive' hidden>Add a family member</button>
 
 	<div id='badge-container'></div>
 

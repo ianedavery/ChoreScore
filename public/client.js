@@ -225,10 +225,91 @@ function handleCreateBadgeButtonClicks() {
 	});
 }
 
+function findObjectByKey(array, key, value) {
+	for(let i=0; i<array.length; i++) {
+		if(array[i][key] === value) {
+			return array[i].id;
+		}
+	}
+	return null;
+}
+
+function editBadge(data) {
+
+}
+
+function handleBadgeEditItButtonClicks() {
+	$('#edit-badge-form').submit(event => {
+		event.preventDefault();
+		console.log('edit it button clicked');		
+		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+		$.get({
+			url: BADGE_LIST_URL,
+			beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+			},
+			success: function(badge) {
+				let currentBadgeNameTarget = $(event.currentTarget).find('#edit-dropdown');
+				let currentBadgeName = currentBadgeNameTarget.val();
+				let badgeId;
+				function findObjectByKey(array, key, value) {
+					for(let i=0; i<array.length; i++) {
+						if(array[i][key] === value) {
+							badgeId = array[i].id;
+						}
+					}
+					return null;
+				}
+				findObjectByKey(badge, "badgename", currentBadgeName);
+				console.log(badgeId);
+				let newBadgeNameTarget = $(event.currentTarget).find('#badge-name');
+				let newBadgeName = newBadgeNameTarget.val();
+				newBadgeNameTarget.val('');
+				console.log(newBadgeName);
+				let newBadgeCostTarget = $(event.currentTarget).find('#badge-cost');
+				let newBadgeCost = newBadgeCostTarget.val();
+				newBadgeCostTarget.val('');
+				console.log(newBadgeCost);
+				let data = {};
+				data.badgename = newBadgeName;
+				data.badgeCost = newBadgeCost;
+				data.id = badgeId;
+				console.log(data);
+			}
+		});
+	});
+}
+
+function handleEditBadgeButtonClicks() {
+	$('#edit-badge').on('click', event => {
+		console.log('edit badge button clicked');
+		$('#edit-badge-form').prop('hidden', false);
+		$('#dashboard-controls').prop('hidden', true);
+		$('#edit-badge').prop('hidden', true);
+		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+		$.get({
+			url: BADGE_LIST_URL,
+			beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+			},
+			success: function(badge) {
+				console.log(badge);
+				let badgeList = [];
+				for(let i=0; i<badge.length; i++) {
+					let badges = `<option>${badge[i].badgename}</option>`;
+					badgeList.push(badges);
+				}
+				$('#edit-dropdown').html(badgeList);
+			}
+		});
+	});
+}
+
 function handleBadgeButtonClicks() {
 	$('#badges').on('click', event => {
-		console.log('retrieving badges');
 		$('#create-badge').prop('hidden', false);
+		$('#edit-badge').prop('hidden', false);
+		$('#redeem-badge').prop('hidden', false);
 		$('#create-chore').prop('hidden', true);
 		$('#create-family').prop('hidden', true);
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
@@ -241,11 +322,11 @@ function handleBadgeButtonClicks() {
 				console.log(badge);
 				let badgeList = [];
 				for(let i=0; i<badge.length; i++) {
-					let badges = `<p>${badge[i].badgename}</br><span>Badge Cost: ${badge[i].badgeCost}</span></p>`;
+					let badges = `<p>${badge[i].badgename}</br><span>${badge[i].badgeCost} Points</span></p>`;
 					badgeList.push(badges);
 				}
-				$('#badge-container').html(badgeList); 
-			}
+				$('#badge-container').html(badgeList);
+			}	
 		});
 	});
 }
@@ -269,6 +350,8 @@ function handleChoreButtonClicks() {
 		$('#create-badge').prop('hidden', true);
 		$('#create-chore').prop('hidden', false);
 		$('#create-family').prop('hidden', true);
+		$('#edit-badge').prop('hidden', true);
+		$('#redeem-badge').prop('hidden', true);
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
 			url: CHORE_LIST_URL,
@@ -307,6 +390,8 @@ function handleFamilyButtonClicks() {
 		$('#create-badge').prop('hidden', true);
 		$('#create-chore').prop('hidden', true);
 		$('#create-family').prop('hidden', false);
+		$('#edit-badge').prop('hidden', true);
+		$('#redeem-badge').prop('hidden', true);
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
 			url: FAMILY_URL,
@@ -364,3 +449,5 @@ $(handleCreateBadgeButtonClicks);
 $(handleCreateChoreButtonClicks);
 $(handleCreateFamilyButtonClicks);
 $(handleDoneButtonClicks);
+$(handleEditBadgeButtonClicks);
+$(handleBadgeEditItButtonClicks);

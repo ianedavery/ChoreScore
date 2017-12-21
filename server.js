@@ -17,6 +17,7 @@ const dashboardRouter = require('./dashboardRouter');
 const createBadgesRouter = require('./createBadgesRouter');
 const createChoresRouter = require('./createChoresRouter');
 const createFamilyRouter = require('./createFamilyRouter');
+const editBadgeRouter =  require('./editBadgeRouter');
 const {PORT, DATABASE_URL} = require('./config');
 
 mongoose.Promise = global.Promise;
@@ -55,6 +56,7 @@ app.use('/api/dashboard', dashboardRouter);
 app.use('/api/createbadge', createBadgesRouter);
 app.use('/api/createchore', createChoresRouter);
 app.use('/api/createfamily', createFamilyRouter);
+app.use('/api/editbadge', editBadgeRouter);
 
 let server;
 
