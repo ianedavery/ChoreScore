@@ -234,8 +234,21 @@ function findObjectByKey(array, key, value) {
 	return null;
 }
 
-function editBadge(data) {
-
+function editBadge(data, badgeId) {
+	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+	$.ajax({
+		method: 'PUT',
+		url: BADGE_LIST_URL + '/' + badgeId,
+		beforeSend: function(xhr, settings) { 
+			xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+		},
+		data: JSON.stringify(data),
+		datatype: 'json',
+		contentType: 'application/json',
+		success: function() {
+			console.log('success');
+		}
+	});
 }
 
 function handleBadgeEditItButtonClicks() {
@@ -271,10 +284,11 @@ function handleBadgeEditItButtonClicks() {
 				newBadgeCostTarget.val('');
 				console.log(newBadgeCost);
 				let data = {};
-				data.badgename = newBadgeName;
-				data.badgeCost = newBadgeCost;
+				data.badgename = newBadgeName.length > 0 ? newBadgeName : undefined;
+				data.badgeCost = newBadgeCost.length > 0 ? newBadgeCost : undefined;
 				data.id = badgeId;
 				console.log(data);
+				editBadge(data, badgeId);
 			}
 		});
 	});
