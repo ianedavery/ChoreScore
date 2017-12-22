@@ -1,5 +1,8 @@
 'use strict';
 
+let badgeCost;
+let pointsAccrued;
+
 const USER_LOGIN_URL = '/api/auth/login';
 const USER_REGISTRATION_URL = '/api/users';
 const BADGE_LIST_URL = 'api/badge';
@@ -240,17 +243,14 @@ function handleRedeemItClicks() {
 			success: function(badge) {
 				let badgeNameTarget = $(event.currentTarget).find('#redeem-dropdown');
 				let badgeName = badgeNameTarget.val();
-				let badgeCost;
 				function findObjectByKey(array, key, value) {
 					for(let i=0; i<array.length; i++) {
 						if(array[i][key] === value) {
 							badgeCost = array[i].badgeCost;
 						}
 					}
-					return null;
 				}
 				findObjectByKey(badge, "badgename", badgeName);
-				console.log(badgeCost);
 			}
 		});
 		$.get({
@@ -261,19 +261,24 @@ function handleRedeemItClicks() {
 			success: function(family) {
 				let familyNameTarget = $(event.currentTarget).find('#family-dropdown');
 				let familyName = familyNameTarget.val();
-				let pointsAccrued;
 				function findObjectByKey(array, key, value) {
 					for(let i=0; i<array.length; i++) {
 						if(array[i][key] === value) {
 							pointsAccrued = array[i].pointsAccrued;
 						}
 					}
-					return null;
 				}
 				findObjectByKey(family, "name", familyName);
-				console.log(pointsAccrued);
 			}
 		});
+		setTimeout(function() {
+			if(badgeCost <= pointsAccrued) {
+				console.log('yes');
+			}
+			else {
+				console.log('no');
+			}
+		}, 1000);
 	});
 }
 
