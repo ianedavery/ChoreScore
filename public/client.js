@@ -1,6 +1,7 @@
 'use strict';
 
 let badgeCost;
+let redeemingBadgeId;
 let pointsAccrued;
 
 const USER_LOGIN_URL = '/api/auth/login';
@@ -230,6 +231,37 @@ function handleCreateBadgeButtonClicks() {
 	});
 }
 
+function handleBadgeAfterRedemption(redeemingBadgeId) {
+	console.log('redeeming badge');
+	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+	$.ajax({
+		method: 'DELETE',
+		url: BADGE_LIST_URL + '/' + redeemingBadgeId,
+		beforeSend: function(xhr, settings) { 
+			xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+		},
+		success: function() {
+			console.log('rendering new list');
+			let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+			$.get({
+				url: BADGE_LIST_URL,
+				beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+				},
+				success: function(badge) {
+					console.log(badge);
+					let badgeList = [];
+					for(let i=0; i<badge.length; i++) {
+						let badges = `<p>${badge[i].badgename}</br><span>${badge[i].badgeCost} Points</span></p>`;
+						badgeList.push(badges);
+					}
+					$('#redeem-page-badge-container').html(badgeList);
+				}	
+			});
+		}
+	});
+}
+
 function handleRedeemItClicks() {
 	$("#redeem-badge-form").submit(event => {
 		event.preventDefault();
@@ -271,9 +303,28 @@ function handleRedeemItClicks() {
 				findObjectByKey(family, "name", familyName);
 			}
 		});
+		$.get({
+			url: BADGE_LIST_URL,
+			beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+			},
+			success: function(badge) {
+				let badgeNameTarget = $(event.currentTarget).find('#redeem-dropdown');
+				let badgeName = badgeNameTarget.val();
+				function findObjectByKey(array, key, value) {
+					for(let i=0; i<array.length; i++) {
+						if(array[i][key] === value) {
+							redeemingBadgeId = array[i].id;
+						}
+					}
+				}
+				findObjectByKey(badge, "badgename", badgeName);
+			}
+		});
 		setTimeout(function() {
 			if(badgeCost <= pointsAccrued) {
 				console.log('yes');
+				handleBadgeAfterRedemption(redeemingBadgeId);
 			}
 			else {
 				console.log('no');
@@ -358,7 +409,7 @@ function editBadge(data, badgeId) {
 		datatype: 'json',
 		contentType: 'application/json',
 		success: function() {
-			let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
 			url: BADGE_LIST_URL,
 			beforeSend: function(xhr, settings) { 
