@@ -42,10 +42,6 @@ const FamilySchema = mongoose.Schema({
 		type: Number,
 		required: true
 	},
-	/*badgesEarned: {
-		type: String,
-		required: true
-	},*/
 	createdBy: {
 		type: String,
 		required: true

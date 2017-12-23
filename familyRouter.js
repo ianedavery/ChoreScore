@@ -59,7 +59,6 @@ router.post('/', jsonParser, (req, res) => {
 	  .create({
 		  name: req.body.name,
 		  pointsAccrued: 0,
-		  badgesEarned: 'none',
 		  createdBy: req.user.userId
 	  })
 	  .then(kid => res.status(201).json(kid.serialize()))
@@ -76,7 +75,7 @@ router.put('/:id', (req, res) => {
 		});
 	}
 	const updated = {};
-	const updatableFields = ['pointsAccrued', 'name', 'badgesEarned'];
+	const updatableFields = ['pointsAccrued', 'name'];
 	updatableFields.forEach(field => {
 		if(field in req.body) {
 			updated[field] = req.body[field];

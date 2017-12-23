@@ -724,7 +724,7 @@ function handleFamilyButtonClicks() {
 				console.log(family);
 				let familyList = [];
 				for(let i=0; i<family.length; i++) {
-					let families = `<p>${family[i].name}</br><span>Points Accrued: ${family[i].pointsAccrued}</span></br><span>Badges Earned: ${family[i].badgesEarned}</span></p>`;
+					let families = `<p>${family[i].name}</br><span>Points Accrued: ${family[i].pointsAccrued}</span></p>`;
 					familyList.push(families);
 				}
 				$('#badge-container').html(familyList);
