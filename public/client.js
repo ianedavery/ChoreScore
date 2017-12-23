@@ -1,14 +1,16 @@
 'use strict';
 
-let badgeCost;
+let redeemingBadgeCost;
 let redeemingBadgeId;
-let pointsAccrued;
+let redeemingPointsAccrued;
+let redeemingFamilyMemberId;
+let redeemingBadgeName;
 
 const USER_LOGIN_URL = '/api/auth/login';
 const USER_REGISTRATION_URL = '/api/users';
 const BADGE_LIST_URL = 'api/badge';
 const CHORE_LIST_URL = 'api/chore';
-const FAMILY_URL = 'api/family';
+const FAMILY_URL = '/api/api/family';
 const SIGNUP_URL = '/api/signup';
 const LOGIN_URL = '/api/login';
 const DASHBOARD_URL = '/api/dashboard';
@@ -231,7 +233,29 @@ function handleCreateBadgeButtonClicks() {
 	});
 }
 
-function handleBadgeAfterRedemption(redeemingBadgeId) {
+function handlePointsAndBadgesEarnedAfterRedemption(redeemingFamilyMemberId, redeemingBadgeName) {
+	console.log('altering users points accrued');
+	let data = {};
+	data.id = redeemingFamilyMemberId;
+	data.badgesEarned = redeemingBadgeName;
+	console.log(data);
+	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+	$.ajax({
+		method: 'PUT',
+		url: FAMILY_URL + '/' + redeemingFamilyMemberId,
+		beforeSend: function(xhr, settings) { 
+			xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+		},
+		data: JSON.stringify(data),
+		datatype: 'json',
+		contentType: 'application/json',
+		success: function() {
+			console.log('success');
+		}
+	});
+}
+
+function handleBadgeAfterRedemption() {
 	console.log('redeeming badge');
 	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 	$.ajax({
@@ -258,6 +282,21 @@ function handleBadgeAfterRedemption(redeemingBadgeId) {
 					$('#redeem-page-badge-container').html(badgeList);
 				}	
 			});
+			$.get({
+				url: BADGE_LIST_URL,
+				beforeSend: function(xhr, settings) { 
+					xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+				},
+				success: function(badge) {
+					console.log(badge);
+					let badgeList = [];
+					for(let i=0; i<badge.length; i++) {
+						let badges = `<option>${badge[i].badgename}</option>`;
+						badgeList.push(badges);
+					}
+					$('#redeem-dropdown').html(badgeList);
+				}
+			});
 		}
 	});
 }
@@ -278,7 +317,7 @@ function handleRedeemItClicks() {
 				function findObjectByKey(array, key, value) {
 					for(let i=0; i<array.length; i++) {
 						if(array[i][key] === value) {
-							badgeCost = array[i].badgeCost;
+							redeemingBadgeCost = array[i].badgeCost;
 						}
 					}
 				}
@@ -296,7 +335,25 @@ function handleRedeemItClicks() {
 				function findObjectByKey(array, key, value) {
 					for(let i=0; i<array.length; i++) {
 						if(array[i][key] === value) {
-							pointsAccrued = array[i].pointsAccrued;
+							redeemingPointsAccrued = array[i].pointsAccrued;
+						}
+					}
+				}
+				findObjectByKey(family, "name", familyName);
+			}
+		});
+		$.get({
+			url: FAMILY_URL,
+			beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+			},
+			success: function(family) {
+				let familyNameTarget = $(event.currentTarget).find('#family-dropdown');
+				let familyName = familyNameTarget.val();
+				function findObjectByKey(array, key, value) {
+					for(let i=0; i<array.length; i++) {
+						if(array[i][key] === value) {
+							redeemingFamilyMemberId = array[i].id;
 						}
 					}
 				}
@@ -310,7 +367,7 @@ function handleRedeemItClicks() {
 			},
 			success: function(badge) {
 				let badgeNameTarget = $(event.currentTarget).find('#redeem-dropdown');
-				let badgeName = badgeNameTarget.val();
+				redeemingBadgeName = badgeNameTarget.val();
 				function findObjectByKey(array, key, value) {
 					for(let i=0; i<array.length; i++) {
 						if(array[i][key] === value) {
@@ -318,13 +375,16 @@ function handleRedeemItClicks() {
 						}
 					}
 				}
-				findObjectByKey(badge, "badgename", badgeName);
+				findObjectByKey(badge, "badgename", redeemingBadgeName);
 			}
 		});
+		setTimeout(function() {console.log(redeemingFamilyMemberId);}, 1000);
+		setTimeout(function() {console.log(redeemingBadgeName);}, 1000);
 		setTimeout(function() {
-			if(badgeCost <= pointsAccrued) {
+			if(redeemingBadgeCost <= redeemingPointsAccrued) {
 				console.log('yes');
-				handleBadgeAfterRedemption(redeemingBadgeId);
+				handleBadgeAfterRedemption();
+				handlePointsAndBadgesEarnedAfterRedemption(redeemingFamilyMemberId, redeemingBadgeName);
 			}
 			else {
 				console.log('no');
@@ -472,7 +532,6 @@ function handleBadgeEditItButtonClicks() {
 							badgeId = array[i].id;
 						}
 					}
-					return null;
 				}
 				findObjectByKey(badge, "badgename", currentBadgeName);
 				console.log(badgeId);

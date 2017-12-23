@@ -76,7 +76,7 @@ router.put('/:id', (req, res) => {
 		});
 	}
 	const updated = {};
-	const updatableFields = ['pointsAccrued', 'name'];
+	const updatableFields = ['pointsAccrued', 'name', 'badgesEarned'];
 	updatableFields.forEach(field => {
 		if(field in req.body) {
 			updated[field] = req.body[field];
