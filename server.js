@@ -21,6 +21,8 @@ const createFamilyRouter = require('./createFamilyRouter');
 const editBadgeRouter =  require('./editBadgeRouter');
 const deleteBadgesRouter = require('./deleteBadgeRouter');
 const redeemBadgeRouter = require('./redeemBadgeRouter');
+const deleteChoreRouter = require('./deleteChoreRouter');
+const deleteFamilyRouter = require('./deleteFamilyRouter');
 const {PORT, DATABASE_URL} = require('./config');
 
 mongoose.Promise = global.Promise;
@@ -63,6 +65,8 @@ app.use('/api/createfamily', createFamilyRouter);
 app.use('/api/editbadge', editBadgeRouter);
 app.use('/api/redeembadge', redeemBadgeRouter);
 app.use('/api/deletebadge', deleteBadgesRouter);
+app.use('/api/deletechore', deleteChoreRouter);
+app.use('/api/deletefamily', deleteFamilyRouter);
 
 let server;
 
