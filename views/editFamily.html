@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+	<title>ChoreScore</title>
+	<meta charset='utf-8' content='edit family' name='description'>
+	<link rel='stylesheet' type='text/css' href='/styles.css'>
+</head>
+<body>
+
+	<header>
+		<h1>ChoreScore</h1>
+	</header>
+
+	<form id='edit-family-form'>
+		<fieldset>
+			<legend>Edit Family</legend>
+
+			<select form='edit-family-form' name='family-to-edit' id='family-edit-dropdown' autofocus required>
+			</select>
+
+			<label for='family-name'>New Name</label>
+			<input type='text' name='family-name' id='family-name' autocomplete>
+
+			<label for='family-points'>New Points Accrued</label>
+			<input type='number' name='family-points' id='family-points' autocomplete>
+
+		</fieldset>
+
+		<button type='submit'>Edit it</button>
+	</form>
+
+	<button id='done-button'>Done</button>
+
+	<div id='family-edit-page-badge-container'></div>
+
+<script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+<script type='text/javascript' src='/client.js'></script>		
+</body>
+</html>

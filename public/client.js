@@ -25,6 +25,7 @@ const DELETE_BADGE_URL = '/api/deletebadge';
 const DELETE_CHORE_URL = '/api/deletechore';
 const DELETE_FAMILY_URL = '/api/deletefamily';
 const EDIT_CHORE_URL = '/api/editchore';
+const EDIT_FAMILY_URL = '/api/editfamily';
 
 function userRegistration(user) {
 	console.log('registration called');
@@ -533,6 +534,112 @@ function editBadge(data, badgeId) {
 	}});
 }
 
+function editFamily(data, familyId) {
+	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+	$.ajax({
+		method: 'PUT',
+		url: FAMILY_URL + '/' + familyId,
+		beforeSend: function(xhr, settings) { 
+			xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+		},
+		data: JSON.stringify(data),
+		datatype: 'json',
+		contentType: 'application/json',
+		success: function() {
+			populateEditFamilyPage();
+		}
+	});
+}
+
+function handleFamilyEditItButtonClicks() {
+	$('#edit-family-form').submit(event => {
+		event.preventDefault();
+		console.log('edit it button clicked');		
+		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+		$.get({
+			url: FAMILY_URL,
+			beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+			},
+			success: function(members) {
+				let currentFamilyNameTarget = $(event.currentTarget).find('#family-edit-dropdown');
+				let currentFamilyName = currentFamilyNameTarget.val();
+				let familyId;
+				function findObjectByKey(array, key, value) {
+					for(let i=0; i<array.length; i++) {
+						if(array[i][key] === value) {
+							familyId = array[i].id;
+						}
+					}
+				}
+				findObjectByKey(members, "name", currentFamilyName);
+				console.log(familyId);
+				let newFamilyNameTarget = $(event.currentTarget).find('#family-name');
+				let newFamilyName = newFamilyNameTarget.val();
+				newFamilyNameTarget.val('');
+				console.log(newFamilyName);
+				let newPointsAccruedTarget = $(event.currentTarget).find('#family-points');
+				let newPointsAccrued = newPointsAccruedTarget.val();
+				newPointsAccruedTarget.val('');
+				console.log(newPointsAccrued);
+				let data = {};
+				data.name = newFamilyName.length > 0 ? newFamilyName : undefined;
+				data.pointsAccrued = newPointsAccrued.length > 0 ? newPointsAccrued : undefined;
+				data.id = familyId;
+				console.log(data);
+				editFamily(data, familyId);
+			}
+		});
+	});
+}
+
+function populateEditFamilyPage() {
+	$('#edit-family-form').load('/views/editFamily.html', event => {
+		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+		$.get({
+			url: FAMILY_URL,
+			beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+			},
+			success: function(members) {
+				console.log(members);
+				let familyList = [];
+				for(let i=0; i<members.length; i++) {
+					let family = `<option>${members[i].name}</option>`;
+					familyList.push(family);
+				}
+				$('#family-edit-dropdown').html(familyList);
+			}
+		});
+		$.get({
+			url: FAMILY_URL,
+			beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+			},
+			success: function(members) {
+				console.log(members);
+				let familyList = [];
+				for(let i=0; i<members.length; i++) {
+					let family = `<p>${members[i].name}</br><span>${members[i].pointsAccrued} Points Accrued</span></p>`;
+					familyList.push(family);
+				}
+				$('#family-edit-page-badge-container').html(familyList);
+			}	
+		});
+	});
+}
+
+function handleEditFamilyButtonClicks() {
+	$('#edit-family').on('click', event => {
+		$.get({
+			url: EDIT_FAMILY_URL,
+			success: function() {
+				window.location.href = '/api/editfamily';
+			}
+		});
+	});
+}
+
 function editChore(data, choreId) {
 	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 	$.ajax({
@@ -1034,6 +1141,7 @@ function handleBadgeButtonClicks() {
 		$('#delete-badge').prop('hidden', false);
 		$('#edit-badge').prop('hidden', false);
 		$('#redeem-badge').prop('hidden', false);
+		$('#edit-family').prop('hidden', true);
 		$('#create-chore').prop('hidden', true);
 		$('#create-family').prop('hidden', true);
 		$('#edit-chore').prop('hidden', true);
@@ -1079,6 +1187,7 @@ function handleChoreButtonClicks() {
 		$('#create-chore').prop('hidden', false);
 		$('#create-family').prop('hidden', true);
 		$('#edit-badge').prop('hidden', true);
+		$('#edit-family').prop('hidden', true);
 		$('#edit-chore').prop('hidden', false);
 		$('#redeem-badge').prop('hidden', true);
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
@@ -1124,6 +1233,7 @@ function handleFamilyButtonClicks() {
 		$('#create-family').prop('hidden', false);
 		$('#edit-badge').prop('hidden', true);
 		$('#edit-chore').prop('hidden', true);
+		$('#edit-family').prop('hidden', false);
 		$('#redeem-badge').prop('hidden', true);
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
@@ -1200,3 +1310,6 @@ $(handleFamilyDeleteItButtonClicks);
 $(handleEditChoreButtonClicks);
 $(populateEditChorePage);
 $(handleChoreEditItButtonClicks);
+$(handleEditFamilyButtonClicks);
+$(populateEditFamilyPage);
+$(handleFamilyEditItButtonClicks);
