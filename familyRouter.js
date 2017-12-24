@@ -59,7 +59,6 @@ router.post('/', jsonParser, (req, res) => {
 	  .create({
 		  name: req.body.name,
 		  pointsAccrued: 0,
-		  badgesEarned: 'none',
 		  createdBy: req.user.userId
 	  })
 	  .then(kid => res.status(201).json(kid.serialize()))
