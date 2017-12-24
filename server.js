@@ -19,6 +19,7 @@ const createBadgesRouter = require('./createBadgesRouter');
 const createChoresRouter = require('./createChoresRouter');
 const createFamilyRouter = require('./createFamilyRouter');
 const editBadgeRouter =  require('./editBadgeRouter');
+const deleteBadgesRouter = require('./deleteBadgeRouter');
 const redeemBadgeRouter = require('./redeemBadgeRouter');
 const {PORT, DATABASE_URL} = require('./config');
 
@@ -61,6 +62,7 @@ app.use('/api/createchore', createChoresRouter);
 app.use('/api/createfamily', createFamilyRouter);
 app.use('/api/editbadge', editBadgeRouter);
 app.use('/api/redeembadge', redeemBadgeRouter);
+app.use('/api/deletebadge', deleteBadgesRouter);
 
 let server;
 

@@ -21,6 +21,7 @@ const CREATE_CHORES_URL = '/api/createchore';
 const CREATE_FAMILY_URL = '/api/createfamily';
 const EDIT_BADGE_URL = '/api/editbadge';
 const REDEEM_BADGE_URL = '/api/redeembadge';
+const DELETE_BADGE_URL = '/api/deletebadge';
 
 function userRegistration(user) {
 	console.log('registration called');
@@ -529,6 +530,99 @@ function editBadge(data, badgeId) {
 	}});
 }
 
+function handleBadgeDeletion(badgeId) {
+	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+	$.ajax({
+		method: 'DELETE',
+		url: BADGE_LIST_URL + '/' + badgeId,
+		beforeSend: function(xhr, settings) { 
+			xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+		},
+		success: function() {
+			console.log('badge deleted');
+			populateDeleteBadgePage();
+		}
+	});
+}
+
+function handleBadgeDeleteItButtonClicks() {
+	$('#delete-badge-form').submit(event => {
+		event.preventDefault();
+		console.log('delete it button clicked');
+		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+		$.get({
+			url: BADGE_LIST_URL,
+			beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+			},
+			success: function(badge) {
+				let currentBadgeNameTarget = $(event.currentTarget).find('#delete-dropdown');
+				let currentBadgeName = currentBadgeNameTarget.val();
+				let badgeId;
+				function findObjectByKey(array, key, value) {
+					for(let i=0; i<array.length; i++) {
+						if(array[i][key] === value) {
+							badgeId = array[i].id;
+						}
+					}
+				}
+				findObjectByKey(badge, "badgename", currentBadgeName);
+				console.log(badgeId);
+				handleBadgeDeletion(badgeId);
+			}
+		});
+	});
+}
+
+function populateDeleteBadgePage() {
+	$('#delete-badge-form').load('/views/deleteBadges.html', event => {
+		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+		$.get({
+			url: BADGE_LIST_URL,
+			beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+			},
+			success: function(badge) {
+				console.log(badge);
+				let badgeList = [];
+				for(let i=0; i<badge.length; i++) {
+					let badges = `<option>${badge[i].badgename}</option>`;
+					badgeList.push(badges);
+				}
+				$('#delete-dropdown').html(badgeList);
+			}
+		});
+		$.get({
+			url: BADGE_LIST_URL,
+			beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+			},
+			success: function(badge) {
+				console.log(badge);
+				let badgeList = [];
+				for(let i=0; i<badge.length; i++) {
+					let badges = `<p>${badge[i].badgename}</br><span>${badge[i].badgeCost} Points</span></p>`;
+					badgeList.push(badges);
+				}
+				$('#delete-page-badge-container').html(badgeList);
+			}	
+		});
+	});
+}
+
+function handleDeleteBadgeButtonClicks() {
+	$('#delete-badge').on('click', event => {
+		console.log('delete badge clicked');
+		$.get({
+			url: DELETE_BADGE_URL,
+			success: function() {
+				console.log('success');
+				window.location.href = '/api/deletebadge';
+			}
+		});
+	});
+}
+
 function findObjectByKey(array, key, value) {
 	for(let i=0; i<array.length; i++) {
 		if(array[i][key] === value) {
@@ -630,6 +724,7 @@ function handleEditBadgeButtonClicks() {
 function handleBadgeButtonClicks() {
 	$('#badges').on('click', event => {
 		$('#create-badge').prop('hidden', false);
+		$('#delete-badge').prop('hidden', false);
 		$('#edit-badge').prop('hidden', false);
 		$('#redeem-badge').prop('hidden', false);
 		$('#create-chore').prop('hidden', true);
@@ -669,6 +764,7 @@ function handleCreateChoreButtonClicks() {
 function handleChoreButtonClicks() {
 	$('#chores').on('click', event => {
 		console.log('retrieving chores');
+		$('#delete-badge').prop('hidden', true);
 		$('#create-badge').prop('hidden', true);
 		$('#create-chore').prop('hidden', false);
 		$('#create-family').prop('hidden', true);
@@ -709,6 +805,7 @@ function handleCreateFamilyButtonClicks() {
 function handleFamilyButtonClicks() {
 	$('#family').on('click', event => {
 		console.log('retrieving family');
+		$('#delete-badge').prop('hidden', true);
 		$('#create-badge').prop('hidden', true);
 		$('#create-chore').prop('hidden', true);
 		$('#create-family').prop('hidden', false);
@@ -777,3 +874,6 @@ $(populateEditBadgePage);
 $(handleRedeemBadgeButtonClick);
 $(populateRedeemBadgePage);
 $(handleRedeemItClicks);
+$(handleDeleteBadgeButtonClicks);
+$(populateDeleteBadgePage);
+$(handleBadgeDeleteItButtonClicks);
