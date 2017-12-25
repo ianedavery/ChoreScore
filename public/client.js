@@ -1461,7 +1461,9 @@ function handleEditBadgeButtonClicks() {
 
 function handleBadgeButtonClicks() {
 	$('#badges').on('click', event => {
+		$('#dashboard-controls').addClass('hidden-dashboard-buttons');
 		$('#create-badge').prop('hidden', false);
+		$('#done-button').prop('hidden', false);
 		$('#view-completed-chores').prop('hidden', true);
 		$('#delete-chore').prop('hidden', true);
 		$('#delete-family').prop('hidden', true);
@@ -1487,7 +1489,7 @@ function handleBadgeButtonClicks() {
 					let badges = `<p>${badge[i].badgename}</br><span>${badge[i].badgeCost} Points</span></p>`;
 					badgeList.push(badges);
 				}
-				$('#badge-container').html(badgeList);
+				$('#dashboard-container').html(badgeList);
 			}	
 		});
 	});
@@ -1509,6 +1511,8 @@ function handleCreateChoreButtonClicks() {
 function handleChoreButtonClicks() {
 	$('#chores').on('click', event => {
 		console.log('retrieving chores');
+		$('#dashboard-controls').addClass('hidden-dashboard-buttons');
+		$('#done-button').prop('hidden', false);
 		$('#delete-badge').prop('hidden', true);
 		$('#view-redeemed-badges').prop('hidden', true);
 		$('#delete-chore').prop('hidden', false);
@@ -1535,7 +1539,7 @@ function handleChoreButtonClicks() {
 					let chores = `<p>${chore[i].chore}</br><span>Point Value: ${chore[i].pointValue}</span></p>`;
 					choreList.push(chores);
 				}
-				$('#badge-container').html(choreList);
+				$('#dashboard-container').html(choreList);
 			}
 		});
 	});
@@ -1557,7 +1561,9 @@ function handleCreateFamilyButtonClicks() {
 function handleFamilyButtonClicks() {
 	$('#family').on('click', event => {
 		console.log('retrieving family');
+		$('#dashboard-controls').addClass('hidden-dashboard-buttons');
 		$('#delete-badge').prop('hidden', true);
+		$('#done-button').prop('hidden', false);
 		$('#view-completed-chores').prop('hidden', true);
 		$('#view-redeemed-badges').prop('hidden', true);
 		$('#delete-chore').prop('hidden', true);
@@ -1583,7 +1589,7 @@ function handleFamilyButtonClicks() {
 					let families = `<p>${family[i].name}</br><span>Points Accrued: ${family[i].pointsAccrued}</span></p>`;
 					familyList.push(families);
 				}
-				$('#badge-container').html(familyList);
+				$('#dashboard-container').html(familyList);
 			}
 		});
 	});
