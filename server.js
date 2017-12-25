@@ -29,6 +29,9 @@ const completeChoreRouter = require('./completeChoreRouter');
 const choresCompletedRouter = require('./choresCompletedRouter');
 const viewCompletedChoresRouter = require('./viewCompletedChoresRouter');
 const viewRedeemedBadgesRouter = require('./viewRedeemedBadgesRouter');
+const badgeDashboardRouter = require('./badgeDashboardRouter');
+const choreDashboardRouter = require('./choreDashboardRouter');
+const familyDashboardRouter = require('./familyDashboardRouter');
 const {PORT, DATABASE_URL} = require('./config');
 
 mongoose.Promise = global.Promise;
@@ -79,6 +82,9 @@ app.use('/api/editfamily', editFamilyRouter);
 app.use('/api/completechore', completeChoreRouter);
 app.use('/api/completedchores', viewCompletedChoresRouter);
 app.use('/api/redeemedbadges', viewRedeemedBadgesRouter);
+app.use('/api/badgedashboard', badgeDashboardRouter);
+app.use('/api/choredashboard', choreDashboardRouter);
+app.use('/api/familydashboard', familyDashboardRouter);
 
 let server;
 
