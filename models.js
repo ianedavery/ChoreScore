@@ -86,6 +86,14 @@ const ChoresCompletedSchema = mongoose.Schema({
 	}
 });
 
+ChoresCompletedSchema.methods.serialize = function() {
+	return {
+		id: this._id,
+		choreName: this.choreName,
+		completedBy: this.completedBy
+	};
+};
+
 BadgesEarnedSchema.methods.serialize = function() {
 	return {
 		id: this._id,
@@ -123,5 +131,6 @@ const Family = mongoose.model('Family', FamilySchema);
 const Badge = mongoose.model('Badge', BadgeSchema);
 const Chore = mongoose.model('Chore', ChoreSchema);
 const BadgesEarned = mongoose.model('BadgesEarned', BadgesEarnedSchema);
+const ChoresCompleted = mongoose.model('ChoresCompleted', ChoresCompletedSchema);
 
-module.exports = {Badge, Chore, Family, BadgesEarned};
+module.exports = {Badge, Chore, Family, BadgesEarned, ChoresCompleted};

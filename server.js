@@ -26,6 +26,7 @@ const deleteFamilyRouter = require('./deleteFamilyRouter');
 const editChoreRouter = require('./editChoresRouter');
 const editFamilyRouter = require('./editFamilyRouter');
 const completeChoreRouter = require('./completeChoreRouter');
+const choresCompletedRouter = require('./choresCompletedRouter');
 const {PORT, DATABASE_URL} = require('./config');
 
 mongoose.Promise = global.Promise;
@@ -59,6 +60,7 @@ app.use('/api/api/chore', jwtAuth, choreRouter);
 app.use('/api/api/badge', jwtAuth, badgeRouter);
 app.use('/api/api/family', jwtAuth, familyRouter);
 app.use('/api/badgesearned', jwtAuth, badgesEarnedRouter);
+app.use('/api/chorescompleted', jwtAuth, choresCompletedRouter);
 app.use('/api/signup', signUpRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/dashboard', dashboardRouter);
