@@ -10,6 +10,8 @@ let completedChoreValue;
 let completingFamilyMemberId;
 let completingFamilyMembersPointsAccrued;
 let completedChoreId;
+let completingFamilyMemberName;
+let completedChoreName;
 
 const USER_LOGIN_URL = '/api/auth/login';
 const USER_REGISTRATION_URL = '/api/users';
@@ -31,6 +33,9 @@ const DELETE_FAMILY_URL = '/api/deletefamily';
 const EDIT_CHORE_URL = '/api/editchore';
 const EDIT_FAMILY_URL = '/api/editfamily';
 const COMPLETE_CHORE_URL = '/api/completechore';
+const CHORES_COMPLETED_URL = '/api/chorescompleted'
+const VIEW_COMPLETED_CHORES_URL = '/api/completedchores';
+const VIEW_REDEEMED_BADGES_URL = '/api/redeemedbadges';
 
 function userRegistration(user) {
 	console.log('registration called');
@@ -245,6 +250,74 @@ function handleCreateBadgeButtonClicks() {
 	});
 }
 
+function populateViewRedeemedBadgesPage() {
+	$('#redeemed-badge-container').load('/views/viewRedeemedBadges.html', event => {
+		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+		$.get({
+			url: BADGES_EARNED_URL,
+			beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+			},
+			success: function(badges) {
+				console.log(badges);
+				let badgeList = [];
+				for(let i=0; i<badges.length; i++) {
+					let badge = `<p>${badges[i].badgeName}</br><span>Earned By: ${badges[i].earnedBy}</span></p>`;
+					badgeList.push(badge);
+				}
+				$('#redeemed-badge-container').html(badgeList);
+			}
+		});
+	});
+}
+
+function handleViewRedeemedBadgesButtonClicks() {
+	$('#view-redeemed-badges').on('click', event => {
+		console.log('view redeemed badges button clicked');
+		$.get({
+			url: VIEW_REDEEMED_BADGES_URL,
+			success: function() {
+				console.log('success');
+				window.location.href = '/api/redeemedbadges';
+			}
+		});
+	});
+}
+
+function populateViewCompletedChoresPage() {
+	$('#completed-chores-container').load('/views/viewCompletedChores.html', event => {
+		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+		$.get({
+			url: CHORES_COMPLETED_URL,
+			beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+			},
+			success: function(chores) {
+				console.log(chores);
+				let choreList = [];
+				for(let i=0; i<chores.length; i++) {
+					let chore = `<p>${chores[i].choreName}</br><span>Completed By: ${chores[i].completedBy}</span></p>`;
+					choreList.push(chore);
+				}
+				$('#completed-chores-container').html(choreList);
+			}
+		});
+	});
+}
+
+function handleViewCompletedChoresButtonClicks() {
+	$('#view-completed-chores').on('click', event => {
+		console.log('view completed chores button clicked');
+		$.get({
+			url: VIEW_COMPLETED_CHORES_URL,
+			success: function() {
+				console.log('success');
+				window.location.href = '/api/completedchores';
+			}
+		});
+	});
+}
+
 function handlePointsAccruedAfterRedemption(redeemingPointsAccrued, redeemingBadgeCost, redeemingFamilyMemberId) {
 	let newPoints = redeemingPointsAccrued - redeemingBadgeCost;
 	let data = {};
@@ -267,7 +340,6 @@ function handlePointsAccruedAfterRedemption(redeemingPointsAccrued, redeemingBad
 }
 
 function handleBadgesEarnedAfterRedemption(redeemingFamilyMemberId, redeemingBadgeName, redeemingFamilyMemberName) {
-	console.log('altering users points accrued');
 	let data = {};
 	data.earnedBy = redeemingFamilyMemberName;
 	data.earnedById = redeemingFamilyMemberId;
@@ -539,6 +611,28 @@ function editBadge(data, badgeId) {
 	}});
 }
 
+function handleChoresEarnedAfterCompletion(completingFamilyMemberName, completingFamilyMemberId, completedChoreName) {
+	let data = {};
+	data.completedBy = completingFamilyMemberName;
+	data.completedById = completingFamilyMemberId;
+	data.choreName = completedChoreName;
+	console.log(data);
+	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+	$.ajax({
+		method: 'POST',
+		url: CHORES_COMPLETED_URL,
+		beforeSend: function(xhr, settings) { 
+			xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+		},
+		data: JSON.stringify(data),
+		datatype: 'json',
+		contentType: 'application/json',
+		success: function() {
+			console.log('success');
+		}
+	});
+}
+
 function handleChoreAfterCompletion() {
 	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 	$.ajax({
@@ -618,6 +712,25 @@ function handleChoreCompleteItClicks() {
 			}
 		});
 		$.get({
+			url: CHORE_LIST_URL,
+			beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+			},
+			success: function(chores) {
+				console.log('success');
+				let choreNameTarget = $(event.currentTarget).find('#complete-dropdown');
+				let choreName = choreNameTarget.val();
+				function findObjectByKey(array, key, value) {
+					for(let i=0; i<array.length; i++) {
+						if(array[i][key] === value) {
+							completedChoreName = array[i].chore;
+						}
+					}
+				}
+				findObjectByKey(chores, "chore", choreName);
+			}
+		});
+		$.get({
 			url: FAMILY_URL,
 			beforeSend: function(xhr, settings) { 
 				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
@@ -629,6 +742,24 @@ function handleChoreCompleteItClicks() {
 					for(let i=0; i<array.length; i++) {
 						if(array[i][key] === value) {
 							completingFamilyMemberId = array[i].id;
+						}
+					}
+				}
+				findObjectByKey(family, "name", familyName);
+			}
+		});
+		$.get({
+			url: FAMILY_URL,
+			beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+			},
+			success: function(family) {
+				let familyNameTarget = $(event.currentTarget).find('#family-dropdown');
+				let familyName = familyNameTarget.val();
+				function findObjectByKey(array, key, value) {
+					for(let i=0; i<array.length; i++) {
+						if(array[i][key] === value) {
+							completingFamilyMemberName = array[i].name;
 						}
 					}
 				}
@@ -660,6 +791,7 @@ function handleChoreCompleteItClicks() {
 		setTimeout(function() {
 			handlePointsAccruedAfterCompletion(completedChoreValue, completingFamilyMembersPointsAccrued, completingFamilyMemberId);
 			handleChoreAfterCompletion();
+			handleChoresEarnedAfterCompletion(completingFamilyMemberName, completingFamilyMemberId, completedChoreName);
 		}, 1000);
 	});
 }
@@ -1330,8 +1462,10 @@ function handleEditBadgeButtonClicks() {
 function handleBadgeButtonClicks() {
 	$('#badges').on('click', event => {
 		$('#create-badge').prop('hidden', false);
+		$('#view-completed-chores').prop('hidden', true);
 		$('#delete-chore').prop('hidden', true);
 		$('#delete-family').prop('hidden', true);
+		$('#view-redeemed-badges').prop('hidden', false);
 		$('#complete-chore').prop('hidden', true);
 		$('#delete-badge').prop('hidden', false);
 		$('#edit-badge').prop('hidden', false);
@@ -1376,7 +1510,9 @@ function handleChoreButtonClicks() {
 	$('#chores').on('click', event => {
 		console.log('retrieving chores');
 		$('#delete-badge').prop('hidden', true);
+		$('#view-redeemed-badges').prop('hidden', true);
 		$('#delete-chore').prop('hidden', false);
+		$('#view-completed-chores').prop('hidden', false);
 		$('#complete-chore').prop('hidden', false);
 		$('#delete-family').prop('hidden', true);
 		$('#create-badge').prop('hidden', true);
@@ -1422,6 +1558,8 @@ function handleFamilyButtonClicks() {
 	$('#family').on('click', event => {
 		console.log('retrieving family');
 		$('#delete-badge').prop('hidden', true);
+		$('#view-completed-chores').prop('hidden', true);
+		$('#view-redeemed-badges').prop('hidden', true);
 		$('#delete-chore').prop('hidden', true);
 		$('#delete-family').prop('hidden', false);
 		$('#create-badge').prop('hidden', true);
@@ -1513,3 +1651,7 @@ $(handleFamilyEditItButtonClicks);
 $(handleCompleteChoreButtonClicks);
 $(populateCompleteChorePage);
 $(handleChoreCompleteItClicks);
+$(handleViewRedeemedBadgesButtonClicks);
+$(handleViewCompletedChoresButtonClicks);
+$(populateViewRedeemedBadgesPage);
+$(populateViewCompletedChoresPage);
