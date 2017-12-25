@@ -6,6 +6,10 @@ let redeemingPointsAccrued;
 let redeemingFamilyMemberId;
 let redeemingBadgeName;
 let redeemingFamilyMemberName;
+let completedChoreValue;
+let completingFamilyMemberId;
+let completingFamilyMembersPointsAccrued;
+let completedChoreId;
 
 const USER_LOGIN_URL = '/api/auth/login';
 const USER_REGISTRATION_URL = '/api/users';
@@ -26,6 +30,7 @@ const DELETE_CHORE_URL = '/api/deletechore';
 const DELETE_FAMILY_URL = '/api/deletefamily';
 const EDIT_CHORE_URL = '/api/editchore';
 const EDIT_FAMILY_URL = '/api/editfamily';
+const COMPLETE_CHORE_URL = '/api/completechore';
 
 function userRegistration(user) {
 	console.log('registration called');
@@ -532,6 +537,195 @@ function editBadge(data, badgeId) {
 			}
 		});
 	}});
+}
+
+function handleChoreAfterCompletion() {
+	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+	$.ajax({
+		method: 'DELETE',
+		url: CHORE_LIST_URL + '/' +  completedChoreId,
+		beforeSend: function(xhr, settings) { 
+			xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+		},
+		success: function() {
+			populateCompleteChorePage();
+		}
+	});
+}
+
+function handlePointsAccruedAfterCompletion(completedChoreValue, completingFamilyMembersPointsAccrued, completingFamilyMemberId) {
+	let newPoints = completedChoreValue + completingFamilyMembersPointsAccrued;
+	let data = {};
+	data.id = completingFamilyMemberId;
+	data.pointsAccrued = newPoints;
+	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+	$.ajax({
+		method: 'PUT',
+		url: FAMILY_URL + '/' + completingFamilyMemberId,
+		beforeSend: function(xhr, settings) { 
+			xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+		},
+		data: JSON.stringify(data),
+		datatype: 'json',
+		contentType: 'application/json',
+		success: function() {
+			console.log('success');
+		}
+	});
+}
+
+function handleChoreCompleteItClicks() {
+	$('#complete-chore-form').submit(event => {
+		event.preventDefault();
+		console.log('complete it button clicked');
+		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+		$.get({
+			url: CHORE_LIST_URL,
+			beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+			},
+			success: function(chores) {
+				console.log('success');
+				let choreNameTarget = $(event.currentTarget).find('#complete-dropdown');
+				let choreName = choreNameTarget.val();
+				function findObjectByKey(array, key, value) {
+					for(let i=0; i<array.length; i++) {
+						if(array[i][key] === value) {
+							completedChoreValue = array[i].pointValue;
+						}
+					}
+				}
+				findObjectByKey(chores, "chore", choreName);
+			}
+		});
+		$.get({
+			url: CHORE_LIST_URL,
+			beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+			},
+			success: function(chores) {
+				console.log('success');
+				let choreNameTarget = $(event.currentTarget).find('#complete-dropdown');
+				let choreName = choreNameTarget.val();
+				function findObjectByKey(array, key, value) {
+					for(let i=0; i<array.length; i++) {
+						if(array[i][key] === value) {
+							completedChoreId = array[i].id;
+						}
+					}
+				}
+				findObjectByKey(chores, "chore", choreName);
+			}
+		});
+		$.get({
+			url: FAMILY_URL,
+			beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+			},
+			success: function(family) {
+				let familyNameTarget = $(event.currentTarget).find('#family-dropdown');
+				let familyName = familyNameTarget.val();
+				function findObjectByKey(array, key, value) {
+					for(let i=0; i<array.length; i++) {
+						if(array[i][key] === value) {
+							completingFamilyMemberId = array[i].id;
+						}
+					}
+				}
+				findObjectByKey(family, "name", familyName);
+			}
+		});
+		$.get({
+			url: FAMILY_URL,
+			beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+			},
+			success: function(family) {
+				let familyNameTarget = $(event.currentTarget).find('#family-dropdown');
+				let familyName = familyNameTarget.val();
+				function findObjectByKey(array, key, value) {
+					for(let i=0; i<array.length; i++) {
+						if(array[i][key] === value) {
+							completingFamilyMembersPointsAccrued = array[i].pointsAccrued;
+						}
+					}
+				}
+				findObjectByKey(family, "name", familyName);
+			}
+		});
+		/*setTimeout(function() {console.log('chore value: ' + completedChoreValue);}, 1000);
+		setTimeout(function() {console.log('family id: ' + completingFamilyMemberId);}, 1000);
+		setTimeout(function() {console.log('points accrued: ' + completingFamilyMembersPointsAccrued);}, 1000);
+		setTimeout(function() {console.log('chore id: ' + completedChoreId);}, 1000);*/
+		setTimeout(function() {
+			handlePointsAccruedAfterCompletion(completedChoreValue, completingFamilyMembersPointsAccrued, completingFamilyMemberId);
+			handleChoreAfterCompletion();
+		}, 1000);
+	});
+}
+
+function populateCompleteChorePage() {
+	$('#complete-chore-form').load('/views/completeChores.html', event => {
+		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+		$.get({
+			url: CHORE_LIST_URL,
+			beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+			},
+			success: function(chores) {
+				console.log(chores);
+				let choreList = [];
+				for(let i=0; i<chores.length; i++) {
+					let chore = `<option>${chores[i].chore}</option>`;
+					choreList.push(chore);
+				}
+				$('#complete-dropdown').html(choreList);
+			}
+		});
+		$.get({
+			url: CHORE_LIST_URL,
+			beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+			},
+			success: function(chores) {
+				console.log(chores);
+				let choreList = [];
+				for(let i=0; i<chores.length; i++) {
+					let chore = `<p>${chores[i].chore}</br><span>${chores[i].pointValue} Points</span></p>`;
+					choreList.push(chore);
+				}
+				$('#complete-page-badge-container').html(choreList);
+			}	
+		});
+		$.get({
+			url: FAMILY_URL,
+			beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+			},
+			success: function(family) {
+				console.log(family);
+				let familyList = [];
+				for(let i=0; i<family.length; i++) {
+					let families = `<option>${family[i].name}</option>`;
+					familyList.push(families);
+				}
+				$('#family-dropdown').html(familyList);
+			}
+		});
+	});
+}
+
+function handleCompleteChoreButtonClicks() {
+	$('#complete-chore').on('click', event => {
+		console.log('complete chore clicked');
+		$.get({
+			url: COMPLETE_CHORE_URL,
+			success: function() {
+				console.log('success');
+				window.location.href = '/api/completechore';
+			}
+		});
+	});
 }
 
 function editFamily(data, familyId) {
@@ -1138,6 +1332,7 @@ function handleBadgeButtonClicks() {
 		$('#create-badge').prop('hidden', false);
 		$('#delete-chore').prop('hidden', true);
 		$('#delete-family').prop('hidden', true);
+		$('#complete-chore').prop('hidden', true);
 		$('#delete-badge').prop('hidden', false);
 		$('#edit-badge').prop('hidden', false);
 		$('#redeem-badge').prop('hidden', false);
@@ -1182,6 +1377,7 @@ function handleChoreButtonClicks() {
 		console.log('retrieving chores');
 		$('#delete-badge').prop('hidden', true);
 		$('#delete-chore').prop('hidden', false);
+		$('#complete-chore').prop('hidden', false);
 		$('#delete-family').prop('hidden', true);
 		$('#create-badge').prop('hidden', true);
 		$('#create-chore').prop('hidden', false);
@@ -1230,6 +1426,7 @@ function handleFamilyButtonClicks() {
 		$('#delete-family').prop('hidden', false);
 		$('#create-badge').prop('hidden', true);
 		$('#create-chore').prop('hidden', true);
+		$('#complete-chore').prop('hidden', true);
 		$('#create-family').prop('hidden', false);
 		$('#edit-badge').prop('hidden', true);
 		$('#edit-chore').prop('hidden', true);
@@ -1313,3 +1510,6 @@ $(handleChoreEditItButtonClicks);
 $(handleEditFamilyButtonClicks);
 $(populateEditFamilyPage);
 $(handleFamilyEditItButtonClicks);
+$(handleCompleteChoreButtonClicks);
+$(populateCompleteChorePage);
+$(handleChoreCompleteItClicks);
