@@ -61,7 +61,26 @@ const BadgesEarnedSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
-		createdBy: {
+	createdBy: {
+		type: String,
+		required: true
+	}
+});
+
+const ChoresCompletedSchema = mongoose.Schema({
+	choreName: {
+		type: String,
+		required: true
+	},
+	completedBy: {
+		type: String,
+		required: true
+	},
+	completedById: {
+		type: String,
+		required: true
+	},
+	createdBy: {
 		type: String,
 		required: true
 	}
