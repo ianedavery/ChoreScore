@@ -34,6 +34,8 @@ const EDIT_CHORE_URL = '/api/editchore';
 const EDIT_FAMILY_URL = '/api/editfamily';
 const COMPLETE_CHORE_URL = '/api/completechore';
 const CHORES_COMPLETED_URL = '/api/chorescompleted'
+const VIEW_COMPLETED_CHORES_URL = '/api/completedchores';
+const VIEW_REDEEMED_BADGES_URL = '/api/redeemedbadges';
 
 function userRegistration(user) {
 	console.log('registration called');
@@ -243,6 +245,74 @@ function handleCreateBadgeButtonClicks() {
 			success: function() {
 				console.log('success');
 				window.location.href = '/api/createbadge';
+			}
+		});
+	});
+}
+
+function populateViewRedeemedBadgesPage() {
+	$('#redeemed-badge-container').load('/views/viewRedeemedBadges.html', event => {
+		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+		$.get({
+			url: BADGES_EARNED_URL,
+			beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+			},
+			success: function(badges) {
+				console.log(badges);
+				let badgeList = [];
+				for(let i=0; i<badges.length; i++) {
+					let badge = `<p>${badges[i].badgeName}</br><span>Earned By: ${badges[i].earnedBy}</span></p>`;
+					badgeList.push(badge);
+				}
+				$('#redeemed-badge-container').html(badgeList);
+			}
+		});
+	});
+}
+
+function handleViewRedeemedBadgesButtonClicks() {
+	$('#view-redeemed-badges').on('click', event => {
+		console.log('view redeemed badges button clicked');
+		$.get({
+			url: VIEW_REDEEMED_BADGES_URL,
+			success: function() {
+				console.log('success');
+				window.location.href = '/api/redeemedbadges';
+			}
+		});
+	});
+}
+
+function populateViewCompletedChoresPage() {
+	$('#completed-chores-container').load('/views/viewCompletedChores.html', event => {
+		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+		$.get({
+			url: CHORES_COMPLETED_URL,
+			beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+			},
+			success: function(chores) {
+				console.log(chores);
+				let choreList = [];
+				for(let i=0; i<chores.length; i++) {
+					let chore = `<p>${chores[i].choreName}</br><span>Completed By: ${chores[i].completedBy}</span></p>`;
+					choreList.push(chore);
+				}
+				$('#completed-chores-container').html(choreList);
+			}
+		});
+	});
+}
+
+function handleViewCompletedChoresButtonClicks() {
+	$('#view-completed-chores').on('click', event => {
+		console.log('view completed chores button clicked');
+		$.get({
+			url: VIEW_COMPLETED_CHORES_URL,
+			success: function() {
+				console.log('success');
+				window.location.href = '/api/completedchores';
 			}
 		});
 	});
@@ -1392,8 +1462,10 @@ function handleEditBadgeButtonClicks() {
 function handleBadgeButtonClicks() {
 	$('#badges').on('click', event => {
 		$('#create-badge').prop('hidden', false);
+		$('#view-completed-chores').prop('hidden', true);
 		$('#delete-chore').prop('hidden', true);
 		$('#delete-family').prop('hidden', true);
+		$('#view-redeemed-badges').prop('hidden', false);
 		$('#complete-chore').prop('hidden', true);
 		$('#delete-badge').prop('hidden', false);
 		$('#edit-badge').prop('hidden', false);
@@ -1438,7 +1510,9 @@ function handleChoreButtonClicks() {
 	$('#chores').on('click', event => {
 		console.log('retrieving chores');
 		$('#delete-badge').prop('hidden', true);
+		$('#view-redeemed-badges').prop('hidden', true);
 		$('#delete-chore').prop('hidden', false);
+		$('#view-completed-chores').prop('hidden', false);
 		$('#complete-chore').prop('hidden', false);
 		$('#delete-family').prop('hidden', true);
 		$('#create-badge').prop('hidden', true);
@@ -1484,6 +1558,8 @@ function handleFamilyButtonClicks() {
 	$('#family').on('click', event => {
 		console.log('retrieving family');
 		$('#delete-badge').prop('hidden', true);
+		$('#view-completed-chores').prop('hidden', true);
+		$('#view-redeemed-badges').prop('hidden', true);
 		$('#delete-chore').prop('hidden', true);
 		$('#delete-family').prop('hidden', false);
 		$('#create-badge').prop('hidden', true);
@@ -1575,3 +1651,7 @@ $(handleFamilyEditItButtonClicks);
 $(handleCompleteChoreButtonClicks);
 $(populateCompleteChorePage);
 $(handleChoreCompleteItClicks);
+$(handleViewRedeemedBadgesButtonClicks);
+$(handleViewCompletedChoresButtonClicks);
+$(populateViewRedeemedBadgesPage);
+$(populateViewCompletedChoresPage);
