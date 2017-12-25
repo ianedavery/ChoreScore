@@ -36,6 +36,9 @@ const COMPLETE_CHORE_URL = '/api/completechore';
 const CHORES_COMPLETED_URL = '/api/chorescompleted'
 const VIEW_COMPLETED_CHORES_URL = '/api/completedchores';
 const VIEW_REDEEMED_BADGES_URL = '/api/redeemedbadges';
+const BADGE_DASHBOARD_URL = '/api/badgedashboard';
+const CHORE_DASHBOARD_URL = '/api/choredashboard';
+const FAMILY_DASHBOARD_URL = '/api/familydashboard';
 
 function userRegistration(user) {
 	console.log('registration called');
@@ -1430,7 +1433,7 @@ function populateEditBadgePage() {
 				$('#edit-dropdown').html(badgeList);
 			}
 		});
-				$.get({
+		$.get({
 			url: BADGE_LIST_URL,
 			beforeSend: function(xhr, settings) { 
 				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
@@ -1459,23 +1462,8 @@ function handleEditBadgeButtonClicks() {
 	});
 }
 
-function handleBadgeButtonClicks() {
-	$('#badges').on('click', event => {
-		$('#dashboard-controls').addClass('hidden-dashboard-buttons');
-		$('#create-badge').prop('hidden', false);
-		$('#done-button').prop('hidden', false);
-		$('#view-completed-chores').prop('hidden', true);
-		$('#delete-chore').prop('hidden', true);
-		$('#delete-family').prop('hidden', true);
-		$('#view-redeemed-badges').prop('hidden', false);
-		$('#complete-chore').prop('hidden', true);
-		$('#delete-badge').prop('hidden', false);
-		$('#edit-badge').prop('hidden', false);
-		$('#redeem-badge').prop('hidden', false);
-		$('#edit-family').prop('hidden', true);
-		$('#create-chore').prop('hidden', true);
-		$('#create-family').prop('hidden', true);
-		$('#edit-chore').prop('hidden', true);
+function populateCreateBadgesPage() {
+	$('#badge-form').load('/views/createBadges.html', event => {
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
 			url: BADGE_LIST_URL,
@@ -1489,8 +1477,41 @@ function handleBadgeButtonClicks() {
 					let badges = `<p>${badge[i].badgename}</br><span>${badge[i].badgeCost} Points</span></p>`;
 					badgeList.push(badges);
 				}
-				$('#dashboard-container').html(badgeList);
+				$('#create-badge-container').html(badgeList);
 			}	
+		});
+	});
+}
+
+function populateBadgeDashboard() {
+	$('#badge-buttons').load('/views/badgeDashboard.html', event => {
+		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+		$.get({
+			url: BADGE_LIST_URL,
+			beforeSend: function(xhr, settings) { 
+				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+			},
+			success: function(badge) {
+				console.log(badge);
+				let badgeList = [];
+				for(let i=0; i<badge.length; i++) {
+					let badges = `<p>${badge[i].badgename}</br><span>${badge[i].badgeCost} Points</span></p>`;
+					badgeList.push(badges);
+				}
+				$('#badge-dashboard-container').html(badgeList);
+			}	
+		});
+	});
+}
+
+function handleBadgeButtonClicks() {
+	$('#badges').on('click', event => {
+		$.get({
+			url: BADGE_DASHBOARD_URL,
+			success: function() {
+				console.log('success');
+				window.location.href = '/api/badgedashboard';
+			}
 		});
 	});
 }
@@ -1508,38 +1529,34 @@ function handleCreateChoreButtonClicks() {
 	});
 }
 
-function handleChoreButtonClicks() {
-	$('#chores').on('click', event => {
-		console.log('retrieving chores');
-		$('#dashboard-controls').addClass('hidden-dashboard-buttons');
-		$('#done-button').prop('hidden', false);
-		$('#delete-badge').prop('hidden', true);
-		$('#view-redeemed-badges').prop('hidden', true);
-		$('#delete-chore').prop('hidden', false);
-		$('#view-completed-chores').prop('hidden', false);
-		$('#complete-chore').prop('hidden', false);
-		$('#delete-family').prop('hidden', true);
-		$('#create-badge').prop('hidden', true);
-		$('#create-chore').prop('hidden', false);
-		$('#create-family').prop('hidden', true);
-		$('#edit-badge').prop('hidden', true);
-		$('#edit-family').prop('hidden', true);
-		$('#edit-chore').prop('hidden', false);
-		$('#redeem-badge').prop('hidden', true);
+function populateChoreDashboard() {
+	$('#chore-buttons').load('/views/choreDashboard.html', event => {
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
 			url: CHORE_LIST_URL,
 			beforeSend: function(xhr, settings) { 
 				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
 			},
-			success: function(chore) {
-				console.log(chore);
+			success: function(chores) {
+				console.log(chores);
 				let choreList = [];
-				for(let i=0; i<chore.length; i++) {
-					let chores = `<p>${chore[i].chore}</br><span>Point Value: ${chore[i].pointValue}</span></p>`;
-					choreList.push(chores);
+				for(let i=0; i<chores.length; i++) {
+					let chore = `<p>${chores[i].chore}</br><span>${chores[i].pointValue} Points</span></p>`;
+					choreList.push(chore);
 				}
-				$('#dashboard-container').html(choreList);
+				$('#chore-dashboard-container').html(choreList);
+			}	
+		});
+	});
+}
+
+function handleChoreButtonClicks() {
+	$('#chores').on('click', event => {
+		$.get({
+			url: CHORE_DASHBOARD_URL,
+			success: function() {
+				console.log('success');
+				window.location.href = '/api/choredashboard';
 			}
 		});
 	});
@@ -1558,38 +1575,34 @@ function handleCreateFamilyButtonClicks() {
 	});
 }
 
-function handleFamilyButtonClicks() {
-	$('#family').on('click', event => {
-		console.log('retrieving family');
-		$('#dashboard-controls').addClass('hidden-dashboard-buttons');
-		$('#delete-badge').prop('hidden', true);
-		$('#done-button').prop('hidden', false);
-		$('#view-completed-chores').prop('hidden', true);
-		$('#view-redeemed-badges').prop('hidden', true);
-		$('#delete-chore').prop('hidden', true);
-		$('#delete-family').prop('hidden', false);
-		$('#create-badge').prop('hidden', true);
-		$('#create-chore').prop('hidden', true);
-		$('#complete-chore').prop('hidden', true);
-		$('#create-family').prop('hidden', false);
-		$('#edit-badge').prop('hidden', true);
-		$('#edit-chore').prop('hidden', true);
-		$('#edit-family').prop('hidden', false);
-		$('#redeem-badge').prop('hidden', true);
+function populateFamilyDashboard() {
+	$('#family-buttons').load('/views/deleteFamily.html', event => {
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
 			url: FAMILY_URL,
 			beforeSend: function(xhr, settings) { 
 				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
 			},
-			success: function(family) {
-				console.log(family);
+			success: function(members) {
+				console.log(members);
 				let familyList = [];
-				for(let i=0; i<family.length; i++) {
-					let families = `<p>${family[i].name}</br><span>Points Accrued: ${family[i].pointsAccrued}</span></p>`;
-					familyList.push(families);
+				for(let i=0; i<members.length; i++) {
+					let family = `<p>${members[i].name}</br><span>${members[i].pointsAccrued} Points Accrued</span></p>`;
+					familyList.push(family);
 				}
-				$('#dashboard-container').html(familyList);
+				$('#family-dashboard-container').html(familyList);
+			}	
+		});
+	});
+}
+
+function handleFamilyButtonClicks() {
+	$('#family').on('click', event => {
+		$.get({
+			url: FAMILY_DASHBOARD_URL,
+			success: function() {
+				console.log('success');
+				window.location.href = '/api/familydashboard';
 			}
 		});
 	});
@@ -1622,7 +1635,6 @@ function handleSplashLoginButtonClicks() {
 $(handleLogInRequests);
 $(handleRegistrationRequests);
 $(handleBadgeButtonClicks);
-$(handleChoreButtonClicks);
 $(handleBadgeCreationClicks);
 $(handleFamilyButtonClicks);
 $(handleFamilyCreationClicks);
@@ -1661,3 +1673,8 @@ $(handleViewRedeemedBadgesButtonClicks);
 $(handleViewCompletedChoresButtonClicks);
 $(populateViewRedeemedBadgesPage);
 $(populateViewCompletedChoresPage);
+$(populateBadgeDashboard);
+$(populateCreateBadgesPage);
+$(handleChoreButtonClicks);
+$(populateChoreDashboard);
+$(populateFamilyDashboard);
