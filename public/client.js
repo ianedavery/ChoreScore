@@ -1026,7 +1026,7 @@ function handleChoreEditItButtonClicks() {
 				let newChoreName = newChoreNameTarget.val();
 				newChoreNameTarget.val('');
 				console.log(newChoreName);
-				let newChoreCostTarget = $(event.currentTarget).find('#chore-cost');
+				let newChoreCostTarget = $(event.currentTarget).find('#chore-value');
 				let newChoreCost = newChoreCostTarget.val();
 				newChoreCostTarget.val('');
 				console.log(newChoreCost);
