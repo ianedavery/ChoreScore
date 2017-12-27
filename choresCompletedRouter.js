@@ -62,6 +62,25 @@ router.put('/:id', (req, res) => {
 		.catch(err => res.status(500).json({error: 'Something went wrong'}));
 });
 
+router.put('/family/:completedById', (req, res) => {
+	if(!(req.params.completedById && req.body.completedById && req.params.completedById === req.body.completedById)) {
+		res.status(400).json({
+			error: 'Request path completedById and request body completedById values must match'
+		});
+	}
+	const updated = {};
+	const updatableFields = ['completedBy'];
+	updatableFields.forEach(field => {
+		if(field in req.body) {
+			updated[field] = req.body[field];
+		}
+	});
+	ChoresCompleted
+		.update({"completedById": req.body.completedById}, {$set: updated}, {multi: true})
+		.then(updatedBadgesEarned => res.status(204).end())
+		.catch(err => res.status(500).json({error: 'Something went wrong'}));
+});
+
 router.delete('/:id', (req, res) => {
 	ChoresCompleted
 	  .findByIdAndRemove(req.params.id)
