@@ -62,6 +62,25 @@ router.put('/:id', (req, res) => {
 		.catch(err => res.status(500).json({error: 'Something went wrong'}));
 });
 
+router.put('/family/:earnedById', (req, res) => {
+	if(!(req.params.earnedById && req.body.earnedById && req.params.earnedById === req.body.earnedById)) {
+		res.status(400).json({
+			error: 'Request path earnedById and request body earnedById values must match'
+		});
+	}
+	const updated = {};
+	const updatableFields = ['earnedBy'];
+	updatableFields.forEach(field => {
+		if(field in req.body) {
+			updated[field] = req.body[field];
+		}
+	});
+	BadgesEarned
+		.update({"earnedById": req.body.earnedById}, {$set: updated}, {multi: true})
+		.then(updatedBadgesEarned => res.status(204).end())
+		.catch(err => res.status(500).json({error: 'Something went wrong'}));
+});
+
 router.delete('/:id', (req, res) => {
 	BadgesEarned
 	  .findByIdAndRemove(req.params.id)
