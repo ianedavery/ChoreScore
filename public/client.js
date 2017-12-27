@@ -923,6 +923,23 @@ function editBadgesEarned(badgesEarnedData, familyId) {
 	});	
 }
 
+function editChoresCompleted(choresCompletedData, familyId) {
+	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+	$.ajax({
+		method: 'PUT',
+		url: CHORES_COMPLETED_URL + '/family/' + familyId,
+		beforeSend: function(xhr, settings) { 
+			xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+		},
+		data: JSON.stringify(choresCompletedData),
+		datatype: 'json',
+		contentType: 'application/json',
+		success: function() {
+			console.log('success');
+		}
+	});
+}
+
 function handleFamilyEditItButtonClicks() {
 	$('#edit-family-form').submit(event => {
 		event.preventDefault();
@@ -958,8 +975,12 @@ function handleFamilyEditItButtonClicks() {
 				let badgesEarnedData = {};
 				badgesEarnedData.earnedById = familyId;
 				badgesEarnedData.earnedBy = newFamilyName;
+				let choresCompletedData = {};
+				choresCompletedData.completedById = familyId;
+				choresCompletedData.completedBy = newFamilyName;
 				editFamily(data, familyId);
 				editBadgesEarned(badgesEarnedData, familyId);
+				editChoresCompleted(choresCompletedData, familyId);
 			}
 		});
 	});
