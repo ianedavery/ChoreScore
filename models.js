@@ -98,7 +98,8 @@ BadgesEarnedSchema.methods.serialize = function() {
 	return {
 		id: this._id,
 		badgeName: this.badgeName,
-		earnedBy: this.earnedBy
+		earnedBy: this.earnedBy,
+		earnedById: this.earnedById
 	};
 };
 

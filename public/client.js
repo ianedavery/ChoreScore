@@ -906,6 +906,23 @@ function editFamily(data, familyId) {
 	});
 }
 
+function editBadgesEarned(badgesEarnedData, familyId) {
+	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+	$.ajax({
+		method: 'PUT',
+		url: BADGES_EARNED_URL + '/family/' + familyId,
+		beforeSend: function(xhr, settings) { 
+			xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+		},
+		data: JSON.stringify(badgesEarnedData),
+		datatype: 'json',
+		contentType: 'application/json',
+		success: function() {
+			console.log('success');
+		}
+	});	
+}
+
 function handleFamilyEditItButtonClicks() {
 	$('#edit-family-form').submit(event => {
 		event.preventDefault();
@@ -928,21 +945,21 @@ function handleFamilyEditItButtonClicks() {
 					}
 				}
 				findObjectByKey(members, "name", currentFamilyName);
-				console.log(familyId);
 				let newFamilyNameTarget = $(event.currentTarget).find('#family-name');
 				let newFamilyName = newFamilyNameTarget.val();
 				newFamilyNameTarget.val('');
-				console.log(newFamilyName);
 				let newPointsAccruedTarget = $(event.currentTarget).find('#family-points');
 				let newPointsAccrued = newPointsAccruedTarget.val();
 				newPointsAccruedTarget.val('');
-				console.log(newPointsAccrued);
 				let data = {};
 				data.name = newFamilyName.length > 0 ? newFamilyName : undefined;
 				data.pointsAccrued = newPointsAccrued.length > 0 ? newPointsAccrued : undefined;
 				data.id = familyId;
-				console.log(data);
+				let badgesEarnedData = {};
+				badgesEarnedData.earnedById = familyId;
+				badgesEarnedData.earnedBy = newFamilyName;
 				editFamily(data, familyId);
+				editBadgesEarned(badgesEarnedData, familyId);
 			}
 		});
 	});
