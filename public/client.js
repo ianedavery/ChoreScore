@@ -195,6 +195,29 @@ function handleBadgeCreationClicks() {
 	});
 }
 
+function checkIfFamilyAlreadyExists(name) {
+	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+	$.get({
+		url: FAMILY_URL,
+		beforeSend: function(xhr, settings) { 
+			xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
+		},
+		success: function(family) {
+			let familyArray = [];
+			let newName = name.name;
+			for(let i=0; i<family.length; i++) {
+				familyArray.push(family[i].name);
+			}
+			if(familyArray.includes(newName)) {
+				alert('user already exists');
+			}
+			else {
+				createFamily(name);
+			}
+		}		
+	});
+}
+
 function handleFamilyCreationClicks() {
 	$('#family-form').submit(event => {
 		event.preventDefault();
@@ -205,7 +228,7 @@ function handleFamilyCreationClicks() {
 		let name = {};
 		name.name = familyName;
 		console.log(name);
-		createFamily(name);
+		checkIfFamilyAlreadyExists(name);
 	});
 }
 
@@ -501,7 +524,7 @@ function handleRedeemItClicks() {
 				handlePointsAccruedAfterRedemption(redeemingPointsAccrued, redeemingBadgeCost, redeemingFamilyMemberId);
 			}
 			else {
-				console.log('no');
+				alert('not enough points to redeem this badge');
 			}
 		}, 1000);
 	});
