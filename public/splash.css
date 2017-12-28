@@ -49,6 +49,23 @@ header p {
 	padding: 5px 10px 5px 10px;
 }
 
+#arrow-container {
+	text-align: center;
+	margin-top: 230px;
+}
+
+i {
+    border: solid #FFFF2A;
+    border-width: 2px 0 0 2px;
+    display: inline-block;
+    padding: 30px;
+}
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
 footer a {
 	position: fixed;
 	bottom: 0;
