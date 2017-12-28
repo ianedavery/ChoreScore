@@ -14,16 +14,15 @@ body {
 }
 
 h1 {
-	font-size: 42px;
-	margin: 0;
-	padding: 20px 0 0 20px;
+	font-size: 65px;
+	text-align: center;
 	font-family: 'Delius', cursive;
+	margin-top: 200px;
 }
 
 header p {
 	font-size: 20px;
-	padding: 5px 0 0 24px;
-	margin: 0;
+	text-align: center;
 }
 
 .splash-buttons:hover {
@@ -42,21 +41,22 @@ header p {
 #splash-login {
 	background-color: #6B9956;
 	border: none;
-	/*position: fixed;*/
+	position: fixed;
 	top: 0;
 	right: 0;
 	font-size: 18px;
 	padding: 5px 10px 5px 10px;
+	z-index: 2;
 }
 
 #arrow-up-container {
 	text-align: center;
-	margin-top: 425px;
+	margin-top: 240px;
 }
 
 #arrow-down-container {
 	text-align: center;
-	margin-top: 280px;
+	margin-top: 320px;
 }
 
 #arrow-up {
@@ -92,8 +92,8 @@ header p {
   height: 100vh;
   top: 0;
   overflow: hidden;
-  background-color: #000; color: #FFF;
-  transition: all 1s;
+  background-color: black;
+  transition: all 2s;
 }
 
 .slider.close {

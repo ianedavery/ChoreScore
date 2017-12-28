@@ -1784,7 +1784,7 @@ function handleBadgeDashboardDoneButtonClicks() {
 }
 
 $('.trigger').click(function() {
-  $('.slider').toggleClass('close');
+  	$('.slider').toggleClass('close');
 });
 
 $(handleLogInRequests);
