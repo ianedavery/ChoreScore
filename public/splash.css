@@ -42,28 +42,63 @@ header p {
 #splash-login {
 	background-color: #6B9956;
 	border: none;
-	position: fixed;
+	/*position: fixed;*/
 	top: 0;
 	right: 0;
 	font-size: 18px;
 	padding: 5px 10px 5px 10px;
 }
 
-#arrow-container {
+#arrow-up-container {
 	text-align: center;
-	margin-top: 230px;
+	margin-top: 425px;
 }
 
-i {
+#arrow-down-container {
+	text-align: center;
+	margin-top: 280px;
+}
+
+#arrow-up {
     border: solid #FFFF2A;
     border-width: 2px 0 0 2px;
     display: inline-block;
     padding: 30px;
 }
 
+#arrow-up:hover {
+	cursor: pointer;
+}
+
+#arrow-down {
+    border: solid #FFFF2A;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 30px;
+}
+
+#arrow-down:hover {
+	cursor: pointer;
+}
+
 .down {
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
+}
+
+.slider {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  overflow: hidden;
+  background-color: #000; color: #FFF;
+  transition: all 1s;
+}
+
+.slider.close {
+  top: 100vh;
+  height: 0;
 }
 
 footer a {

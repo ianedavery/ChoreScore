@@ -1783,6 +1783,10 @@ function handleBadgeDashboardDoneButtonClicks() {
 	});
 }
 
+$('.trigger').click(function() {
+  $('.slider').toggleClass('close');
+});
+
 $(handleLogInRequests);
 $(handleRegistrationRequests);
 $(handleBadgeButtonClicks);
