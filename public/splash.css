@@ -14,16 +14,15 @@ body {
 }
 
 h1 {
-	font-size: 42px;
-	margin: 0;
-	padding: 20px 0 0 20px;
+	font-size: 65px;
+	text-align: center;
 	font-family: 'Delius', cursive;
+	margin-top: 200px;
 }
 
 header p {
 	font-size: 20px;
-	padding: 5px 0 0 24px;
-	margin: 0;
+	text-align: center;
 }
 
 .splash-buttons:hover {
@@ -47,23 +46,59 @@ header p {
 	right: 0;
 	font-size: 18px;
 	padding: 5px 10px 5px 10px;
+	z-index: 2;
 }
 
-#arrow-container {
+#arrow-up-container {
 	text-align: center;
-	margin-top: 230px;
+	margin-top: 240px;
 }
 
-i {
+#arrow-down-container {
+	text-align: center;
+	margin-top: 320px;
+}
+
+#arrow-up {
     border: solid #FFFF2A;
     border-width: 2px 0 0 2px;
     display: inline-block;
     padding: 30px;
 }
 
+#arrow-up:hover {
+	cursor: pointer;
+}
+
+#arrow-down {
+    border: solid #FFFF2A;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 30px;
+}
+
+#arrow-down:hover {
+	cursor: pointer;
+}
+
 .down {
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
+}
+
+.slider {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  overflow: hidden;
+  background-color: black;
+  transition: all 2s;
+}
+
+.slider.close {
+  top: 100vh;
+  height: 0;
 }
 
 footer a {
