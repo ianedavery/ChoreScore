@@ -4,12 +4,14 @@ html, body {
   	-moz-background-size: cover;
  	-o-background-size: cover;
   	background-size: cover;
+  	height: 100%;
 }
 
 body {
 	box-sizing: border-box;
 	font-family: 'Average Sans', sans-serif;
 	color: white;
+	height: 100%;
 }
 
 h1 {
