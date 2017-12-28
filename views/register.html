@@ -3,38 +3,54 @@
 <head>
 	<title>ChoreScore</title>
 	<meta charset="utf-8" content='registration page' name='description'>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 	<link rel='stylesheet' type='text/css' href='/register.css'>
 	<link href="https://fonts.googleapis.com/css?family=Delius" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 
 <body>
 
-	<header>
+	<header role='banner'>
 		<h1>ChoreScore</h1>
 	</header>
 
-	<form id='registration-form'>
+		<div class='container'>
+			<form id='registration-form'>
 
-		<fieldset id='registration-fieldset'>
-			<legend>Sign Up</legend>
+				<fieldset id='registration-fieldset'>
+					
+					<div class='row'>
+						<div class='form-group col-xs-12 col-sm-6 col-lg-6 left'>
+							<label for='username' class='.sr-only'></label>
+							<input class='form-control' type='text' name='username' id='reg-username' placeholder='username' required autocomplete autofocus>
+						</div>
 
-			<label for='username'>username</label>
-			<input type='text' name='username' id='reg-username' required autocomplete>
+						<div class='form-group col-xs-12 col-sm-6 col-lg-6 right'>
+							<label for='password' class='.sr-only'></label>
+							<input class='form-control' type='password' name='password' id='reg-password' placeholder='password' required autocomplete>
+						</div>
+					</div>
+					<div class='row'>
+						<div class='form-group col-xs-12 col-sm-6 col-lg-6 left bottom'>
+							<label for='firstName' class='.sr-only'></label>
+							<input class='form-control' type='text' name='firstName' id='firstName' placeholder='first name' autocomplete>
+						</div>
 
-			<label for='password'>password</label>
-			<input type='password' name='password' id='reg-password' required autocomplete>
+						<div class='form-group col-xs-12 col-sm-6 col-lg-6 right bottom'>
+							<label for='lastName' class='.sr-only'></label>
+							<input class='form-control' type='text' name='lastName' id='lastName' placeholder='last name' autocomplete>
+						</div> 
+					</div>
 
-			<label for='firstName'>First Name</label>
-			<input type='text' name='firstName' id='firstName' autocomplete>
+				</fieldset>
 
-			<label for='lastName'>Last Name</label>
-			<input type='text' name='lastName' id='lastName' autocomplete>
-
-		</fieldset>
-
-		<button type='submit'>Sign Up</button>
-	</form>
-
+				<div id='button-container'>
+					<button type='submit' id='sign-up-button' class='btn btn-default'>Sign Up</button>
+				</div>
+			</form>
+		</div>
+	
 
 <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
 <script type='text/javascript' src='/client.js'></script>
