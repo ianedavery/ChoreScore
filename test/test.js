@@ -9,6 +9,8 @@ const should = chai.should();
 const {TEST_DATABASE_URL} = require('../config');
 const {Badge, Chore, Family} = require('../models');
 
+let cookie = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6IjVhMzAyOTEyMzc2Y2U0NWE4YzIxZmU2YyIsInVzZXJuYW1lIjoiZ3JlZW5zZXJ2byIsImZpcnN0TmFtZSI6IiIsImxhc3ROYW1lIjoiIn0sImlhdCI6MTUxNDQ5NDgwMywiZXhwIjoxNTE1MDk5NjAzLCJzdWIiOiJncmVlbnNlcnZvIn0.qDbUE6UAOqaXsaOgGKFSae-gw1xqPJvTKv6UowBRR14';
+
 chai.use(chaiHttp);
 
 describe('Root', function() {
@@ -68,7 +70,7 @@ describe('badge API resource', function() {
   		let res;
   		return chai.request(app)
   			.get('/api/api/badge')
-  			.set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6IjVhMzAyOTEyMzc2Y2U0NWE4YzIxZmU2YyIsInVzZXJuYW1lIjoiZ3JlZW5zZXJ2byIsImZpcnN0TmFtZSI6IiIsImxhc3ROYW1lIjoiIn0sImlhdCI6MTUxMzg3NzU3NCwiZXhwIjoxNTE0NDgyMzc0LCJzdWIiOiJncmVlbnNlcnZvIn0.7M-wOeEzk4KNfO9jfGtR6Wsj-cmSr5crmFtiSzcLE28')
+  			.set('Authorization', 'Bearer' + cookie);
   			.then(_res => {
   				res = _res;
   				res.should.have.status(200);
@@ -88,7 +90,7 @@ describe('badge API resource', function() {
     	};
     	return chai.request(app)
     		.post('/api/api/badge')
-  			.set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6IjVhMzAyOTEyMzc2Y2U0NWE4YzIxZmU2YyIsInVzZXJuYW1lIjoiZ3JlZW5zZXJ2byIsImZpcnN0TmFtZSI6IiIsImxhc3ROYW1lIjoiIn0sImlhdCI6MTUxMzg3NzU3NCwiZXhwIjoxNTE0NDgyMzc0LCJzdWIiOiJncmVlbnNlcnZvIn0.7M-wOeEzk4KNfO9jfGtR6Wsj-cmSr5crmFtiSzcLE28')
+        .set('Authorization', 'Bearer' + cookie);
     		.send(newBadge)
     		.then(function(res) {
     			res.should.have.status(201);
@@ -107,7 +109,7 @@ describe('badge API resource', function() {
   				updateData.id = post.id;
   				return chai.request(app)
   					.put(`/api/api/badge/${post.id}`)
-		  			.set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6IjVhMzAyOTEyMzc2Y2U0NWE4YzIxZmU2YyIsInVzZXJuYW1lIjoiZ3JlZW5zZXJ2byIsImZpcnN0TmFtZSI6IiIsImxhc3ROYW1lIjoiIn0sImlhdCI6MTUxMzg3NzU3NCwiZXhwIjoxNTE0NDgyMzc0LCJzdWIiOiJncmVlbnNlcnZvIn0.7M-wOeEzk4KNfO9jfGtR6Wsj-cmSr5crmFtiSzcLE28')
+            .set('Authorization', 'Bearer' + cookie);
   					.send(updateData);
   			})
   			.then(res => {
@@ -124,7 +126,7 @@ describe('badge API resource', function() {
   				post = _post;
   				return chai.request(app)
   				.delete(`/api/api/badge/${post.id}`)
-	  			.set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6IjVhMzAyOTEyMzc2Y2U0NWE4YzIxZmU2YyIsInVzZXJuYW1lIjoiZ3JlZW5zZXJ2byIsImZpcnN0TmFtZSI6IiIsImxhc3ROYW1lIjoiIn0sImlhdCI6MTUxMzg3NzU3NCwiZXhwIjoxNTE0NDgyMzc0LCJzdWIiOiJncmVlbnNlcnZvIn0.7M-wOeEzk4KNfO9jfGtR6Wsj-cmSr5crmFtiSzcLE28');
+          .set('Authorization', 'Bearer' + cookie);
   			})
   			.then(res => {
   				res.should.have.status(204);
@@ -164,7 +166,7 @@ describe('chore API resource', function() {
   		let res;
   		return chai.request(app)
   			.get('/api/api/chore')
-  			.set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6IjVhMzAyOTEyMzc2Y2U0NWE4YzIxZmU2YyIsInVzZXJuYW1lIjoiZ3JlZW5zZXJ2byIsImZpcnN0TmFtZSI6IiIsImxhc3ROYW1lIjoiIn0sImlhdCI6MTUxMzg3NzU3NCwiZXhwIjoxNTE0NDgyMzc0LCJzdWIiOiJncmVlbnNlcnZvIn0.7M-wOeEzk4KNfO9jfGtR6Wsj-cmSr5crmFtiSzcLE28')
+        .set('Authorization', 'Bearer' + cookie);
   			.then(_res => {
   				res = _res;
   				res.should.have.status(200);
@@ -184,7 +186,7 @@ describe('chore API resource', function() {
     	};
     	return chai.request(app)
     		.post('/api/api/chore')
-  			.set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6IjVhMzAyOTEyMzc2Y2U0NWE4YzIxZmU2YyIsInVzZXJuYW1lIjoiZ3JlZW5zZXJ2byIsImZpcnN0TmFtZSI6IiIsImxhc3ROYW1lIjoiIn0sImlhdCI6MTUxMzg3NzU3NCwiZXhwIjoxNTE0NDgyMzc0LCJzdWIiOiJncmVlbnNlcnZvIn0.7M-wOeEzk4KNfO9jfGtR6Wsj-cmSr5crmFtiSzcLE28')
+        .set('Authorization', 'Bearer' + cookie);
     		.send(newChore)
     		.then(function(res) {
     			res.should.have.status(201);
@@ -203,7 +205,7 @@ describe('chore API resource', function() {
   				updateData.id = post.id;
   				return chai.request(app)
   					.put(`/api/api/chore/${post.id}`)
-		  			.set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6IjVhMzAyOTEyMzc2Y2U0NWE4YzIxZmU2YyIsInVzZXJuYW1lIjoiZ3JlZW5zZXJ2byIsImZpcnN0TmFtZSI6IiIsImxhc3ROYW1lIjoiIn0sImlhdCI6MTUxMzg3NzU3NCwiZXhwIjoxNTE0NDgyMzc0LCJzdWIiOiJncmVlbnNlcnZvIn0.7M-wOeEzk4KNfO9jfGtR6Wsj-cmSr5crmFtiSzcLE28')
+            .set('Authorization', 'Bearer' + cookie);
   					.send(updateData);
   			})
   			.then(res => {
@@ -220,7 +222,7 @@ describe('chore API resource', function() {
   				post = _post;
   				return chai.request(app)
   				.delete(`/api/api/chore/${post.id}`)
-	  			.set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6IjVhMzAyOTEyMzc2Y2U0NWE4YzIxZmU2YyIsInVzZXJuYW1lIjoiZ3JlZW5zZXJ2byIsImZpcnN0TmFtZSI6IiIsImxhc3ROYW1lIjoiIn0sImlhdCI6MTUxMzg3NzU3NCwiZXhwIjoxNTE0NDgyMzc0LCJzdWIiOiJncmVlbnNlcnZvIn0.7M-wOeEzk4KNfO9jfGtR6Wsj-cmSr5crmFtiSzcLE28');
+          .set('Authorization', 'Bearer' + cookie);
   			})
   			.then(res => {
   				res.should.have.status(204);
@@ -260,7 +262,7 @@ describe('family API resource', function() {
   		let res;
   		return chai.request(app)
   			.get('/api/api/family')
-  			.set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6IjVhMzAyOTEyMzc2Y2U0NWE4YzIxZmU2YyIsInVzZXJuYW1lIjoiZ3JlZW5zZXJ2byIsImZpcnN0TmFtZSI6IiIsImxhc3ROYW1lIjoiIn0sImlhdCI6MTUxMzg3NzU3NCwiZXhwIjoxNTE0NDgyMzc0LCJzdWIiOiJncmVlbnNlcnZvIn0.7M-wOeEzk4KNfO9jfGtR6Wsj-cmSr5crmFtiSzcLE28')
+        .set('Authorization', 'Bearer' + cookie);
   			.then(_res => {
   				res = _res;
   				res.should.have.status(200);
@@ -280,7 +282,7 @@ describe('family API resource', function() {
     	};
     	return chai.request(app)
     		.post('/api/api/family')
-  			.set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6IjVhMzAyOTEyMzc2Y2U0NWE4YzIxZmU2YyIsInVzZXJuYW1lIjoiZ3JlZW5zZXJ2byIsImZpcnN0TmFtZSI6IiIsImxhc3ROYW1lIjoiIn0sImlhdCI6MTUxMzg3NzU3NCwiZXhwIjoxNTE0NDgyMzc0LCJzdWIiOiJncmVlbnNlcnZvIn0.7M-wOeEzk4KNfO9jfGtR6Wsj-cmSr5crmFtiSzcLE28')
+        .set('Authorization', 'Bearer' + cookie);
     		.send(newFamily)
     		.then(function(res) {
     			res.should.have.status(201);
@@ -299,7 +301,7 @@ describe('family API resource', function() {
   				updateData.id = post.id;
   				return chai.request(app)
   					.put(`/api/api/family/${post.id}`)
-		  			.set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6IjVhMzAyOTEyMzc2Y2U0NWE4YzIxZmU2YyIsInVzZXJuYW1lIjoiZ3JlZW5zZXJ2byIsImZpcnN0TmFtZSI6IiIsImxhc3ROYW1lIjoiIn0sImlhdCI6MTUxMzg3NzU3NCwiZXhwIjoxNTE0NDgyMzc0LCJzdWIiOiJncmVlbnNlcnZvIn0.7M-wOeEzk4KNfO9jfGtR6Wsj-cmSr5crmFtiSzcLE28')
+            .set('Authorization', 'Bearer' + cookie);
   					.send(updateData);
   			})
   			.then(res => {
@@ -316,7 +318,7 @@ describe('family API resource', function() {
   				post = _post;
   				return chai.request(app)
   				.delete(`/api/api/family/${post.id}`)
-	  			.set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6IjVhMzAyOTEyMzc2Y2U0NWE4YzIxZmU2YyIsInVzZXJuYW1lIjoiZ3JlZW5zZXJ2byIsImZpcnN0TmFtZSI6IiIsImxhc3ROYW1lIjoiIn0sImlhdCI6MTUxMzg3NzU3NCwiZXhwIjoxNTE0NDgyMzc0LCJzdWIiOiJncmVlbnNlcnZvIn0.7M-wOeEzk4KNfO9jfGtR6Wsj-cmSr5crmFtiSzcLE28');
+          .set('Authorization', 'Bearer' + cookie);
   			})
   			.then(res => {
   				res.should.have.status(204);
