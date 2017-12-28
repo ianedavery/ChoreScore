@@ -1,9 +1,12 @@
- body {
+html, body {
 	background: url('images/ze-zorzan-57616.jpg') no-repeat center center fixed; 
  	-webkit-background-size: cover;
   	-moz-background-size: cover;
   	-o-background-size: cover;
   	background-size: cover;	
+}
+
+body {
 	box-sizing: border-box;
 	font-family: 'Average Sans', sans-serif;
 	color: white;
