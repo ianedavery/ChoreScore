@@ -70,7 +70,7 @@ describe('badge API resource', function() {
   		let res;
   		return chai.request(app)
   			.get('/api/api/badge')
-  			.set('Authorization', 'Bearer' + cookie);
+  			.set('Authorization', 'Bearer' + cookie)
   			.then(_res => {
   				res = _res;
   				res.should.have.status(200);
@@ -90,7 +90,7 @@ describe('badge API resource', function() {
     	};
     	return chai.request(app)
     		.post('/api/api/badge')
-        .set('Authorization', 'Bearer' + cookie);
+        .set('Authorization', 'Bearer' + cookie)
     		.send(newBadge)
     		.then(function(res) {
     			res.should.have.status(201);
@@ -109,7 +109,7 @@ describe('badge API resource', function() {
   				updateData.id = post.id;
   				return chai.request(app)
   					.put(`/api/api/badge/${post.id}`)
-            .set('Authorization', 'Bearer' + cookie);
+            .set('Authorization', 'Bearer' + cookie)
   					.send(updateData);
   			})
   			.then(res => {
@@ -126,7 +126,7 @@ describe('badge API resource', function() {
   				post = _post;
   				return chai.request(app)
   				.delete(`/api/api/badge/${post.id}`)
-          .set('Authorization', 'Bearer' + cookie);
+          .set('Authorization', 'Bearer' + cookie)
   			})
   			.then(res => {
   				res.should.have.status(204);
@@ -166,7 +166,7 @@ describe('chore API resource', function() {
   		let res;
   		return chai.request(app)
   			.get('/api/api/chore')
-        .set('Authorization', 'Bearer' + cookie);
+        .set('Authorization', 'Bearer' + cookie)
   			.then(_res => {
   				res = _res;
   				res.should.have.status(200);
@@ -186,7 +186,7 @@ describe('chore API resource', function() {
     	};
     	return chai.request(app)
     		.post('/api/api/chore')
-        .set('Authorization', 'Bearer' + cookie);
+        .set('Authorization', 'Bearer' + cookie)
     		.send(newChore)
     		.then(function(res) {
     			res.should.have.status(201);
@@ -205,7 +205,7 @@ describe('chore API resource', function() {
   				updateData.id = post.id;
   				return chai.request(app)
   					.put(`/api/api/chore/${post.id}`)
-            .set('Authorization', 'Bearer' + cookie);
+            .set('Authorization', 'Bearer' + cookie)
   					.send(updateData);
   			})
   			.then(res => {
@@ -222,7 +222,7 @@ describe('chore API resource', function() {
   				post = _post;
   				return chai.request(app)
   				.delete(`/api/api/chore/${post.id}`)
-          .set('Authorization', 'Bearer' + cookie);
+          .set('Authorization', 'Bearer' + cookie)
   			})
   			.then(res => {
   				res.should.have.status(204);
@@ -262,7 +262,7 @@ describe('family API resource', function() {
   		let res;
   		return chai.request(app)
   			.get('/api/api/family')
-        .set('Authorization', 'Bearer' + cookie);
+        .set('Authorization', 'Bearer' + cookie)
   			.then(_res => {
   				res = _res;
   				res.should.have.status(200);
@@ -282,7 +282,7 @@ describe('family API resource', function() {
     	};
     	return chai.request(app)
     		.post('/api/api/family')
-        .set('Authorization', 'Bearer' + cookie);
+        .set('Authorization', 'Bearer' + cookie)
     		.send(newFamily)
     		.then(function(res) {
     			res.should.have.status(201);
@@ -301,7 +301,7 @@ describe('family API resource', function() {
   				updateData.id = post.id;
   				return chai.request(app)
   					.put(`/api/api/family/${post.id}`)
-            .set('Authorization', 'Bearer' + cookie);
+            .set('Authorization', 'Bearer' + cookie)
   					.send(updateData);
   			})
   			.then(res => {
@@ -318,7 +318,7 @@ describe('family API resource', function() {
   				post = _post;
   				return chai.request(app)
   				.delete(`/api/api/family/${post.id}`)
-          .set('Authorization', 'Bearer' + cookie);
+          .set('Authorization', 'Bearer' + cookie)
   			})
   			.then(res => {
   				res.should.have.status(204);
