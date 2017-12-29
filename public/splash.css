@@ -15,7 +15,7 @@ body {
 }
 
 #main {
-	height: 100vh;
+	height: 110vh;
 	position: relative;
 }
 
@@ -106,7 +106,7 @@ header p {
 .slider {
   	position: absolute;
   	width: 100vw;
-  	height: 100vh;
+  	height: 110vh;
   	top: 0;
   	overflow: hidden;
   	background-color: white;
