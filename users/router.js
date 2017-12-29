@@ -18,7 +18,7 @@ router.post('/', jsonParser, (req, res) => {
 		});
 	}
 	//checking that all fields are of the 'string' type
-	const stringFields = ['username', 'password', 'firstName', 'lastName'];
+	const stringFields = ['username', 'password'];
 	const nonStringField = stringFields.find(field => field in req.body && typeof req.body[field] !== 'string');
 	if(nonStringField) {
 		return res.status(422).json({
@@ -58,10 +58,7 @@ router.post('/', jsonParser, (req, res) => {
 		});
 	}
 	//check that the username is unique. if it is, create the user.
-	let {username, password, firstName = '', lastName = ''} = req.body;
-	//trim any whitespace from the first and last names
-	firstName = firstName.trim();
-	lastName = lastName.trim();
+	let {username, password} = req.body;
 	return User.find({username})
 		.count()
 		.then(count => {
@@ -78,9 +75,7 @@ router.post('/', jsonParser, (req, res) => {
 		.then(hash => {
 			return User.create({
 				username,
-				password: hash,
-				firstName,
-				lastName
+				password: hash
 			});
 		})
 		//then return response object to user

@@ -144,17 +144,9 @@ function handleRegistrationRequests() {
 		let passwordTarget = $(event.currentTarget).find('#reg-password');
 		let password = passwordTarget.val();
 		passwordTarget.val('');
-		let firstNameTarget = $(event.currentTarget).find('#firstName');
-		let firstName = firstNameTarget.val();
-		firstNameTarget.val('');
-		let lastNameTarget = $(event.currentTarget).find('#lastName');
-		let lastName = lastNameTarget.val();
-		lastNameTarget.val('');
 		let user = {};
 		user.username = username;
 		user.password = password;
-		user.firstName = firstName;
-		user.lastName = lastName;
 		console.log(user);
 		userRegistration(user);
 	});
