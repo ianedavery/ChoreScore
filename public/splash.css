@@ -10,9 +10,8 @@ html, body {
 body {
 	box-sizing: border-box;
 	font-family: 'Average Sans', sans-serif;
-	color: white;
 	position: relative;
-	top: 0;
+	bottom: 0;
 }
 
 #main {
@@ -24,6 +23,7 @@ h1 {
 	text-align: center;
 	font-family: 'Delius', cursive;
 	padding-top: 200px;
+	color: white;
 }
 
 header p {
@@ -31,35 +31,29 @@ header p {
 	text-align: center;
 	padding-right: 20px;
 	padding-left: 20px;
+	color: white;
 }
 
-.splash-buttons:hover {
+.splash-buttons:hover, #sign-up-button:hover {
 	cursor: pointer;
 }
 
-#splash-signup {
-	display: block;
-	background-color: #FFFF2A;
-	border: none;
-	padding: 10px 20px 10px 20px;
-	font-size: 18px;
-	margin: 150px auto 0 auto;
-}
-
 #splash-login {
-	background-color: #6B9956;
+	background-color: #FFFF2A;
 	border: none;
 	position: fixed;
 	top: 0;
 	right: 0;
 	font-size: 18px;
+	width: 85px;
+	height: 45px;
 	padding: 5px 10px 5px 10px;
 	z-index: 2;
 }
 
 #arrow-up-container {
 	text-align: center;
-	margin-top: 240px;
+	margin-top: 218px;
 	margin-bottom: 0;
 }
 
@@ -70,7 +64,7 @@ header p {
 
 #arrow-up {
     border: solid #FFFF2A;
-    border-width: 2px 0 0 2px;
+    border-width: 3px 0 0 3px;
     display: inline-block;
     padding: 30px;
 }
@@ -81,7 +75,7 @@ header p {
 
 #arrow-down {
     border: solid #FFFF2A;
-    border-width: 0 2px 2px 0;
+    border-width: 0 3px 3px 0;
     display: inline-block;
     padding: 30px;
 }
@@ -133,8 +127,14 @@ header p {
 	position: relative;
 }
 
+#instructions {
+	color: black;
+	text-align: center;
+	margin-top: 60px;
+}
+
 #registration-form {
-	margin-top: 30px;
+	margin-top: 50px;
 }
 
 .inputs, .buttons {
@@ -158,6 +158,12 @@ header p {
 
 #sign-up-button {
 	width: 100%;
+}
+
+#laundry {
+	display: block;
+	margin: 70px auto 0 auto;
+	width: 25%;
 }
 
 #arrow-down-container {
