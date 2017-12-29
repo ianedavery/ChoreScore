@@ -1714,18 +1714,6 @@ function handleFamilyButtonClicks() {
 	});
 }
 
-function handleSignUpButtonClicks() {
-	$('#splash-signup').on('click', event => {
-		console.log('signup button clicked');
-		$.get({
-			url: SIGNUP_URL,
-			success: function() {
-				window.location.href = '/api/signup';
-			}
-		});
-	});
-}
-
 function handleSplashLoginButtonClicks() {
 	$('#splash-login').on('click', event => {
 		console.log('login button clicked');
@@ -1794,7 +1782,6 @@ $(handleBadgeCreationClicks);
 $(handleFamilyButtonClicks);
 $(handleFamilyCreationClicks);
 $(handleChoreCreationClicks);
-$(handleSignUpButtonClicks);
 $(handleSplashLoginButtonClicks);
 $(handleCreateBadgeButtonClicks);
 $(handleCreateChoreButtonClicks);

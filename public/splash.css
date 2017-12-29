@@ -4,7 +4,7 @@ html, body {
   	-moz-background-size: cover;
  	-o-background-size: cover;
   	background-size: cover;
-  	/*height: 100%;*/
+  	height: 100%;
 }
 
 body {
@@ -24,12 +24,13 @@ h1 {
 	text-align: center;
 	font-family: 'Delius', cursive;
 	padding-top: 200px;
-	/*margin-top: 200px;*/
 }
 
 header p {
 	font-size: 20px;
 	text-align: center;
+	padding-right: 20px;
+	padding-left: 20px;
 }
 
 .splash-buttons:hover {
@@ -59,11 +60,12 @@ header p {
 #arrow-up-container {
 	text-align: center;
 	margin-top: 240px;
+	margin-bottom: 0;
 }
 
 #arrow-down-container {
 	text-align: center;
-	margin-top: 320px;
+	margin-top: 320px auto 0 auto;
 }
 
 #arrow-up {
@@ -94,21 +96,67 @@ header p {
 }
 
 .slider {
-  position: absolute;
-  width: 100vw;
-  height: 100%;
-  top: 0;
-  overflow: hidden;
-  background-color: black;
-  transition: all 2s;
+  	position: absolute;
+  	width: 100%;
+  	height: 100%;
+  	top: 0;
+  	overflow: hidden;
+  	background-color: white;
+  	transition: all 1s;
 }
 
 .slider.close {
-  top: 100vh;
-  height: 0;
+  	top: 100%;
+  	height: 0;
 }
 
-footer a {
+#split {
+	height: 100%;
+}
+
+#inner-left-container, #inner-right-container {
+	border: none;
+	padding: 0;
+}
+
+#inner-left-container {
+	background-color: white;
+	height: 25%;
+}
+
+#inner-right-container {
+	background-image: url('images/ze-zorzan-57616.jpg');
+	background-size: 250%;
+}
+
+#registration-form {
+	margin-top: 30px;
+}
+
+.inputs, .buttons {
+	padding: 0;
+}
+
+.split-form, .split-form-button {
+	width: 80%;
+	margin: auto;
+}
+
+.form-control, #sign-up-button {
+	height: 50px;
+	border: none;
+	border-radius: 0;
+}
+
+.buttons {
+	margin-top: 20px;
+}
+
+#sign-up-button {
+	width: 100%;
+}
+
+a {
 	position: fixed;
 	bottom: 0;
 	right: 0;
