@@ -42,7 +42,7 @@ header p {
 #splash-login {
 	background-color: #fcd43e;
 	border: none;
-	position: fixed;
+	position: absolute;
 	top: 0;
 	right: 0;
 	font-size: 18px;

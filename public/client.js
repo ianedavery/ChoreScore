@@ -805,10 +805,6 @@ function handleChoreCompleteItClicks() {
 				findObjectByKey(family, "name", familyName);
 			}
 		});
-		/*setTimeout(function() {console.log('chore value: ' + completedChoreValue);}, 1000);
-		setTimeout(function() {console.log('family id: ' + completingFamilyMemberId);}, 1000);
-		setTimeout(function() {console.log('points accrued: ' + completingFamilyMembersPointsAccrued);}, 1000);
-		setTimeout(function() {console.log('chore id: ' + completedChoreId);}, 1000);*/
 		setTimeout(function() {
 			handlePointsAccruedAfterCompletion(completedChoreValue, completingFamilyMembersPointsAccrued, completingFamilyMemberId);
 			handleChoreAfterCompletion();
@@ -1712,7 +1708,12 @@ function handleSplashLoginButtonClicks() {
 		$.get({
 			url: LOGIN_URL,
 			success: function() {
-				window.location.href = '/api/login';	
+				if(document.cookie) {
+					window.location.href = 'api/dashboard';
+				}
+				else {
+					window.location.href = '/api/login';
+				}
 			}
 		});
 	});
