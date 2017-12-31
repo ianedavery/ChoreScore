@@ -29,17 +29,26 @@ button {
 	height: 50px;
 	width: 100%;
 	margin-top: 12px;
+	background-color: #f05928;
 }
 
 img {
 	width: 100%;
-	height: 275px;
+	height: 250px;
 	position: fixed;
 	bottom: 0;
+	z-index: -10;
 }
 
 @media screen and (min-width: 768px) {
    h1 {
    	font-size: 65px;   
    }
+   img {
+   	bottom: -120px;
+   	height: 370px;
+   }
+   #login-form {
+	width: 40%;
+	}
 }

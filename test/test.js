@@ -30,7 +30,7 @@ describe('Root', function() {
 	});
 });
 
-function tearDownDb() {
+/*function tearDownDb() {
   return new Promise((resolve, reject) => {
     console.warn('Deleting database');
     mongoose.connection.dropDatabase()
@@ -325,4 +325,4 @@ describe('family API resource', function() {
   			});
   	});
   });
-});
+});*/
