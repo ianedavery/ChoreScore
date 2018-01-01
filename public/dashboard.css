@@ -1,0 +1,94 @@
+html, body {
+	background-color: #83d0d8;
+	font-family: 'Average Sans', sans-serif;
+}
+
+h1 {
+	font-size: 55px;
+	text-align: center;
+	font-family: 'Delius', cursive;
+	color: #ffffff;
+	padding: 20px 20px 0 20px;
+	margin-bottom: 0;
+}
+
+#dashboard-controls {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+button:hover{
+	cursor: pointer;
+}
+
+#chores {;
+	background-color: #83d0d8;
+	border: none;
+	position: relative;
+	font-size: 32px;
+	height: 50px;
+	padding: 0 75px 0 75px;
+	margin-bottom: 130px;
+	font-family: 'Average Sans', sans-serif;
+}
+
+#chores-pic	{
+	position: absolute;
+	top: -6px;
+	left: 7px;
+}
+
+#badges {
+	background-color: #83d0d8;
+	border: none;
+	position: relative;
+	height: 50px;
+	font-size: 32px;
+	font-family: 'Average Sans', sans-serif;
+	padding: 0 75px 0 75px;
+	margin-bottom: 130px;
+
+}
+
+#badge-pic {
+	position: absolute;
+	height: 121px;
+	left: 60px;
+}
+
+#family {
+	background-color: #83d0d8;
+	border: none;
+	position: relative;
+	font-size: 32px;
+	height: 50px;	
+	font-family: 'Average Sans', sans-serif;
+	padding: 0 75px 0 75px;
+}
+
+#child-pic {
+	position: absolute;
+	top: 28px;
+	left: 36px;
+}
+
+#rolling-hills {
+	visibility: hidden;
+}
+
+@media screen and (min-width: 768px) {
+    h1 {
+   		font-size: 65px;
+   		margin-bottom: 70px;
+    }
+  	#rolling-hills {
+  		visibility: visible;
+  		width: 100%;
+  		position: fixed;
+   		bottom: -120px;
+   		height: 370px;
+   		z-index: -10;
+    }
+}
