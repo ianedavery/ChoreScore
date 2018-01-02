@@ -3,7 +3,11 @@
 <head>
 	<title>ChoreScore</title>
 	<meta charset='utf-8' content='family dashboard' name='description'>
-	<link rel='stylesheet' type='text/css' href='/styles.css'>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<link rel='stylesheet' type='text/css' href='/subDashboard.css'>
+	<link href="https://fonts.googleapis.com/css?family=Delius" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Average+Sans" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body>
 
@@ -11,17 +15,28 @@
 		<h1>ChoreScore</h1>
 	</header>
 
-	<div id='family-buttons'>
-		<button type='button' id='create-family' class='create-buttons'>Add a family member</button>
-		<button type='button' id='edit-family' class='edit-buttons'>Edit Family</button>
-		<button type='button' id='delete-family'>Delete a Family Member</button>
-	</div>
+	<nav role='navigation'>
+	  <div id='menuToggle'>
 
-	<button id='back-button'>Back</button>
+	    <input type="checkbox"/>
+
+	    <span></span>
+	    <span></span>
+	    <span></span>
+
+	    <ul id='menu'>
+	      <a href='/api/createfamily'><li>Add Family</li></a>
+	      <a href='/api/editfamily'><li>Edit Family</li></a>
+	      <a href='/api/deletefamily'><li>Delete Family</li></a>
+	    </ul>
+	  </div>
+	</nav>
 
 	<main>
 		<div id='family-dashboard-container'></div>
 	</main>
+
+	<button id='back-button'><div class='arrow-back trigger'></div></button>	
 
 <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
 <script type='text/javascript' src='/client.js'></script>

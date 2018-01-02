@@ -66,11 +66,11 @@ header p {
   	height: 0; 
  	border-left: 30px solid transparent;
   	border-right: 30px solid transparent;
-	border-top: 30px solid #FFFF2A;
+	border-top: 30px solid #fcd43e;
 }
 
 #arrow-up-container {
-		position: absolute;
+	position: absolute;
 	left: 0;
 	right: 0;
 	text-align: center;

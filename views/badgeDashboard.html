@@ -3,7 +3,11 @@
 <head>
 	<title>ChoreScore</title>
 	<meta charset='utf-8' content='badge dashboard' name='description'>
-	<link rel='stylesheet' type='text/css' href='/styles.css'>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<link rel='stylesheet' type='text/css' href='/subDashboard.css'>
+	<link href="https://fonts.googleapis.com/css?family=Delius" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Average+Sans" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body>
 
@@ -11,19 +15,30 @@
 		<h1>ChoreScore</h1>
 	</header>
 
-	<div id='badge-buttons'>
-		<button type='button' id='create-badge' class='create-buttons'>Create a new badge</button>
-		<button type='button' id='edit-badge' class='edit-buttons'>Edit a badge</button>
-		<button type='button' id='redeem-badge'>Redeem a badge</button>
-		<button type='button' id='delete-badge'>Delete a badge</button>
-		<button type='button' id='view-redeemed-badges'>View Redeemed Badges</button>
-	</div>
+	<nav role="navigation">
+	  <div id="menuToggle">
 
-	<button id='back-button'>Back</button>
+	    <input type="checkbox"/>
+
+	    <span></span>
+	    <span></span>
+	    <span></span>
+
+	    <ul id="menu">
+	      <a href='/api/createbadge'><li>Create a Prize</li></a>
+	      <a href='/api/editbadge'><li>Edit a Prize</li></a>
+	      <a href='/api/redeembadge'><li>Redeem a Prize</li></a>
+	      <a href='/api/deletebadge'><li>Delete a Prize</li></a>
+	      <a href='/api/redeemedbadges'><li>View Redeemed Prizes</li></a>
+	    </ul>
+	  </div>
+	</nav>
 
 	<main>
 		<div id='badge-dashboard-container'></div>
 	</main>
+
+	<button id='back-button'><div class='arrow-back trigger'></div></button>
 
 <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
 <script type='text/javascript' src='/client.js'></script>

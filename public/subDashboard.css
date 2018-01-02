@@ -1,0 +1,136 @@
+html, body {
+	background-color: #83d0d8;
+	font-family: 'Average Sans', sans-serif;
+	overflow-x: hidden;
+}
+
+h1 {
+	font-size: 55px;
+	text-align: center;
+	font-family: 'Delius', cursive;
+	color: #ffffff;
+	padding: 20px 20px 0 20px;
+	margin-bottom: 20px;
+}
+
+a:hover {
+	color: #5C9398;
+	text-decoration: none;
+}
+
+a {
+	font-family: 'Average Sans', sans-serif;
+	color: #83d0d8;
+	font-weight: bold;
+}
+
+#menuToggle {
+  	display: block;
+  	position: absolute;
+  	top: 130px;
+  	right: 20px;
+  	z-index: 1;
+  	-webkit-user-select: none;
+  	user-select: none;
+}
+
+#menuToggle input {
+  	display: block;
+  	width: 49px;
+  	height: 39px;
+  	position: absolute;
+  	top: -6px;
+  	left: -3px; 
+  	cursor: pointer;
+  	opacity: 0;
+  	z-index: 2;
+  	-webkit-touch-callout: none;
+}
+
+#menuToggle span {
+  	display: block;
+  	width: 36px;
+  	height: 5px;
+  	margin-bottom: 5px;
+  	position: relative;
+  	background: #f05928;
+  	border-radius: 3px;
+  	z-index: 1;
+  	transform-origin: 4px 0px;
+  	transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease;
+}
+
+#menuToggle span:first-child {
+  	transform-origin: 0% 0%;
+}
+
+#menuToggle span:nth-last-child(2) {
+  	transform-origin: 0% 100%;
+}
+
+#menuToggle input:checked ~ span {
+  	opacity: 1;
+  	transform: rotate(45deg) translate(-2px, -1px);
+  	background: #f05928;
+}
+
+#menuToggle input:checked ~ span:nth-last-child(3) {
+  	opacity: 0;
+  	transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+#menuToggle input:checked ~ span:nth-last-child(2) {
+  	opacity: 1;
+  	transform: rotate(-45deg) translate(0, -1px);
+}
+
+#menu{
+  	position: absolute;
+  	text-align: center;
+  	width: 300px;
+  	margin-top: 22px;
+  	padding: 20px 50px 20px 50px;
+  	right: -21px;
+  	background: #ffffff;
+  	list-style-type: none;
+  	-webkit-font-smoothing: antialiased;
+  	transform-origin: 0% 0%;
+  	transform: translate(100%, 0); 
+  	transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+
+#menu li {
+  	padding: 10px 0;
+  	font-size: 22px;
+}
+
+#menuToggle input:checked ~ ul {
+  	transform: scale(1.0, 1.0);
+  	opacity: 1;
+}
+
+#back-button {
+	background-color: #83d0d8;
+	border: none;
+	margin-left: 20px;
+	margin-top: 5px;
+}
+
+.arrow-back {
+	display: inline-block;
+  	width: 0; 
+  	height: 0; 
+  	border-bottom: 30px solid transparent;
+  	border-top: 30px solid transparent;
+	border-right: 30px solid #fcd43e;
+}
+
+@media screen and (min-width: 768px) {
+    #menu {
+    	margin-top: -100px;
+    	padding: 50px;
+    	padding: 125px 50px 50px 50px;
+    }
+}
