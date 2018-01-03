@@ -143,10 +143,10 @@ a {
 }
 
 .arrow-back {
-  	width: 0; 
-  	height: 0; 
-  	border-bottom: 30px solid transparent;
-  	border-top: 30px solid transparent;
+  width: 0; 
+	height: 0; 
+	border-bottom: 30px solid transparent;
+  border-top: 30px solid transparent;
 	border-right: 30px solid #fcd43e;
 }
 

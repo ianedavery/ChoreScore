@@ -1,0 +1,148 @@
+html, body {
+	background-color: #83d0d8;
+	font-family: 'Average Sans', sans-serif;
+}
+
+body {
+	position: relative;
+}
+
+h1 {
+	font-size: 55px;
+	text-align: center;
+	font-family: 'Delius', cursive;
+	color: #ffffff;
+	padding: 20px 20px 0 20px;
+	margin-bottom: 0;
+}
+
+fieldset {
+	position: relative;
+}
+
+#chore-form, #badge-form, #family-form {
+	width: 60%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 38px;
+}
+
+#family-form {
+	margin-top: 55px;
+}
+
+.legend {
+	position: absolute;
+	color: #ffffff;
+	text-align: center;
+	top: -20px;
+	font-size: 24px;
+}
+
+.form-control, .operations-button {
+	height: 50px;
+	border: none;
+	border-radius: 0;
+	font-size: 20px;
+}
+
+.form-group {
+	margin-bottom: 0;
+}
+
+.operations-button {
+	margin-top: 24px;
+	width: 100%;
+	background-color: #f05928;
+}
+
+.operations-button:hover {
+	cursor: pointer;
+}
+
+.create-container {
+	position: absolute;
+	width: 100%;
+	z-index: 3;	
+	bottom: -124px;
+}
+
+.one-field-create-container {
+	bottom: -92px;
+}
+
+.new-box {
+	width: 60%;
+	margin: auto;
+	text-align: center;
+	background-color: #ffffff;
+}
+
+p {
+	font-size: 22px;
+	margin: 0;
+}
+
+.done-button, .one-field-done-button {
+	background-color: #a3bd3e;
+	border: none; 
+	position: absolute;
+	bottom: -250px;
+	z-index: 3;
+	width: 100%;
+}
+
+.one-field-done-button {
+	bottom: -307px;
+}
+
+
+.arrow-back {
+	margin: auto;
+  	width: 0; 
+	height: 0; 
+	border-bottom: 30px solid transparent;
+ 	border-top: 30px solid transparent;
+	border-right: 30px solid #fcd43e;
+}
+
+.arrow-back:hover {
+	cursor: pointer;
+}
+
+#rolling-hills {
+	width: 100%;
+	height: 250px;
+	position: fixed;
+	bottom: 0;
+	z-index: 2;
+}
+
+@media screen and (min-width: 768px) {
+    h1 {
+   		font-size: 65px;
+    }
+  	#rolling-hills {
+        display: block;
+  		width: 100%;
+  		position: fixed;
+   		bottom: -120px;
+   		height: 370px;
+    }
+    .legend {
+		font-size: 32px;
+		top: -30px;
+	}
+	#chore-form, #badge-form, #family-form {
+		margin-top: 32px;
+		width: 50%;
+	}
+	#family-form {
+		margin-top: 52px;
+	}
+	.new-box {
+	    width: 30%;
+    }
+    .one-field-done-button {
+		bottom: -304px;
+}

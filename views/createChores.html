@@ -3,7 +3,11 @@
 <head>
 	<title>ChoreScore</title>
 	<meta charset='utf-8' content='create chores' name='description'>
-	<link rel='stylesheet' type='text/css' href='/styles.css'>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<link rel='stylesheet' type='text/css' href='/operations.css'>
+	<link href="https://fonts.googleapis.com/css?family=Delius" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Average+Sans" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body>
 
@@ -13,24 +17,30 @@
 
 	<form id='chore-form'>
 		<fieldset>
-			<legend>Create Chore</legend>
+			<legend class='legend'>Create Chore</legend>
 
-			<label for='chore-name'>Chore</label>
-			<input type='text' name='chore-name' id='chore-name' required autocomplete>
+			<div class='form-group'>
+			    <label for='chore-name'></label>
+			    <input type='text' name='chore-name' id='chore-name' class='form-control' placeholder='New Chore Name' required autocomplete>
+			</div>
 
-			<label for='point-value'>Point Value</label>
-			<input type='number' name='point-value' id='point-value' required autocomplete>
+			<div class='form-group'>
+			    <label for='point-value'></label>
+			    <input type='number' name='point-value' id='point-value' class='form-control' placeholder='New Chore Point Value' required autocomplete>
+			</div>
 
 		</fieldset>
 
-		<button type='submit'>Do it</button>
+		<button type='submit' class='btn btn-default operations-button'>Create</button>
 	</form>
 
-	<button id='chore-done-button'>Done</button>
+	<button class='done-button'><div class='arrow-back trigger' id='chore-arrow-back'></div></button>
 
-	<main>
-		<div id='create-chore-container'></div>
-	</main>
+	<main class='create-container'></main>
+
+	<div id='ground'>
+		<img src='/images/curve.png' alt='image of the ground' id='rolling-hills'>
+	</div>
 
 <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
 <script type='text/javascript' src='/client.js'></script>		

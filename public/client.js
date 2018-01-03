@@ -94,7 +94,7 @@ function createBadge(data) {
 		contentType: 'application/json',
 		success: function() {
 			console.log('success');
-			populateCreateBadgesPage();
+			//populateCreateBadgesPage();
 		}
 	});
 }
@@ -112,7 +112,7 @@ function createFamily(name) {
 		contentType: 'application/json',
 		success: function() {
 			console.log('success');
-			populateCreateFamilyPage();
+			//populateCreateFamilyPage();
 		}
 	});
 }
@@ -130,7 +130,7 @@ function createChore(chore) {
 		contentType: 'application/json',
 		success: function() {
 			console.log('success');
-			populateCreateChorePage();
+			//populateCreateChorePage();
 		}
 	});
 }
@@ -184,6 +184,9 @@ function handleBadgeCreationClicks() {
 		data.badgeCost = badgeCost;
 		console.log(data);
 		createBadge(data);
+		let message = `<div class='new-box'><p>${badgeName}</br>${badgeCost} Points<p></div>`;
+		console.log(message);
+		$('.create-container').html(message);
 	});
 }
 
@@ -205,6 +208,10 @@ function checkIfFamilyAlreadyExists(name) {
 			}
 			else {
 				createFamily(name);
+				let messageName = name.name;
+				let message = `<div class='new-box'><p>${messageName}</br>Created<p></div>`;
+				console.log(message);
+				$('.create-container').html(message)
 			}
 		}		
 	});
@@ -239,6 +246,9 @@ function handleChoreCreationClicks() {
 		chore.pointValue = pointValue;
 		console.log(chore);
 		createChore(chore);
+		let message = `<div class='new-box'><p>${choreName}</br>${pointValue} Points<p></div>`;
+		console.log(message);
+		$('.create-container').html(message);
 	});
 }
 
@@ -1274,7 +1284,7 @@ function handleChoreDeleteItButtonClicks() {
 	});
 }
 
-function populateCreateChorePage() {
+/*function populateCreateChorePage() {
 	$('#chore-form').load('/views/deleteChores.html', event => {
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
@@ -1293,7 +1303,7 @@ function populateCreateChorePage() {
 			}	
 		});
 	});
-}
+}*/
 
 function populateDeleteChorePage() {
 	$('#delete-chore-form').load('/views/deleteChores.html', event => {
@@ -1535,7 +1545,7 @@ function handleEditBadgeButtonClicks() {
 	});
 }
 
-function populateCreateBadgesPage() {
+/*function populateCreateBadgesPage() {
 	$('#badge-form').load('/views/createBadges.html', event => {
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
@@ -1554,10 +1564,10 @@ function populateCreateBadgesPage() {
 			}	
 		});
 	});
-}
+}*/
 
 function populateBadgeDashboard() {
-	$('#badge-buttons').load('/views/badgeDashboard.html', event => {
+	$('#badge-pic').load('/views/badgeDashboard.html', event => {
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
 			url: BADGE_LIST_URL,
@@ -1603,7 +1613,8 @@ function handleCreateChoreButtonClicks() {
 }
 
 function populateChoreDashboard() {
-	$('#chore-buttons').load('/views/choreDashboard.html', event => {
+	$('#chores-pic').load('/views/choreDashboard.html', event => {
+		console.log('chore dashboard loaded');
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
 			url: CHORE_LIST_URL,
@@ -1648,7 +1659,7 @@ function handleCreateFamilyButtonClicks() {
 	});
 }
 
-function populateCreateFamilyPage() {
+/*function populateCreateFamilyPage() {
 	$('#family-form').load('/views/createFamily.html', event => {
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
@@ -1667,10 +1678,10 @@ function populateCreateFamilyPage() {
 			}	
 		});
 	});
-}
+}*/
 
 function populateFamilyDashboard() {
-	$('#family-buttons').load('/views/deleteFamily.html', event => {
+	$('#child-pic').load('/views/deleteFamily.html', event => {
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
 			url: FAMILY_URL,
@@ -1720,7 +1731,7 @@ function handleSplashLoginButtonClicks() {
 }
 
 function handleFamilyDashboardDoneButtonClicks() {
-	$('#family-done-button').on('click', event => {
+	$('#family-arrow-back').on('click', event => {
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
 			url: FAMILY_DASHBOARD_URL,
@@ -1735,7 +1746,7 @@ function handleFamilyDashboardDoneButtonClicks() {
 }
 
 function handleChoreDashboardDoneButtonClicks() {
-	$('#chore-done-button').on('click', event => {
+	$('#chore-arrow-back').on('click', event => {
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
 			url: CHORE_DASHBOARD_URL,
@@ -1750,7 +1761,7 @@ function handleChoreDashboardDoneButtonClicks() {
 }
 
 function handleBadgeDashboardDoneButtonClicks() {
-	$('#badge-done-button').on('click', event => {
+	$('#badge-arrow-back').on('click', event => {
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
 			url: BADGE_DASHBOARD_URL,
@@ -1809,12 +1820,12 @@ $(handleViewCompletedChoresButtonClicks);
 $(populateViewRedeemedBadgesPage);
 $(populateViewCompletedChoresPage);
 $(populateBadgeDashboard);
-$(populateCreateBadgesPage);
+//$(populateCreateBadgesPage);
 $(handleChoreButtonClicks);
 $(populateChoreDashboard);
 $(populateFamilyDashboard);
 $(handleBadgeDashboardDoneButtonClicks);
 $(handleChoreDashboardDoneButtonClicks);
-$(populateCreateChorePage);
+//$(populateCreateChorePage);
 $(handleFamilyDashboardDoneButtonClicks);
-$(populateCreateFamilyPage);
+//$(populateCreateFamilyPage);
