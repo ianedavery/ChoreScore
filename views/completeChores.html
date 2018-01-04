@@ -17,22 +17,26 @@
 
 	<form id='complete-chore-form'>
 		<fieldset>
-			<legend>Complete a Chore</legend>
+			<legend class='legend'>Complete a Chore</legend>
 
-			<select form='complete-chore-form' name='chore-to-complete' id='complete-dropdown' autofocus required>
-			</select>
+			<div class='form-group'>
+				<select form='complete-chore-form' name='chore-to-complete' id='complete-dropdown' class='form-control two-field-dropdown' autofocus required>
+				</select>
+			</div>
 
-			<select form='complete-chore-form' name='family-to-complete' id='family-dropdown' autofocus required>
-			</select>
+			<div class='form-group'>
+				<select form='complete-chore-form' name='family-to-complete' id='family-dropdown' class='form-control two-field-dropdown' autofocus required>
+				</select>
+			</div>
 
 		</fieldset>
 
-		<button type='submit'>Complete it</button>
+		<button type='submit' class='btn btn-default operations-button'>Complete</button>
 	</form>
 
-	<button id='chore-done-button'>Done</button>
+	<button class='done-button'><div class='arrow-back trigger' id='chore-arrow-back'></div></button>
 
-	<div id='complete-page-badge-container'></div>
+	<main class='create-container'></main>
 
 	<div id='ground'>
 		<img src='/images/curve.png' alt='image of the ground' id='rolling-hills'>

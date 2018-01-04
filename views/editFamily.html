@@ -3,7 +3,11 @@
 <head>
 	<title>ChoreScore</title>
 	<meta charset='utf-8' content='edit family' name='description'>
-	<link rel='stylesheet' type='text/css' href='/styles.css'>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<link rel='stylesheet' type='text/css' href='/operations.css'>
+	<link href="https://fonts.googleapis.com/css?family=Delius" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Average+Sans" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body>
 
@@ -13,25 +17,35 @@
 
 	<form id='edit-family-form'>
 		<fieldset>
-			<legend>Edit Family</legend>
+			<legend class='legend three-field-legend'>Edit Family</legend>
 
-			<select form='edit-family-form' name='family-to-edit' id='family-edit-dropdown' autofocus required>
-			</select>
+			<div class="form-group">
+				<select form='edit-family-form' name='family-to-edit' id='family-edit-dropdown' class='form-control' autofocus required>
+				</select>
+			</div>
 
-			<label for='family-name'>New Name</label>
-			<input type='text' name='family-name' id='family-name' autocomplete>
+			<div class="form-group">
+				<label for='family-name'></label>
+				<input type='text' name='family-name' id='family-name' class='form-control' placeholder='New Name' autocomplete>
+			</div>
 
-			<label for='family-points'>New Points Accrued</label>
-			<input type='number' name='family-points' id='family-points' autocomplete>
+			<div class="form-group">
+				<label for='family-points'></label>
+				<input type='number' name='family-points' id='family-points' class='form-control' placeholder='New Points Accrued' autocomplete>
+			</div>
 
 		</fieldset>
 
-		<button type='submit'>Edit it</button>
+		<button type='submit' class='btn btn-default operations-button three-field-operations-button'>Edit</button>
 	</form>
 
-	<button id='family-done-button'>Done</button>
+	<button class='done-button three-field-done-button'><div class='arrow-back trigger' id='family-arrow-back'></div></button>
 
-	<div id='family-edit-page-badge-container'></div>
+	<main class='create-container three-field-create-container'></main>
+	
+	<div id='ground'>
+		<img src='/images/curve.png' alt='image of the ground' id='rolling-hills'>
+	</div>
 
 <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
 <script type='text/javascript' src='/client.js'></script>		

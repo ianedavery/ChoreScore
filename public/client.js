@@ -524,6 +524,9 @@ function handleRedeemItClicks() {
 				handleBadgeAfterRedemption();
 				handleBadgesEarnedAfterRedemption(redeemingFamilyMemberId, redeemingBadgeName, redeemingFamilyMemberName);
 				handlePointsAccruedAfterRedemption(redeemingPointsAccrued, redeemingBadgeCost, redeemingFamilyMemberId);
+				let message = `<div class='new-box'><p>${redeemingBadgeName}</br>Redeemed by ${redeemingFamilyMemberName}<p></div>`;
+				console.log(message);
+				$('.create-container').html(message)
 			}
 			else {
 				alert('not enough points to redeem this badge');
@@ -549,21 +552,6 @@ function populateRedeemBadgePage() {
 				}
 				$('#redeem-dropdown').html(badgeList);
 			}
-		});
-		$.get({
-			url: BADGE_LIST_URL,
-			beforeSend: function(xhr, settings) { 
-				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
-			},
-			success: function(badge) {
-				console.log(badge);
-				let badgeList = [];
-				for(let i=0; i<badge.length; i++) {
-					let badges = `<p>${badge[i].badgename}</br><span>${badge[i].badgeCost} Points</span></p>`;
-					badgeList.push(badges);
-				}
-				$('#redeem-page-badge-container').html(badgeList);
-			}	
 		});
 		$.get({
 			url: FAMILY_URL,
@@ -819,6 +807,9 @@ function handleChoreCompleteItClicks() {
 			handlePointsAccruedAfterCompletion(completedChoreValue, completingFamilyMembersPointsAccrued, completingFamilyMemberId);
 			handleChoreAfterCompletion();
 			handleChoresEarnedAfterCompletion(completingFamilyMemberName, completingFamilyMemberId, completedChoreName);
+			let message = `<div class='new-box'><p>${completedChoreName}</br>Completed by ${completingFamilyMemberName}<p></div>`;
+			console.log(message);
+			$('.create-container').html(message)
 		}, 1000);
 	});
 }
@@ -840,21 +831,6 @@ function populateCompleteChorePage() {
 				}
 				$('#complete-dropdown').html(choreList);
 			}
-		});
-		$.get({
-			url: CHORE_LIST_URL,
-			beforeSend: function(xhr, settings) { 
-				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
-			},
-			success: function(chores) {
-				console.log(chores);
-				let choreList = [];
-				for(let i=0; i<chores.length; i++) {
-					let chore = `<p>${chores[i].chore}</br><span>${chores[i].pointValue} Points</span></p>`;
-					choreList.push(chore);
-				}
-				$('#complete-page-badge-container').html(choreList);
-			}	
 		});
 		$.get({
 			url: FAMILY_URL,
@@ -979,6 +955,9 @@ function handleFamilyEditItButtonClicks() {
 				editFamily(data, familyId);
 				editBadgesEarned(badgesEarnedData, familyId);
 				editChoresCompleted(choresCompletedData, familyId);
+				let message = `<div class='new-box'><p>Family</br>Edited<p></div>`;
+				console.log(message);
+				$('.create-container').html(message);
 			}
 		});
 	});
@@ -1001,21 +980,6 @@ function populateEditFamilyPage() {
 				}
 				$('#family-edit-dropdown').html(familyList);
 			}
-		});
-		$.get({
-			url: FAMILY_URL,
-			beforeSend: function(xhr, settings) { 
-				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
-			},
-			success: function(members) {
-				console.log(members);
-				let familyList = [];
-				for(let i=0; i<members.length; i++) {
-					let family = `<p>${members[i].name}</br><span>${members[i].pointsAccrued} Points Accrued</span></p>`;
-					familyList.push(family);
-				}
-				$('#family-edit-page-badge-container').html(familyList);
-			}	
 		});
 	});
 }
@@ -1095,6 +1059,9 @@ function handleChoreEditItButtonClicks() {
 				data.id = choreId;
 				console.log(data);
 				editChore(data, choreId);
+				let message = `<div class='new-box'><p>Chore</br>Edited<p></div>`;
+				console.log(message);
+				$('.create-container').html(message);
 			}
 		});
 	});
@@ -1117,21 +1084,6 @@ function populateEditChorePage() {
 				}
 				$('#chore-edit-dropdown').html(choreList);
 			}
-		});
-		$.get({
-			url: CHORE_LIST_URL,
-			beforeSend: function(xhr, settings) { 
-				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
-			},
-			success: function(chores) {
-				console.log(chores);
-				let choreList = [];
-				for(let i=0; i<chores.length; i++) {
-					let chore = `<p>${chores[i].chore}</br><span>${chores[i].pointValue} Points</span></p>`;
-					choreList.push(chore);
-				}
-				$('#chore-edit-page-badge-container').html(choreList);
-			}	
 		});
 	});
 }
@@ -1186,6 +1138,9 @@ function handleFamilyDeleteItButtonClicks() {
 				findObjectByKey(family, "name", currentFamilyName);
 				console.log(familyId);
 				handleFamilyDeletion(familyId);
+				let message = `<div class='new-box'><p>${currentFamilyName}</br>Deleted<p></div>`;
+				console.log(message);
+				$('.create-container').html(message);
 			}
 		});
 	});
@@ -1209,7 +1164,7 @@ function populateDeleteFamilyPage() {
 				$('#family-delete-dropdown').html(familyList);
 			}
 		});
-		$.get({
+		/*$.get({
 			url: FAMILY_URL,
 			beforeSend: function(xhr, settings) { 
 				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
@@ -1223,7 +1178,7 @@ function populateDeleteFamilyPage() {
 				}
 				$('#family-delete-page-badge-container').html(familyList);
 			}	
-		});
+		});*/
 	});
 }
 
@@ -1279,31 +1234,13 @@ function handleChoreDeleteItButtonClicks() {
 				findObjectByKey(chore, "chore", currentChoreName);
 				console.log(choreId);
 				handleChoreDeletion(choreId);
+				let message = `<div class='new-box'><p>${currentChoreName}</br>Deleted<p></div>`;
+				console.log(message);
+				$('.create-container').html(message)
 			}
 		});
 	});
 }
-
-/*function populateCreateChorePage() {
-	$('#chore-form').load('/views/deleteChores.html', event => {
-		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-		$.get({
-			url: CHORE_LIST_URL,
-			beforeSend: function(xhr, settings) { 
-				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
-			},
-			success: function(chores) {
-				console.log(chores);
-				let choreList = [];
-				for(let i=0; i<chores.length; i++) {
-					let chore = `<p>${chores[i].chore}</br><span>${chores[i].pointValue} Points</span></p>`;
-					choreList.push(chore);
-				}
-				$('#create-chore-container').html(choreList);
-			}	
-		});
-	});
-}*/
 
 function populateDeleteChorePage() {
 	$('#delete-chore-form').load('/views/deleteChores.html', event => {
@@ -1322,21 +1259,6 @@ function populateDeleteChorePage() {
 				}
 				$('#chore-delete-dropdown').html(choreList);
 			}
-		});
-		$.get({
-			url: CHORE_LIST_URL,
-			beforeSend: function(xhr, settings) { 
-				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
-			},
-			success: function(chores) {
-				console.log(chores);
-				let choreList = [];
-				for(let i=0; i<chores.length; i++) {
-					let chore = `<p>${chores[i].chore}</br><span>${chores[i].pointValue} Points</span></p>`;
-					choreList.push(chore);
-				}
-				$('#chore-delete-page-badge-container').html(choreList);
-			}	
 		});
 	});
 }
@@ -1393,6 +1315,9 @@ function handleBadgeDeleteItButtonClicks() {
 				findObjectByKey(badge, "badgename", currentBadgeName);
 				console.log(badgeId);
 				handleBadgeDeletion(badgeId);
+				let message = `<div class='new-box'><p>${currentBadgeName}</br>Deleted<p></div>`;
+				console.log(message);
+				$('.create-container').html(message);
 			}
 		});
 	});
@@ -1415,21 +1340,6 @@ function populateDeleteBadgePage() {
 				}
 				$('#delete-dropdown').html(badgeList);
 			}
-		});
-		$.get({
-			url: BADGE_LIST_URL,
-			beforeSend: function(xhr, settings) { 
-				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
-			},
-			success: function(badge) {
-				console.log(badge);
-				let badgeList = [];
-				for(let i=0; i<badge.length; i++) {
-					let badges = `<p>${badge[i].badgename}</br><span>${badge[i].badgeCost} Points</span></p>`;
-					badgeList.push(badges);
-				}
-				$('#delete-page-badge-container').html(badgeList);
-			}	
 		});
 	});
 }
@@ -1493,6 +1403,9 @@ function handleBadgeEditItButtonClicks() {
 				data.id = badgeId;
 				console.log(data);
 				editBadge(data, badgeId);
+				let message = `<div class='new-box'><p>Prize</br>Edited<p></div>`;
+				console.log(message);
+				$('.create-container').html(message);
 			}
 		});
 	});
@@ -1516,21 +1429,6 @@ function populateEditBadgePage() {
 				$('#edit-dropdown').html(badgeList);
 			}
 		});
-		$.get({
-			url: BADGE_LIST_URL,
-			beforeSend: function(xhr, settings) { 
-				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
-			},
-			success: function(badge) {
-				console.log(badge);
-				let badgeList = [];
-				for(let i=0; i<badge.length; i++) {
-					let badges = `<p>${badge[i].badgename}</br><span>${badge[i].badgeCost} Points</span></p>`;
-					badgeList.push(badges);
-				}
-				$('#edit-page-badge-container').html(badgeList);
-			}	
-		});
 	})
 }
 
@@ -1544,27 +1442,6 @@ function handleEditBadgeButtonClicks() {
 		});
 	});
 }
-
-/*function populateCreateBadgesPage() {
-	$('#badge-form').load('/views/createBadges.html', event => {
-		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-		$.get({
-			url: BADGE_LIST_URL,
-			beforeSend: function(xhr, settings) { 
-				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
-			},
-			success: function(badge) {
-				console.log(badge);
-				let badgeList = [];
-				for(let i=0; i<badge.length; i++) {
-					let badges = `<p>${badge[i].badgename}</br><span>${badge[i].badgeCost} Points</span></p>`;
-					badgeList.push(badges);
-				}
-				$('#create-badge-container').html(badgeList);
-			}	
-		});
-	});
-}*/
 
 function populateBadgeDashboard() {
 	$('#badge-pic').load('/views/badgeDashboard.html', event => {
@@ -1658,27 +1535,6 @@ function handleCreateFamilyButtonClicks() {
 		});
 	});
 }
-
-/*function populateCreateFamilyPage() {
-	$('#family-form').load('/views/createFamily.html', event => {
-		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-		$.get({
-			url: FAMILY_URL,
-			beforeSend: function(xhr, settings) { 
-				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
-			},
-			success: function(members) {
-				console.log(members);
-				let familyList = [];
-				for(let i=0; i<members.length; i++) {
-					let family = `<p>${members[i].name}</br><span>${members[i].pointsAccrued} Points Accrued</span></p>`;
-					familyList.push(family);
-				}
-				$('#create-family-container').html(familyList);
-			}	
-		});
-	});
-}*/
 
 function populateFamilyDashboard() {
 	$('#child-pic').load('/views/deleteFamily.html', event => {
@@ -1820,12 +1676,9 @@ $(handleViewCompletedChoresButtonClicks);
 $(populateViewRedeemedBadgesPage);
 $(populateViewCompletedChoresPage);
 $(populateBadgeDashboard);
-//$(populateCreateBadgesPage);
 $(handleChoreButtonClicks);
 $(populateChoreDashboard);
 $(populateFamilyDashboard);
 $(handleBadgeDashboardDoneButtonClicks);
 $(handleChoreDashboardDoneButtonClicks);
-//$(populateCreateChorePage);
 $(handleFamilyDashboardDoneButtonClicks);
-//$(populateCreateFamilyPage);

@@ -17,25 +17,31 @@
 
 	<form id='edit-chore-form'>
 		<fieldset>
-			<legend>Edit Chore</legend>
+			<legend class='legend three-field-legend'>Edit Chore</legend>
 
-			<select form='edit-chore-form' name='chore-to-edit' id='chore-edit-dropdown' autofocus required>
-			</select>
+			<div class="form-group">
+				<select form='edit-chore-form' name='chore-to-edit' id='chore-edit-dropdown' class='form-control' autofocus required>
+				</select>
+			</div>
 
-			<label for='chore-name'>New Chore Name</label>
-			<input type='text' name='chore-name' id='chore-name' autocomplete>
+			<div class="form-group">
+				<label for='chore-name'></label>
+				<input type='text' name='chore-name' id='chore-name' class='form-control' placeholder='New Chore Name' autocomplete>
+			</div>
 
-			<label for='chore-value'>New Chore Value</label>
-			<input type='number' name='chore-value' id='chore-value' autocomplete>
+			<div class="form-group">
+				<label for='chore-value'></label>
+				<input type='number' name='chore-value' id='chore-value' class='form-control' placeholder='New Chore Value' autocomplete>
+			</div>
 
 		</fieldset>
 
-		<button type='submit'>Edit it</button>
+		<button type='submit' class='btn btn-default operations-button three-field-operations-button'>Edit</button>
 	</form>
 
-	<button id='chore-done-button'>Done</button>
+	<button class='done-button three-field-done-button'><div class='arrow-back trigger' id='chore-arrow-back'></div></button>
 
-	<div id='chore-edit-page-badge-container'></div>
+	<main class='create-container three-field-create-container'></main>
 
 	<div id='ground'>
 		<img src='/images/curve.png' alt='image of the ground' id='rolling-hills'>

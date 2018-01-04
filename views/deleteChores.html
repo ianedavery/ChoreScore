@@ -17,19 +17,21 @@
 
 	<form id='delete-chore-form'>
 		<fieldset>
-			<legend>Delete a Chore</legend>
+			<legend class='legend'>Delete a Chore</legend>
 
-			<select form='delete-chore-form' name='chore-to-delete' id='chore-delete-dropdown' autofocus required>
-			</select>
+			<div class='form-group'>
+				<select form='delete-chore-form' name='chore-to-delete' id='chore-delete-dropdown' class='form-control one-field-dropdown' autofocus required>
+				</select>
+			</div>
 
 		</fieldset>
 
-		<button type='submit'>Delete it</button>
+		<button type='submit' class='btn btn-default operations-button'>Delete</button>
 	</form>
 
-	<button id='chore-done-button'>Done</button>
+	<button class='done-button one-field-done-button'><div class='arrow-back trigger' id='chore-arrow-back'></div></button>
 
-	<div id='chore-delete-page-badge-container'></div>
+	<main class='create-container one-field-create-container'></main>
 
 	<div id='ground'>
 		<img src='/images/curve.png' alt='image of the ground' id='rolling-hills'>

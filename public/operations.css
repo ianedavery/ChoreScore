@@ -1,4 +1,5 @@
-html, body {
+html, 
+body {
 	background-color: #83d0d8;
 	font-family: 'Average Sans', sans-serif;
 }
@@ -20,15 +21,35 @@ fieldset {
 	position: relative;
 }
 
-#chore-form, #badge-form, #family-form {
+#chore-form, 
+#badge-form,
+#family-form, 
+#edit-chore-form, 
+#edit-badge-form, 
+#edit-family-form, 
+#complete-chore-form, 
+#redeem-badge-form,
+#delete-chore-form,
+#delete-badge-form,
+#delete-family-form {
 	width: 60%;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 38px;
 }
 
-#family-form {
+#family-form,
+#delete-chore-form,
+#delete-badge-form,
+#delete-family-form {
 	margin-top: 55px;
+}
+
+#edit-chore-form, 
+#edit-badge-form, 
+#edit-family-form {
+	margin-top: 50px;
+	position: relative;
 }
 
 .legend {
@@ -39,15 +60,47 @@ fieldset {
 	font-size: 24px;
 }
 
-.form-control, .operations-button {
+.three-field-legend {
+	top: -42px;
+}
+
+.form-control, 
+.operations-button {
 	height: 50px;
 	border: none;
 	border-radius: 0;
 	font-size: 20px;
 }
 
+.three-field-operations-button {
+	position: absolute;
+	z-index: 3;
+	top: 201px;
+}
+
+#chore-edit-dropdown, 
+#edit-dropdown, 
+#family-edit-dropdown, 
+#complete-dropdown, 
+#family-dropdown, 
+#redeem-dropdown,
+#family-dropdown,
+#chore-delete-dropdown,
+#delete-dropdown,
+#family-delete-dropdown {
+	height: 50px;
+}
+
+.one-field-dropdown {
+	margin-top: 24px;
+}
+
 .form-group {
 	margin-bottom: 0;
+}
+
+.two-field-dropdown {
+	margin-top: 25px;
 }
 
 .operations-button {
@@ -71,6 +124,10 @@ fieldset {
 	bottom: -92px;
 }
 
+.three-field-create-container {
+	bottom: -170px;
+}
+
 .new-box {
 	width: 60%;
 	margin: auto;
@@ -83,7 +140,8 @@ p {
 	margin: 0;
 }
 
-.done-button, .one-field-done-button {
+.done-button, 
+.one-field-done-button {
 	background-color: #a3bd3e;
 	border: none; 
 	position: absolute;
@@ -96,6 +154,9 @@ p {
 	bottom: -307px;
 }
 
+.three-field-done-button {
+	bottom: -262px;
+}
 
 .arrow-back {
 	margin: auto;
@@ -133,16 +194,41 @@ p {
 		font-size: 32px;
 		top: -30px;
 	}
-	#chore-form, #badge-form, #family-form {
+	.three-field-legend {
+		top: -50px;
+	}
+	#chore-form, 
+	#badge-form, 
+	#family-form, 
+	#edit-chore-form, 
+	#edit-badge-form, 
+	#edit-family-form, 
+	#complete-chore-form,
+	#redeem-badge-form,
+	#delete-chore-form,
+	#delete-badge-form,
+	#delete-family-form {
 		margin-top: 32px;
 		width: 50%;
 	}
-	#family-form {
+	#family-form,
+	#delete-chore-form,
+	#delete-badge-form,
+	#delete-family-form {
 		margin-top: 52px;
+	}
+	#edit-chore-form, 
+	#edit-badge-form, 
+	#edit-family-form {
+		margin-top: 60px;
 	}
 	.new-box {
 	    width: 30%;
     }
     .one-field-done-button {
 		bottom: -304px;
+	}
+	.three-field-done-button {
+		bottom: -246px;
+	}
 }
