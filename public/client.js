@@ -1440,10 +1440,10 @@ function populateBadgeDashboard() {
 				console.log(badge);
 				let badgeList = [];
 				for(let i=0; i<badge.length; i++) {
-					let badges = `<p>${badge[i].badgename}</br><span>${badge[i].badgeCost} Points</span></p>`;
+					let badges = `<div class='dashboard-list'><p>${badge[i].badgename}</br><span>${badge[i].badgeCost} Points</span></p></div>`;
 					badgeList.push(badges);
 				}
-				$('#badge-dashboard-container').html(badgeList);
+				$('.dashboard-container').html(badgeList);
 			}	
 		});
 	});
@@ -1487,10 +1487,10 @@ function populateChoreDashboard() {
 				console.log(chores);
 				let choreList = [];
 				for(let i=0; i<chores.length; i++) {
-					let chore = `<p>${chores[i].chore}</br><span>${chores[i].pointValue} Points</span></p>`;
+					let chore = `<div class='dashboard-list'><p>${chores[i].chore}</br><span>${chores[i].pointValue} Points</span></p></div>`;
 					choreList.push(chore);
 				}
-				$('#chore-dashboard-container').html(choreList);
+				$('.dashboard-container').html(choreList);
 			}	
 		});
 	});
@@ -1533,10 +1533,10 @@ function populateFamilyDashboard() {
 				console.log(members);
 				let familyList = [];
 				for(let i=0; i<members.length; i++) {
-					let family = `<p>${members[i].name}</br><span>${members[i].pointsAccrued} Points Accrued</span></p>`;
+					let family = `<div class='dashboard-list'><p>${members[i].name}</br><span>${members[i].pointsAccrued} Points Accrued</span></p><div>`;
 					familyList.push(family);
 				}
-				$('#family-dashboard-container').html(familyList);
+				$('.dashboard-container').html(familyList);
 			}	
 		});
 	});
