@@ -140,6 +140,12 @@ p {
 	margin: 0;
 }
 
+.back-button-container {
+	position: relative;
+	width: 100%;
+	text-align: center;
+}
+
 .done-button, 
 .one-field-done-button {
 	background-color: #a3bd3e;
@@ -147,7 +153,7 @@ p {
 	position: absolute;
 	bottom: -250px;
 	z-index: 3;
-	width: 100%;
+	width: auto;
 }
 
 .one-field-done-button {

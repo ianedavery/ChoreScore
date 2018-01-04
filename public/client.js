@@ -1164,21 +1164,6 @@ function populateDeleteFamilyPage() {
 				$('#family-delete-dropdown').html(familyList);
 			}
 		});
-		/*$.get({
-			url: FAMILY_URL,
-			beforeSend: function(xhr, settings) { 
-				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
-			},
-			success: function(members) {
-				console.log(members);
-				let familyList = [];
-				for(let i=0; i<members.length; i++) {
-					let family = `<p>${members[i].name}</br><span>${members[i].pointsAccrued} Points Accrued</span></p>`;
-					familyList.push(family);
-				}
-				$('#family-delete-page-badge-container').html(familyList);
-			}	
-		});*/
 	});
 }
 
