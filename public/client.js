@@ -22,7 +22,6 @@ const BADGES_EARNED_URL = '/api/badgesearned';
 const SIGNUP_URL = '/api/signup';
 const LOGIN_URL = '/api/login';
 const DASHBOARD_URL = '/api/dashboard';
-const CREATE_BADGES_URL = '/api/createbadge';
 const CREATE_CHORES_URL = '/api/createchore';
 const CREATE_FAMILY_URL = '/api/createfamily';
 const EDIT_BADGE_URL = '/api/editbadge';
@@ -263,19 +262,6 @@ function handleBackButtonClicks() {
 			},
 			success: function() {
 				window.location.href = '/api/dashboard';
-			}
-		});
-	});
-}
-
-function handleCreateBadgeButtonClicks() {
-	$('#create-badge').on('click', event => {
-		console.log('create badge clicked');
-		$.get({
-			url: CREATE_BADGES_URL,
-			success: function() {
-				console.log('success');
-				window.location.href = '/api/createbadge';
 			}
 		});
 	});
@@ -1329,19 +1315,6 @@ function populateDeleteBadgePage() {
 	});
 }
 
-function handleDeleteBadgeButtonClicks() {
-	$('#delete-badge').on('click', event => {
-		console.log('delete badge clicked');
-		$.get({
-			url: DELETE_BADGE_URL,
-			success: function() {
-				console.log('success');
-				window.location.href = '/api/deletebadge';
-			}
-		});
-	});
-}
-
 function findObjectByKey(array, key, value) {
 	for(let i=0; i<array.length; i++) {
 		if(array[i][key] === value) {
@@ -1415,17 +1388,6 @@ function populateEditBadgePage() {
 			}
 		});
 	})
-}
-
-function handleEditBadgeButtonClicks() {
-	$('#edit-badge').on('click', event => {
-		$.get({
-			url: EDIT_BADGE_URL,
-			success: function() {
-				window.location.href = '/api/editbadge';
-			}
-		});
-	});
 }
 
 function populateBadgeDashboard() {
@@ -1503,19 +1465,6 @@ function handleChoreButtonClicks() {
 			success: function() {
 				console.log('success');
 				window.location.href = '/api/choredashboard';
-			}
-		});
-	});
-}
-
-function handleCreateFamilyButtonClicks() {
-	$('#create-family').on('click', event => {
-		console.log('create chore clicked');
-		$.get({
-			url: CREATE_FAMILY_URL,
-			success: function() {
-				console.log('success');
-				window.location.href = '/api/createfamily';
 			}
 		});
 	});
@@ -1628,17 +1577,13 @@ $(handleFamilyButtonClicks);
 $(handleFamilyCreationClicks);
 $(handleChoreCreationClicks);
 $(handleSplashLoginButtonClicks);
-$(handleCreateBadgeButtonClicks);
 $(handleCreateChoreButtonClicks);
-$(handleCreateFamilyButtonClicks);
 $(handleBackButtonClicks);
-$(handleEditBadgeButtonClicks);
 $(handleBadgeEditItButtonClicks);
 $(populateEditBadgePage);
 $(handleRedeemBadgeButtonClick);
 $(populateRedeemBadgePage);
 $(handleRedeemItClicks);
-$(handleDeleteBadgeButtonClicks);
 $(populateDeleteBadgePage);
 $(handleBadgeDeleteItButtonClicks);
 $(handleDeleteChoreButtonClicks);
