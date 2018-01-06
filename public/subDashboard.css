@@ -157,6 +157,10 @@ a {
 	top: 114px;
 }
 
+#back-button:hover {
+  cursor: pointer;
+}
+
 .arrow-back {
   width: 0; 
 	height: 0; 

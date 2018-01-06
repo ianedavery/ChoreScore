@@ -60,29 +60,32 @@ const jwtAuth = passport.authenticate('jwt', {session: false});
 
 app.use('/api/users', usersRouter);
 app.use('/api/auth', authRouter);
-app.use('/api/api/chore', jwtAuth, choreRouter);
-app.use('/api/api/badge', jwtAuth, badgeRouter);
-app.use('/api/api/family', jwtAuth, familyRouter);
 app.use('/api/badgesearned', jwtAuth, badgesEarnedRouter);
 app.use('/api/chorescompleted', jwtAuth, choresCompletedRouter);
-app.use('/api/login', loginRouter);
-app.use('/api/dashboard', dashboardRouter);
-app.use('/api/createbadge', createBadgesRouter);
-app.use('/api/createchore', createChoresRouter);
-app.use('/api/createfamily', createFamilyRouter);
-app.use('/api/editbadge', editBadgeRouter);
-app.use('/api/redeembadge', redeemBadgeRouter);
-app.use('/api/deletebadge', deleteBadgesRouter);
-app.use('/api/deletechore', deleteChoreRouter);
-app.use('/api/deletefamily', deleteFamilyRouter);
-app.use('/api/editchore', editChoreRouter);
-app.use('/api/editfamily', editFamilyRouter);
-app.use('/api/completechore', completeChoreRouter);
-app.use('/api/completedchores', viewCompletedChoresRouter);
-app.use('/api/redeemedbadges', viewRedeemedBadgesRouter);
-app.use('/api/badgedashboard', badgeDashboardRouter);
-app.use('/api/choredashboard', choreDashboardRouter);
-app.use('/api/familydashboard', familyDashboardRouter);
+app.use('/login', loginRouter);
+app.use('/dashboard', dashboardRouter);
+
+app.use('/chore', jwtAuth, choreRouter);
+app.use('/choredashboard', choreDashboardRouter);
+app.use('/createchore', createChoresRouter);
+app.use('/editchore', editChoreRouter);
+app.use('/completechore', completeChoreRouter);
+app.use('/deletechore', deleteChoreRouter);
+app.use('/completedchores', viewCompletedChoresRouter);
+
+app.use('/badge', jwtAuth, badgeRouter);
+app.use('/badgedashboard', badgeDashboardRouter);
+app.use('/createbadge', createBadgesRouter);
+app.use('/editbadge', editBadgeRouter);
+app.use('/redeembadge', redeemBadgeRouter);
+app.use('/deletebadge', deleteBadgesRouter);
+app.use('/redeemedbadges', viewRedeemedBadgesRouter);
+
+app.use('/family', jwtAuth, familyRouter);
+app.use('/createfamily', createFamilyRouter);
+app.use('/deletefamily', deleteFamilyRouter);
+app.use('/editfamily', editFamilyRouter);
+app.use('/familydashboard', familyDashboardRouter);
 
 let server;
 

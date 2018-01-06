@@ -15,32 +15,31 @@ let completedChoreName;
 
 const USER_LOGIN_URL = '/api/auth/login';
 const USER_REGISTRATION_URL = '/api/users';
-const BADGE_LIST_URL = 'api/badge';
-const CHORE_LIST_URL = 'api/chore';
-const FAMILY_URL = '/api/api/family';
+const BADGE_LIST_URL = '/badge';
+const CHORE_LIST_URL = '/chore';
+const FAMILY_URL = '/family';
 const BADGES_EARNED_URL = '/api/badgesearned';
-const SIGNUP_URL = '/api/signup';
-const LOGIN_URL = '/api/login';
-const DASHBOARD_URL = '/api/dashboard';
-const CREATE_CHORES_URL = '/api/createchore';
-const CREATE_FAMILY_URL = '/api/createfamily';
-const EDIT_BADGE_URL = '/api/editbadge';
-const REDEEM_BADGE_URL = '/api/redeembadge';
-const DELETE_BADGE_URL = '/api/deletebadge';
-const DELETE_CHORE_URL = '/api/deletechore';
-const DELETE_FAMILY_URL = '/api/deletefamily';
-const EDIT_CHORE_URL = '/api/editchore';
-const EDIT_FAMILY_URL = '/api/editfamily';
-const COMPLETE_CHORE_URL = '/api/completechore';
+//const SIGNUP_URL = '/api/signup';
+const LOGIN_URL = '/login';
+const DASHBOARD_URL = '/dashboard';
+//const CREATE_CHORES_URL = '/api/createchore';
+//const CREATE_FAMILY_URL = '/api/createfamily';
+//const EDIT_BADGE_URL = '/api/editbadge';
+//const REDEEM_BADGE_URL = '/api/redeembadge';
+//const DELETE_BADGE_URL = '/api/deletebadge';
+//const DELETE_CHORE_URL = '/api/deletechore';
+//const DELETE_FAMILY_URL = '/api/deletefamily';
+//const EDIT_CHORE_URL = '/api/editchore';
+//const EDIT_FAMILY_URL = '/api/editfamily';
+//const COMPLETE_CHORE_URL = '/api/completechore';
 const CHORES_COMPLETED_URL = '/api/chorescompleted'
-const VIEW_COMPLETED_CHORES_URL = '/api/completedchores';
-const VIEW_REDEEMED_BADGES_URL = '/api/redeemedbadges';
-const BADGE_DASHBOARD_URL = '/api/badgedashboard';
-const CHORE_DASHBOARD_URL = '/api/choredashboard';
-const FAMILY_DASHBOARD_URL = '/api/familydashboard';
+//const VIEW_COMPLETED_CHORES_URL = '/api/completedchores';
+//const VIEW_REDEEMED_BADGES_URL = '/api/redeemedbadges';
+const BADGE_DASHBOARD_URL = '/badgedashboard';
+const CHORE_DASHBOARD_URL = '/choredashboard';
+const FAMILY_DASHBOARD_URL = '/familydashboard';
 
 function userRegistration(user) {
-	console.log('registration called');
 	$.ajax({
 		method: 'POST',
 		url: USER_REGISTRATION_URL,
@@ -48,7 +47,6 @@ function userRegistration(user) {
 		datatype: 'json',
 		contentType: 'application/json',
 		success: function() {
-			console.log('success');
 			userLogIn(user);
 		}
 	});
@@ -62,7 +60,7 @@ function renderDashboard() {
 			xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
 		},
 		success: function() {
-			window.location.href = '/api/dashboard';
+			window.location.href = 'dashboard';
 		}
 	});
 }
@@ -93,7 +91,6 @@ function createBadge(data) {
 		contentType: 'application/json',
 		success: function() {
 			console.log('success');
-			//populateCreateBadgesPage();
 		}
 	});
 }
@@ -111,7 +108,6 @@ function createFamily(name) {
 		contentType: 'application/json',
 		success: function() {
 			console.log('success');
-			//populateCreateFamilyPage();
 		}
 	});
 }
@@ -129,7 +125,6 @@ function createChore(chore) {
 		contentType: 'application/json',
 		success: function() {
 			console.log('success');
-			//populateCreateChorePage();
 		}
 	});
 }
@@ -163,7 +158,6 @@ function handleLogInRequests() {
 		let user = {};
 		user.username = username;
 		user.password = password;
-		console.log(user);
 		userLogIn(user);
 	});
 }
@@ -171,7 +165,6 @@ function handleLogInRequests() {
 function handleBadgeCreationClicks() {
 	$('#badge-form').submit(event => {
 		event.preventDefault();
-		console.log('badge creation button clicked');
 		let badgeNameTarget = $(event.currentTarget).find('#badge-name');
 		let badgeName = badgeNameTarget.val();
 		badgeNameTarget.val('');
@@ -181,10 +174,8 @@ function handleBadgeCreationClicks() {
 		let data = {};
 		data.badgename = badgeName;
 		data.badgeCost = badgeCost;
-		console.log(data);
 		createBadge(data);
 		let message = `<div class='new-box'><p>${badgeName}</br>${badgeCost} Points<p></div>`;
-		console.log(message);
 		$('.create-container').html(message);
 	});
 }
@@ -209,7 +200,6 @@ function checkIfFamilyAlreadyExists(name) {
 				createFamily(name);
 				let messageName = name.name;
 				let message = `<div class='new-box'><p>${messageName}</br>Created<p></div>`;
-				console.log(message);
 				$('.create-container').html(message)
 			}
 		}		
@@ -219,13 +209,11 @@ function checkIfFamilyAlreadyExists(name) {
 function handleFamilyCreationClicks() {
 	$('#family-form').submit(event => {
 		event.preventDefault();
-		console.log('family creation button clicked');
 		let familyNameTarget = $(event.currentTarget).find('#family-name');
 		let familyName = familyNameTarget.val();
 		familyNameTarget.val('');
 		let name = {};
 		name.name = familyName;
-		console.log(name);
 		checkIfFamilyAlreadyExists(name);
 	});
 }
@@ -233,7 +221,6 @@ function handleFamilyCreationClicks() {
 function handleChoreCreationClicks() {
 	$('#chore-form').submit(event => {
 		event.preventDefault();
-		console.log('chore creation button clicked');
 		let choreNameTarget = $(event.currentTarget).find('#chore-name');
 		let choreName = choreNameTarget.val();
 		choreNameTarget.val('');
@@ -243,17 +230,14 @@ function handleChoreCreationClicks() {
 		let chore = {};
 		chore.chore = choreName;
 		chore.pointValue = pointValue;
-		console.log(chore);
 		createChore(chore);
 		let message = `<div class='new-box'><p>${choreName}</br>${pointValue} Points<p></div>`;
-		console.log(message);
 		$('.create-container').html(message);
 	});
 }
 
 function handleBackButtonClicks() {
 	$('#back-button').on('click', event => {
-		console.log('done button clicked');
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
 			url: DASHBOARD_URL,
@@ -261,7 +245,7 @@ function handleBackButtonClicks() {
 				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
 			},
 			success: function() {
-				window.location.href = '/api/dashboard';
+				window.location.href = 'dashboard';
 			}
 		});
 	});
@@ -304,19 +288,6 @@ function populateViewCompletedChoresPage() {
 					choreList.push(chore);
 				}
 				$('.create-container').html(choreList);
-			}
-		});
-	});
-}
-
-function handleViewCompletedChoresButtonClicks() {
-	$('#view-completed-chores').on('click', event => {
-		console.log('view completed chores button clicked');
-		$.get({
-			url: VIEW_COMPLETED_CHORES_URL,
-			success: function() {
-				console.log('success');
-				window.location.href = '/api/completedchores';
 			}
 		});
 	});
@@ -377,21 +348,6 @@ function handleBadgeAfterRedemption() {
 		success: function() {
 			console.log('rendering new list');
 			let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-			$.get({
-				url: BADGE_LIST_URL,
-				beforeSend: function(xhr, settings) { 
-				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
-				},
-				success: function(badge) {
-					console.log(badge);
-					let badgeList = [];
-					for(let i=0; i<badge.length; i++) {
-						let badges = `<p>${badge[i].badgename}</br><span>${badge[i].badgeCost} Points</span></p>`;
-						badgeList.push(badges);
-					}
-					$('#redeem-page-badge-container').html(badgeList);
-				}	
-			});
 			$.get({
 				url: BADGE_LIST_URL,
 				beforeSend: function(xhr, settings) { 
@@ -498,7 +454,6 @@ function handleRedeemItClicks() {
 				handleBadgesEarnedAfterRedemption(redeemingFamilyMemberId, redeemingBadgeName, redeemingFamilyMemberName);
 				handlePointsAccruedAfterRedemption(redeemingPointsAccrued, redeemingBadgeCost, redeemingFamilyMemberId);
 				let message = `<div class='new-box'><p>${redeemingBadgeName}</br>Redeemed by ${redeemingFamilyMemberName}<p></div>`;
-				console.log(message);
 				$('.create-container').html(message)
 			}
 			else {
@@ -544,19 +499,6 @@ function populateRedeemBadgePage() {
 	})
 }
 
-function handleRedeemBadgeButtonClick() {
-	$('#redeem-badge').on('click', event => {
-		console.log('redeem badge clicked');
-		$.get({
-			url: REDEEM_BADGE_URL,
-			success: function() {
-				console.log('success');
-				window.location.href = '/api/redeembadge';
-			}
-		});
-	});
-}
-
 function editBadge(data, badgeId) {
 	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 	$.ajax({
@@ -570,21 +512,6 @@ function editBadge(data, badgeId) {
 		contentType: 'application/json',
 		success: function() {
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-		$.get({
-			url: BADGE_LIST_URL,
-			beforeSend: function(xhr, settings) { 
-				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
-			},
-			success: function(badge) {
-				console.log(badge);
-				let badgeList = [];
-				for(let i=0; i<badge.length; i++) {
-					let badges = `<p>${badge[i].badgename}</br><span>${badge[i].badgeCost} Points</span></p>`;
-					badgeList.push(badges);
-				}
-				$('#edit-page-badge-container').html(badgeList);
-			}	
-		});
 		$.get({
 			url: BADGE_LIST_URL,
 			beforeSend: function(xhr, settings) { 
@@ -781,7 +708,6 @@ function handleChoreCompleteItClicks() {
 			handleChoreAfterCompletion();
 			handleChoresEarnedAfterCompletion(completingFamilyMemberName, completingFamilyMemberId, completedChoreName);
 			let message = `<div class='new-box'><p>${completedChoreName}</br>Completed by ${completingFamilyMemberName}<p></div>`;
-			console.log(message);
 			$('.create-container').html(message)
 		}, 1000);
 	});
@@ -818,19 +744,6 @@ function populateCompleteChorePage() {
 					familyList.push(families);
 				}
 				$('#family-dropdown').html(familyList);
-			}
-		});
-	});
-}
-
-function handleCompleteChoreButtonClicks() {
-	$('#complete-chore').on('click', event => {
-		console.log('complete chore clicked');
-		$.get({
-			url: COMPLETE_CHORE_URL,
-			success: function() {
-				console.log('success');
-				window.location.href = '/api/completechore';
 			}
 		});
 	});
@@ -929,7 +842,6 @@ function handleFamilyEditItButtonClicks() {
 				editBadgesEarned(badgesEarnedData, familyId);
 				editChoresCompleted(choresCompletedData, familyId);
 				let message = `<div class='new-box'><p>Family</br>Edited<p></div>`;
-				console.log(message);
 				$('.create-container').html(message);
 			}
 		});
@@ -952,17 +864,6 @@ function populateEditFamilyPage() {
 					familyList.push(family);
 				}
 				$('#family-edit-dropdown').html(familyList);
-			}
-		});
-	});
-}
-
-function handleEditFamilyButtonClicks() {
-	$('#edit-family').on('click', event => {
-		$.get({
-			url: EDIT_FAMILY_URL,
-			success: function() {
-				window.location.href = '/api/editfamily';
 			}
 		});
 	});
@@ -1033,7 +934,6 @@ function handleChoreEditItButtonClicks() {
 				console.log(data);
 				editChore(data, choreId);
 				let message = `<div class='new-box'><p>Chore</br>Edited<p></div>`;
-				console.log(message);
 				$('.create-container').html(message);
 			}
 		});
@@ -1056,17 +956,6 @@ function populateEditChorePage() {
 					choreList.push(chore);
 				}
 				$('#chore-edit-dropdown').html(choreList);
-			}
-		});
-	});
-}
-
-function handleEditChoreButtonClicks() {
-	$('#edit-chore').on('click', event => {
-		$.get({
-			url: EDIT_CHORE_URL,
-			success: function() {
-				window.location.href = '/api/editchore';
 			}
 		});
 	});
@@ -1112,7 +1001,6 @@ function handleFamilyDeleteItButtonClicks() {
 				console.log(familyId);
 				handleFamilyDeletion(familyId);
 				let message = `<div class='new-box'><p>${currentFamilyName}</br>Deleted<p></div>`;
-				console.log(message);
 				$('.create-container').html(message);
 			}
 		});
@@ -1135,19 +1023,6 @@ function populateDeleteFamilyPage() {
 					familyList.push(family);
 				}
 				$('#family-delete-dropdown').html(familyList);
-			}
-		});
-	});
-}
-
-function handleDeleteFamilyButtonClicks() {
-	$('#delete-family').on('click', event => {
-		console.log('delete family clicked');
-		$.get({
-			url: DELETE_FAMILY_URL,
-			success: function() {
-				console.log('success');
-				window.location.href = '/api/deletefamily';
 			}
 		});
 	});
@@ -1193,7 +1068,6 @@ function handleChoreDeleteItButtonClicks() {
 				console.log(choreId);
 				handleChoreDeletion(choreId);
 				let message = `<div class='new-box'><p>${currentChoreName}</br>Deleted<p></div>`;
-				console.log(message);
 				$('.create-container').html(message)
 			}
 		});
@@ -1221,19 +1095,6 @@ function populateDeleteChorePage() {
 	});
 }
 
-function handleDeleteChoreButtonClicks() {
-	$('#delete-chore').on('click', event => {
-		console.log('delete chore clicked');
-		$.get({
-			url: DELETE_CHORE_URL,
-			success: function() {
-				console.log('success');
-				window.location.href = '/api/deletechore';
-			}
-		});
-	});
-}
-
 function handleBadgeDeletion(badgeId) {
 	let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 	$.ajax({
@@ -1243,7 +1104,6 @@ function handleBadgeDeletion(badgeId) {
 			xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
 		},
 		success: function() {
-			console.log('badge deleted');
 			populateDeleteBadgePage();
 		}
 	});
@@ -1271,10 +1131,8 @@ function handleBadgeDeleteItButtonClicks() {
 					}
 				}
 				findObjectByKey(badge, "badgename", currentBadgeName);
-				console.log(badgeId);
 				handleBadgeDeletion(badgeId);
 				let message = `<div class='new-box'><p>${currentBadgeName}</br>Deleted<p></div>`;
-				console.log(message);
 				$('.create-container').html(message);
 			}
 		});
@@ -1290,7 +1148,6 @@ function populateDeleteBadgePage() {
 				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
 			},
 			success: function(badge) {
-				console.log(badge);
 				let badgeList = [];
 				for(let i=0; i<badge.length; i++) {
 					let badges = `<option>${badge[i].badgename}</option>`;
@@ -1333,23 +1190,18 @@ function handleBadgeEditItButtonClicks() {
 					}
 				}
 				findObjectByKey(badge, "badgename", currentBadgeName);
-				console.log(badgeId);
 				let newBadgeNameTarget = $(event.currentTarget).find('#badge-name');
 				let newBadgeName = newBadgeNameTarget.val();
 				newBadgeNameTarget.val('');
-				console.log(newBadgeName);
 				let newBadgeCostTarget = $(event.currentTarget).find('#badge-cost');
 				let newBadgeCost = newBadgeCostTarget.val();
 				newBadgeCostTarget.val('');
-				console.log(newBadgeCost);
 				let data = {};
 				data.badgename = newBadgeName.length > 0 ? newBadgeName : undefined;
 				data.badgeCost = newBadgeCost.length > 0 ? newBadgeCost : undefined;
 				data.id = badgeId;
-				console.log(data);
 				editBadge(data, badgeId);
 				let message = `<div class='new-box'><p>Prize</br>Edited<p></div>`;
-				console.log(message);
 				$('.create-container').html(message);
 			}
 		});
@@ -1365,7 +1217,6 @@ function populateEditBadgePage() {
 				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
 			},
 			success: function(badge) {
-				console.log(badge);
 				let badgeList = [];
 				for(let i=0; i<badge.length; i++) {
 					let badges = `<option>${badge[i].badgename}</option>`;
@@ -1386,7 +1237,6 @@ function populateBadgeDashboard() {
 				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
 			},
 			success: function(badge) {
-				console.log(badge);
 				let badgeList = [];
 				for(let i=0; i<badge.length; i++) {
 					let badges = `<div class='dashboard-list'><p>${badge[i].badgename}</br><span>${badge[i].badgeCost} Points</span></p></div>`;
@@ -1403,21 +1253,7 @@ function handleBadgeButtonClicks() {
 		$.get({
 			url: BADGE_DASHBOARD_URL,
 			success: function() {
-				console.log('success');
-				window.location.href = '/api/badgedashboard';
-			}
-		});
-	});
-}
-
-function handleCreateChoreButtonClicks() {
-	$('#create-chore').on('click', event => {
-		console.log('create chore clicked');
-		$.get({
-			url: CREATE_CHORES_URL,
-			success: function() {
-				console.log('success');
-				window.location.href = '/api/createchore';
+				window.location.href = '/badgedashboard';
 			}
 		});
 	});
@@ -1425,7 +1261,6 @@ function handleCreateChoreButtonClicks() {
 
 function populateChoreDashboard() {
 	$('#chores-pic').load('/views/choreDashboard.html', event => {
-		console.log('chore dashboard loaded');
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
 			url: CHORE_LIST_URL,
@@ -1450,8 +1285,7 @@ function handleChoreButtonClicks() {
 		$.get({
 			url: CHORE_DASHBOARD_URL,
 			success: function() {
-				console.log('success');
-				window.location.href = '/api/choredashboard';
+				window.location.href = 'choredashboard';
 			}
 		});
 	});
@@ -1466,7 +1300,6 @@ function populateFamilyDashboard() {
 				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
 			},
 			success: function(members) {
-				console.log(members);
 				let familyList = [];
 				for(let i=0; i<members.length; i++) {
 					let family = `<div class='dashboard-list'><p>${members[i].name}</br><span>${members[i].pointsAccrued} Points Accrued</span></p><div>`;
@@ -1483,8 +1316,7 @@ function handleFamilyButtonClicks() {
 		$.get({
 			url: FAMILY_DASHBOARD_URL,
 			success: function() {
-				console.log('success');
-				window.location.href = '/api/familydashboard';
+				window.location.href = '/familydashboard';
 			}
 		});
 	});
@@ -1492,15 +1324,14 @@ function handleFamilyButtonClicks() {
 
 function handleSplashLoginButtonClicks() {
 	$('#splash-login').on('click', event => {
-		console.log('login button clicked');
 		$.get({
 			url: LOGIN_URL,
 			success: function() {
 				if(document.cookie) {
-					window.location.href = 'api/dashboard';
+					window.location.href = 'dashboard';
 				}
 				else {
-					window.location.href = '/api/login';
+					window.location.href = 'login';
 				}
 			}
 		});
@@ -1516,7 +1347,7 @@ function handleFamilyDashboardDoneButtonClicks() {
 				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
 			},
 			success: function() {
-				window.location.href = '/api/familydashboard';
+				window.location.href = '/familydashboard';
 			}
 		});
 	});
@@ -1524,7 +1355,6 @@ function handleFamilyDashboardDoneButtonClicks() {
 
 function handleChoreDashboardDoneButtonClicks() {
 	$('#chore-arrow-back').on('click', event => {
-		console.log('back arrow clicked');
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
 			url: CHORE_DASHBOARD_URL,
@@ -1532,7 +1362,7 @@ function handleChoreDashboardDoneButtonClicks() {
 				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
 			},
 			success: function() {
-				window.location.href = '/api/choredashboard';
+				window.location.href = 'choredashboard';
 			}
 		});
 	});
@@ -1547,7 +1377,7 @@ function handleBadgeDashboardDoneButtonClicks() {
 				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
 			},
 			success: function() {
-				window.location.href = '/api/badgedashboard';
+				window.location.href = '/badgedashboard';
 			}
 		});
 	});
@@ -1565,31 +1395,23 @@ $(handleFamilyButtonClicks);
 $(handleFamilyCreationClicks);
 $(handleChoreCreationClicks);
 $(handleSplashLoginButtonClicks);
-$(handleCreateChoreButtonClicks);
 $(handleBackButtonClicks);
 $(handleBadgeEditItButtonClicks);
 $(populateEditBadgePage);
-$(handleRedeemBadgeButtonClick);
 $(populateRedeemBadgePage);
 $(handleRedeemItClicks);
 $(populateDeleteBadgePage);
 $(handleBadgeDeleteItButtonClicks);
-$(handleDeleteChoreButtonClicks);
 $(populateDeleteChorePage);
 $(handleChoreDeleteItButtonClicks);
-$(handleDeleteFamilyButtonClicks);
 $(populateDeleteFamilyPage);
 $(handleFamilyDeleteItButtonClicks);
-$(handleEditChoreButtonClicks);
 $(populateEditChorePage);
 $(handleChoreEditItButtonClicks);
-$(handleEditFamilyButtonClicks);
 $(populateEditFamilyPage);
 $(handleFamilyEditItButtonClicks);
-$(handleCompleteChoreButtonClicks);
 $(populateCompleteChorePage);
 $(handleChoreCompleteItClicks);
-$(handleViewCompletedChoresButtonClicks);
 $(populateViewRedeemedBadgesPage);
 $(populateViewCompletedChoresPage);
 $(populateBadgeDashboard);
