@@ -39,7 +39,7 @@ router.post('/', jsonParser, (req, res) => {
 			min: 1
 		},
 		password: {
-			min: 8,
+			min: 1,
 			max: 72
 		}
 	};
