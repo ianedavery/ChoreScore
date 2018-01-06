@@ -8,8 +8,10 @@ Screenshots:
 
 ## Get your kids excited about doing their chores.
 
-With ChoreScore your kids can earn points for every chore they complete, and use those points to redeem prizes of your choosing.
+With ChoreScore you can add chores with associated point values. When a chore is compeleted ChoreScore will assign those points to whoever completed the chore. 
 
-## Track who has done what chore.
+Those points can be redeemed for prizes of your choosing.
 
-ChoreScore allows you view what child has completed what chore, and what prizes have been redeemed. 
+## Technical
+
+This app was built with HTML, CSS, JavaScript, MongoDB, and Node.js.
