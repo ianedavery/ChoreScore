@@ -9,6 +9,11 @@ h1 {
 	font-family: 'Delius', cursive;
 	color: #ffffff;
 	padding: 20px;
+	text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+}
+
+legend {
+	margin-bottom: 0;
 }
 
 #login-form {

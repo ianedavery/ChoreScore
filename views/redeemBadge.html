@@ -17,15 +17,15 @@
 
 	<form id='redeem-badge-form'>
 		<fieldset>
-			<legend class='legend'>Redeem Badge</legend>
+			<legend class='legend'>Redeem Prize</legend>
 
 			<div class='form-group'>
-				<select form='redeem-badge-form' name='badge-to-redeem' id='redeem-dropdown' class='form-control two-field-dropdown' autofocus required>
+				<select form='redeem-badge-form' name='badge-to-redeem' id='redeem-dropdown' class='form-control two-field-dropdown' aria-label='prize to redeem' autofocus required>
 				</select>
 			</div>
 
 			<div class='form-group'>
-				<select form='redeem-badge-form' name='family-to-redeem' id='family-dropdown' class='form-control two-field-dropdown' autofocus required>
+				<select form='redeem-badge-form' name='family-to-redeem' id='family-dropdown' class='form-control two-field-dropdown' aria-label='family redeeming prize' autofocus required>
 				</select>
 			</div>
 
@@ -35,7 +35,7 @@
 	</form>
 
 	<div class='back-button-container'>
-		<button class='done-button' id='badge-arrow-back'><div class='arrow-back trigger'></div></button>
+		<button class='done-button' id='badge-arrow-back' aria-label='return to prize dashboard'><div class='arrow-back trigger'></div></button>
 	</div>
 
 	<main class='create-container'></main>

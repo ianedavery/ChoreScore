@@ -3,11 +3,11 @@
 <head>
 	<title>ChoreScore</title>
 	<meta charset='utf-8' content='create badges' name='description'>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css' integrity='sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb' crossorigin='anonymous'>
 	<link rel='stylesheet' type='text/css' href='/operations.css'>
-	<link href="https://fonts.googleapis.com/css?family=Delius" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Average+Sans" rel="stylesheet">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href='https://fonts.googleapis.com/css?family=Delius' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Average+Sans' rel='stylesheet'>
+	<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
 </head>
 <body>
 
@@ -17,16 +17,16 @@
 
 	<form id='badge-form'>
 		<fieldset>
-			<legend class='legend'>Create Badge</legend>
+			<legend class='legend'>Create Prize</legend>
 
 			<div class='form-group'>
 				<label for='badge-name'></label>
-				<input type='text' name='badge-name' class='form-control' id='badge-name' placeholder='New Prize Name' required autocomplete autofocus>
+				<input type='text' name='badge-name' class='form-control' id='badge-name' placeholder='New Prize Name' aria-label='New Prize Name' required autocomplete autofocus>
 			</div>
 
 			<div class='form-group'>
 				<label for='badge-cost'></label>
-				<input type='number' name='badge-cost' class='form-control' id='badge-cost' placeholder='New Prize Cost' required autocomplete>
+				<input type='number' name='badge-cost' class='form-control' id='badge-cost' placeholder='New Prize Cost' aria-label='New Prize Cost' required autocomplete>
 			</div>
 
 		</fieldset>
@@ -35,7 +35,7 @@
 	</form>
 
 	<div class='back-button-container'>
-		<button class='done-button'  id='badge-arrow-back'><div class='arrow-back trigger'></div></button>
+		<button class='done-button'  id='badge-arrow-back' aria-label='return to prize dashboard'><div class='arrow-back trigger'></div></button>
 	</div>
 
 	<main class='create-container'></main>

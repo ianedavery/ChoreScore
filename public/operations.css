@@ -15,6 +15,7 @@ h1 {
 	color: #ffffff;
 	padding: 20px 20px 0 20px;
 	margin-bottom: 0;
+	text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
 }
 
 fieldset {
@@ -58,6 +59,7 @@ fieldset {
 	text-align: center;
 	top: -20px;
 	font-size: 24px;
+	text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
 }
 
 .three-field-legend {
@@ -120,6 +122,15 @@ fieldset {
 	bottom: -124px;
 }
 
+.zero-field-create-container {
+	top: 105px;
+	bottom: 0;
+	z-index: 0;
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+    overflow-y: auto; /* Add vertical scrollbar */
+	height: 350px;
+}
+
 .one-field-create-container {
 	bottom: -92px;
 }
@@ -133,6 +144,14 @@ fieldset {
 	margin: auto;
 	text-align: center;
 	background-color: #ffffff;
+}
+
+.zero-field-create-container .new-box {
+	margin-bottom: 20px;
+}
+
+.zero-field-create-container .new-box:last-child {
+	margin-bottom: 60px;
 }
 
 p {
@@ -154,6 +173,10 @@ p {
 	bottom: -250px;
 	z-index: 3;
 	width: auto;
+}
+
+.zero-field-done-button {
+	bottom: -510px;
 }
 
 .one-field-done-button {
@@ -231,6 +254,9 @@ p {
 	.new-box {
 	    width: 30%;
     }
+    .zero-field-done-button {
+		bottom: -504px;
+	}
     .one-field-done-button {
 		bottom: -304px;
 	}

@@ -268,7 +268,7 @@ function handleBackButtonClicks() {
 }
 
 function populateViewRedeemedBadgesPage() {
-	$('#redeemed-badge-container').load('/views/viewRedeemedBadges.html', event => {
+	$('#populate-redeemed-prizes-trigger').load('/views/viewRedeemedBadges.html', event => {
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
 			url: BADGES_EARNED_URL,
@@ -279,30 +279,17 @@ function populateViewRedeemedBadgesPage() {
 				console.log(badges);
 				let badgeList = [];
 				for(let i=0; i<badges.length; i++) {
-					let badge = `<p>${badges[i].badgeName}</br><span>Earned By: ${badges[i].earnedBy}</span></p>`;
+					let badge = `<div class='new-box'><p>${badges[i].badgeName}</br><span>Earned By: ${badges[i].earnedBy}</span></p></div>`;
 					badgeList.push(badge);
 				}
-				$('#redeemed-badge-container').html(badgeList);
-			}
-		});
-	});
-}
-
-function handleViewRedeemedBadgesButtonClicks() {
-	$('#view-redeemed-badges').on('click', event => {
-		console.log('view redeemed badges button clicked');
-		$.get({
-			url: VIEW_REDEEMED_BADGES_URL,
-			success: function() {
-				console.log('success');
-				window.location.href = '/api/redeemedbadges';
+				$('.create-container').html(badgeList);
 			}
 		});
 	});
 }
 
 function populateViewCompletedChoresPage() {
-	$('#completed-chores-container').load('/views/viewCompletedChores.html', event => {
+	$('#populate-trigger').load('/views/viewCompletedChores.html', event => {
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
 			url: CHORES_COMPLETED_URL,
@@ -313,10 +300,10 @@ function populateViewCompletedChoresPage() {
 				console.log(chores);
 				let choreList = [];
 				for(let i=0; i<chores.length; i++) {
-					let chore = `<p>${chores[i].choreName}</br><span>Completed By: ${chores[i].completedBy}</span></p>`;
+					let chore = `<div class='new-box'><p>${chores[i].choreName}</br><span>Completed By: ${chores[i].completedBy}</span></p></div>`;
 					choreList.push(chore);
 				}
-				$('#completed-chores-container').html(choreList);
+				$('.create-container').html(choreList);
 			}
 		});
 	});
@@ -1537,6 +1524,7 @@ function handleFamilyDashboardDoneButtonClicks() {
 
 function handleChoreDashboardDoneButtonClicks() {
 	$('#chore-arrow-back').on('click', event => {
+		console.log('back arrow clicked');
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
 			url: CHORE_DASHBOARD_URL,
@@ -1601,7 +1589,6 @@ $(handleFamilyEditItButtonClicks);
 $(handleCompleteChoreButtonClicks);
 $(populateCompleteChorePage);
 $(handleChoreCompleteItClicks);
-$(handleViewRedeemedBadgesButtonClicks);
 $(handleViewCompletedChoresButtonClicks);
 $(populateViewRedeemedBadgesPage);
 $(populateViewCompletedChoresPage);

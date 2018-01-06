@@ -3,39 +3,39 @@
 <head>
 	<title>ChoreScore</title>
 	<meta charset='utf-8' content='family dashboard' name='description'>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css' integrity='sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb' crossorigin='anonymous'>
 	<link rel='stylesheet' type='text/css' href='/subDashboard.css'>
-	<link href="https://fonts.googleapis.com/css?family=Delius" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Average+Sans" rel="stylesheet">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href='https://fonts.googleapis.com/css?family=Delius' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Average+Sans' rel='stylesheet'>
+	<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
 </head>
 <body>
 
 	<header>
 		<h1>ChoreScore</h1>
-		<img src='/images/childicon.png' id='child-pic'>
+		<img src='/images/childicon.png' id='child-pic' alt='child icon'>
 	</header>
 
 	<nav role='navigation'>
-	  <div id='menuToggle' autofocus>
+		 <div id='menuToggle'>
 
-	    <input type="checkbox"/>
+		    <input type='checkbox' aria-label='hamburger menu' autofocus>
 
-	    <span></span>
-	    <span></span>
-	    <span></span>
+		    <span></span>
+		    <span></span>
+		    <span></span>
 
-	    <ul id='menu'>
-	      <a href='/api/createfamily'><li>Add Family</li></a>
-	      <a href='/api/editfamily'><li>Edit Family</li></a>
-	      <a href='/api/deletefamily'><li>Delete Family</li></a>
-	    </ul>
-	  </div>
+		    <ul id='menu'>
+		      <li><a href='/api/createfamily'>Add Family</a></li>
+		      <li><a href='/api/editfamily'>Edit Family</a></li>
+		      <li><a href='/api/deletefamily'>Delete Family</a></li>
+		    </ul>
+		 </div>
 	</nav>
 
 	<main class='dashboard-container'></main>
 
-	<button id='back-button'><div class='arrow-back trigger'></div></button>
+	<button id='back-button' aria-label='return to dashboard'><div class='arrow-back trigger'></div></button>
 
 	<div id='ground'>
 		<img src='/images/curve.png' alt='image of the ground' id='rolling-hills'>

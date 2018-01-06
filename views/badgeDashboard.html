@@ -13,31 +13,31 @@
 
 	<header>
 		<h1>ChoreScore</h1>
-		<img src='/images/prize.png' id='badge-pic'>
+		<img src='/images/prize.png' id='badge-pic' alt='trophy icon'>
 	</header>
 
 	<nav role='navigation'>
-	  <div id='menuToggle' autofocus>
+		 <div id='menuToggle'>
 
-	    <input type='checkbox'/>
+		    <input type='checkbox' aria-label='hamburger menu' autofocus>
 
-	    <span></span>
-	    <span></span>
-	    <span></span>
+		    <span></span>
+		    <span></span>
+		    <span></span>
 
-	    <ul id="menu">
-	      <a href='/api/createbadge'><li>Create a Prize</li></a>
-	      <a href='/api/editbadge'><li>Edit a Prize</li></a>
-	      <a href='/api/redeembadge'><li>Redeem a Prize</li></a>
-	      <a href='/api/deletebadge'><li>Delete a Prize</li></a>
-	      <a href='/api/redeemedbadges'><li>View Redeemed Prizes</li></a>
-	    </ul>
-	  </div>
+		    <ul id='menu'>
+		      <li><a href='/api/createbadge'>Create a Prize</a></li>
+		      <li><a href='/api/editbadge'>Edit a Prize</a></li>
+		      <li><a href='/api/redeembadge'>Redeem a Prize</a></li>
+		      <li><a href='/api/deletebadge'>Delete a Prize</a></li>
+		      <li><a href='/api/redeemedbadges'>View Redeemed Prizes</a></li>
+		    </ul>
+		 </div>
 	</nav>
 
 	<main class='dashboard-container'></main>
 
-	<button id='back-button'><div class='arrow-back trigger'></div></button>
+	<button id='back-button' aria-label='return to dashboard'><div class='arrow-back trigger'></div></button>
 
 	<div id='ground'>
 		<img src='/images/curve.png' alt='image of the ground' id='rolling-hills'>

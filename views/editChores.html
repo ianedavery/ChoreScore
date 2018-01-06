@@ -3,11 +3,11 @@
 <head>
 	<title>ChoreScore</title>
 	<meta charset='utf-8' content='edit chores' name='description'>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css' integrity='sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb' crossorigin='anonymous'>
 	<link rel='stylesheet' type='text/css' href='/operations.css'>
-	<link href="https://fonts.googleapis.com/css?family=Delius" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Average+Sans" rel="stylesheet">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href='https://fonts.googleapis.com/css?family=Delius' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Average+Sans' rel='stylesheet'>
+	<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
 </head>
 <body>
 
@@ -19,19 +19,19 @@
 		<fieldset>
 			<legend class='legend three-field-legend'>Edit Chore</legend>
 
-			<div class="form-group">
-				<select form='edit-chore-form' name='chore-to-edit' id='chore-edit-dropdown' class='form-control' autofocus required>
+			<div class='form-group'>
+				<select form='edit-chore-form' name='chore-to-edit' id='chore-edit-dropdown' class='form-control' aria-label='chore to edit' autofocus required>
 				</select>
 			</div>
 
-			<div class="form-group">
+			<div class='form-group'>
 				<label for='chore-name'></label>
-				<input type='text' name='chore-name' id='chore-name' class='form-control' placeholder='New Chore Name' autocomplete>
+				<input type='text' name='chore-name' id='chore-name' class='form-control' placeholder='New Chore Name' aria-label='New Chore Name' autocomplete>
 			</div>
 
-			<div class="form-group">
+			<div class='form-group'>
 				<label for='chore-value'></label>
-				<input type='number' name='chore-value' id='chore-value' class='form-control' placeholder='New Chore Value' autocomplete>
+				<input type='number' name='chore-value' id='chore-value' class='form-control' placeholder='New Chore Value' aria-label='New Chore Value' autocomplete>
 			</div>
 
 		</fieldset>
@@ -40,7 +40,7 @@
 	</form>
 
 	<div class='back-button-container'>
-		<button class='done-button three-field-done-button' id='chore-arrow-back'><div class='arrow-back trigger'></div></button>
+		<button class='done-button three-field-done-button' id='chore-arrow-back' aria-label='return to chore dashboard'><div class='arrow-back trigger'></div></button>
 	</div>
 
 	<main class='create-container three-field-create-container'></main>

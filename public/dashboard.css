@@ -1,4 +1,5 @@
-html, body {
+html, 
+body {
 	background-color: #83d0d8;
 	font-family: 'Average Sans', sans-serif;
 }
@@ -10,6 +11,7 @@ h1 {
 	color: #ffffff;
 	padding: 20px 20px 0 20px;
 	margin-bottom: 0;
+	text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;	
 }
 
 #dashboard-controls {
@@ -70,7 +72,7 @@ button:hover{
 
 #child-pic {
 	position: absolute;
-	top: 28px;
+	top: 26px;
 	left: 36px;
 }
 

@@ -1,4 +1,5 @@
-html, body { 
+html, 
+body { 
   	background: url('images/catt-liu-1625.jpg') no-repeat center center fixed; 
   	-webkit-background-size: cover;
   	-moz-background-size: cover;
@@ -35,7 +36,8 @@ header p {
 	color: white;
 }
 
-.splash-buttons:hover, #sign-up-button:hover {
+.splash-buttons:hover, 
+#sign-up-button:hover {
 	cursor: pointer;
 }
 
@@ -86,10 +88,6 @@ header p {
 	border-bottom: 30px solid #fcd43e;
 }
 
-#arrow-up:hover {
-	cursor: pointer;
-}
-
 #arrow-down {
     border: solid #fcd43e;
     border-width: 0 3px 3px 0;
@@ -97,7 +95,7 @@ header p {
     padding: 30px;
 }
 
-#arrow-down:hover {
+.trigger:hover {
 	cursor: pointer;
 }
 
@@ -125,7 +123,8 @@ header p {
 	height: 100%;
 }
 
-#inner-left-container, #inner-right-container {
+#inner-left-container, 
+#inner-right-container {
 	border: none;
 	padding: 0;
 }
@@ -154,6 +153,7 @@ h2 {
 	font-family: 'Delius', cursive;
 	font-size: 3rem;
 	color: #ffffff;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
 }
 
 ul {
@@ -176,12 +176,14 @@ li {
 	padding: 0;
 }
 
-.split-form, .split-form-button {
+.split-form, 
+.split-form-button {
 	width: 80%;
 	margin: auto;
 }
 
-.form-control, #sign-up-button {
+.form-control, 
+#sign-up-button {
 	height: 50px;
 	border: none;
 	border-radius: 0;

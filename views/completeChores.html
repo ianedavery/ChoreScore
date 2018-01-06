@@ -3,11 +3,11 @@
 <head>
 	<title>ChoreScore</title>
 	<meta charset='utf-8' content='complete chores' name='description'>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css' integrity='sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb' crossorigin='anonymous'>
 	<link rel='stylesheet' type='text/css' href='/operations.css'>
-	<link href="https://fonts.googleapis.com/css?family=Delius" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Average+Sans" rel="stylesheet">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href='https://fonts.googleapis.com/css?family=Delius' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Average+Sans' rel='stylesheet'>
+	<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
 </head>
 <body>
 
@@ -20,12 +20,12 @@
 			<legend class='legend'>Complete a Chore</legend>
 
 			<div class='form-group'>
-				<select form='complete-chore-form' name='chore-to-complete' id='complete-dropdown' class='form-control two-field-dropdown' autofocus required>
+				<select form='complete-chore-form' name='chore-to-complete' id='complete-dropdown' class='form-control two-field-dropdown' aria-label='chore to complete' autofocus required>
 				</select>
 			</div>
 
 			<div class='form-group'>
-				<select form='complete-chore-form' name='family-to-complete' id='family-dropdown' class='form-control two-field-dropdown' autofocus required>
+				<select form='complete-chore-form' name='family-to-complete' id='family-dropdown' class='form-control two-field-dropdown' aria-label='family completing chore' autofocus required>
 				</select>
 			</div>
 
@@ -35,7 +35,7 @@
 	</form>
 
 	<div class='back-button-container'>
-		<button class='done-button' id='chore-arrow-back'><div class='arrow-back trigger'></div></button>
+		<button class='done-button' id='chore-arrow-back' aria-label='return to chore dashboard'><div class='arrow-back trigger'></div></button>
 	</div>
 
 	<main class='create-container'></main>
