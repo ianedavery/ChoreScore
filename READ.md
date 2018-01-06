@@ -2,9 +2,10 @@
 
 Screenshots:
 
-![Alt text]()
-![Alt text]()
-![Alt text]()
+![Alt text](https://github.com/ianedavery/chore-score/blob/master/screenshots/splashpage.png)
+![Alt text](https://github.com/ianedavery/chore-score/blob/master/screenshots/signup.png)
+![Alt text](https://github.com/ianedavery/chore-score/blob/master/screenshots/dashboard.png)
+![Alt text](https://github.com/ianedavery/chore-score/blob/master/screenshots/prizedashboard.png)
 
 ## Get your kids excited about doing their chores.
 
