@@ -19,22 +19,9 @@ const BADGE_LIST_URL = '/badge';
 const CHORE_LIST_URL = '/chore';
 const FAMILY_URL = '/family';
 const BADGES_EARNED_URL = '/api/badgesearned';
-//const SIGNUP_URL = '/api/signup';
 const LOGIN_URL = '/login';
 const DASHBOARD_URL = '/dashboard';
-//const CREATE_CHORES_URL = '/api/createchore';
-//const CREATE_FAMILY_URL = '/api/createfamily';
-//const EDIT_BADGE_URL = '/api/editbadge';
-//const REDEEM_BADGE_URL = '/api/redeembadge';
-//const DELETE_BADGE_URL = '/api/deletebadge';
-//const DELETE_CHORE_URL = '/api/deletechore';
-//const DELETE_FAMILY_URL = '/api/deletefamily';
-//const EDIT_CHORE_URL = '/api/editchore';
-//const EDIT_FAMILY_URL = '/api/editfamily';
-//const COMPLETE_CHORE_URL = '/api/completechore';
-const CHORES_COMPLETED_URL = '/api/chorescompleted'
-//const VIEW_COMPLETED_CHORES_URL = '/api/completedchores';
-//const VIEW_REDEEMED_BADGES_URL = '/api/redeemedbadges';
+const CHORES_COMPLETED_URL = '/api/chorescompleted';
 const BADGE_DASHBOARD_URL = '/badgedashboard';
 const CHORE_DASHBOARD_URL = '/choredashboard';
 const FAMILY_DASHBOARD_URL = '/familydashboard';
@@ -1238,11 +1225,16 @@ function populateBadgeDashboard() {
 			},
 			success: function(badge) {
 				let badgeList = [];
-				for(let i=0; i<badge.length; i++) {
-					let badges = `<div class='dashboard-list'><p>${badge[i].badgename}</br><span>${badge[i].badgeCost} Points</span></p></div>`;
-					badgeList.push(badges);
+				if(badge.length === 0) {
+					$('.dashboard-container').html(`<div class='dashboard-list'><p id='sorry-message'>You currently have no prizes. To create a prize, select the menu to the right and click 'Create Prize'.</p></div>`);
 				}
-				$('.dashboard-container').html(badgeList);
+				else {
+					for(let i=0; i<badge.length; i++) {
+						let badges = `<div class='dashboard-list'><p>${badge[i].badgename}</br><span>${badge[i].badgeCost} Points</span></p></div>`;
+						badgeList.push(badges);
+					}
+					$('.dashboard-container').html(badgeList);	
+				}
 			}	
 		});
 	});
@@ -1270,11 +1262,16 @@ function populateChoreDashboard() {
 			success: function(chores) {
 				console.log(chores);
 				let choreList = [];
-				for(let i=0; i<chores.length; i++) {
-					let chore = `<div class='dashboard-list'><p>${chores[i].chore}</br><span>${chores[i].pointValue} Points</span></p></div>`;
-					choreList.push(chore);
+				if(chores.length === 0) {
+					$('.dashboard-container').html(`<div class='dashboard-list'><p id='sorry-message'>You currently have no chores. To create a chore, select the menu to the right and click 'Create Chore'.</p></div>`);
 				}
-				$('.dashboard-container').html(choreList);
+				else {
+					for(let i=0; i<chores.length; i++) {
+						let chore = `<div class='dashboard-list'><p>${chores[i].chore}</br><span>${chores[i].pointValue} Points</span></p></div>`;
+						choreList.push(chore);
+					}
+					$('.dashboard-container').html(choreList);	
+				}
 			}	
 		});
 	});
@@ -1301,11 +1298,16 @@ function populateFamilyDashboard() {
 			},
 			success: function(members) {
 				let familyList = [];
-				for(let i=0; i<members.length; i++) {
-					let family = `<div class='dashboard-list'><p>${members[i].name}</br><span>${members[i].pointsAccrued} Points Accrued</span></p><div>`;
-					familyList.push(family);
+				if(members.length === 0) {
+					$('.dashboard-container').html(`<div class='dashboard-list'><p id='sorry-message'>You currently have no family. To add a family member, select the menu to the right and click 'Add Family'.</p></div>`);
 				}
-				$('.dashboard-container').html(familyList);
+				else {
+					for(let i=0; i<members.length; i++) {
+						let family = `<div class='dashboard-list'><p>${members[i].name}</br><span>${members[i].pointsAccrued} Points Accrued</span></p><div>`;
+						familyList.push(family);
+					}
+					$('.dashboard-container').html(familyList);	
+				}
 			}	
 		});
 	});

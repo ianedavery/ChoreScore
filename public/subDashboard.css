@@ -149,6 +149,11 @@ a {
   background-color: #ffffff;
 }
 
+#sorry-message {
+  font-size: 20px;
+  padding: 10px;
+}
+
 #back-button {
 	position: absolute;
 	background-color: #83d0d8;
@@ -196,4 +201,8 @@ a {
     .dashboard-container {
       top: 220px;
     }
+    #sorry-message {
+      font-size: 22px;
+      padding: 10px;
+  }
 }
