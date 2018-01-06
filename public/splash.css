@@ -156,15 +156,14 @@ h2 {
     text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
 }
 
-ul {
-	padding-left: 60px;
+p {
+	padding-left: 20px;
 	padding-right: 20px;
-	font-size: 18px;
-	list-style-type: none;
+	font-size: 17px;
+	text-align: center;
 }
 
 li {
-	text-align: left;
 	margin-top: 5px;
 }
 
@@ -211,8 +210,8 @@ a {
 }
 
 @media screen and (min-width: 768px) {
-    ul {
-        font-size: 29px;
+    p {
+        font-size: 24px;
     }
     h2 {
     	font-size: 4rem;
