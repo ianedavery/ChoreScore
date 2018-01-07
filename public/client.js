@@ -1303,7 +1303,8 @@ function populateFamilyDashboard() {
 				}
 				else {
 					for(let i=0; i<members.length; i++) {
-						let family = `<div class='dashboard-list'><p>${members[i].name}</br><span>${members[i].pointsAccrued} Points Accrued</span></p><div>`;
+						let avatar = 'https://ui-avatars.com/api/?uppercase=false&rounded=true&background=f05928&color=ffffff&name=' + members[i].name;
+						let family = `<div class='dashboard-list'><img src=${avatar} alt='avatar' class='avatar'><p>${members[i].name}<br>${members[i].pointsAccrued} Points Accrued</p><div>`;
 						familyList.push(family);
 					}
 					$('.dashboard-container').html(familyList);	

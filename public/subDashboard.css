@@ -143,10 +143,14 @@ a {
 }
 
 .dashboard-list {
-  width: 60%;
+  width: 70%;
   margin: auto;
+  margin-bottom: 20px;
   text-align: center;
   background-color: #ffffff;
+  border-radius: 500px;
+  position: relative;
+  height: 66px;
 }
 
 #sorry-message {
@@ -174,6 +178,24 @@ a {
 	border-right: 30px solid #fcd43e;
 }
 
+.avatar, p {
+  display: inline-block;
+}
+
+.avatar {
+  position: absolute;
+  left: 1px;
+  bottom: 1px;
+}
+
+p {
+  margin-bottom: 0;
+  padding-left: 48px;
+  padding-top: 3px;
+  font-size: 20px;
+  line-height: 28px;
+}
+
 #rolling-hills {
 	display: none;
 }
@@ -196,7 +218,15 @@ a {
    		z-index: -10;
     }
     .dashboard-list {
-      width: 38%;
+      width: 36%;
+    }
+    p {
+      font-size: 24px;
+      padding-top: 0;
+      line-height: 30px; 
+    }
+    br {
+      margin-top: 0;
     }
     .dashboard-container {
       top: 220px;
