@@ -25,6 +25,7 @@ const CHORES_COMPLETED_URL = '/api/chorescompleted';
 const BADGE_DASHBOARD_URL = '/badgedashboard';
 const CHORE_DASHBOARD_URL = '/choredashboard';
 const FAMILY_DASHBOARD_URL = '/familydashboard';
+const SPLASH_URL = '/';
 
 function userRegistration(user) {
 	$.ajax({
@@ -1387,6 +1388,29 @@ function handleBadgeDashboardDoneButtonClicks() {
 	});
 }
 
+function handleLoginBackButtonClicks() {
+	$('#login-arrow-back').on('click', event => {
+		$.get({
+			url: SPLASH_URL,
+			success: function() {
+				window.location.href = '/';
+			}
+		});
+	});
+}
+
+function handleSignout() {
+	$('#signout-button').on('click', event => {
+		document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+		$.get({
+			url: SPLASH_URL,
+			success: function() {
+				window.location.href = '/';
+			}
+		});
+	});
+}
+
 $('.trigger').click(function() {
   	$('.slider').toggleClass('close');
 });
@@ -1428,3 +1452,5 @@ $(populateChoreDashboard);
 $(handleBadgeDashboardDoneButtonClicks);
 $(handleChoreDashboardDoneButtonClicks);
 $(handleFamilyDashboardDoneButtonClicks);
+$(handleLoginBackButtonClicks);
+$(handleSignout);

@@ -76,6 +76,22 @@ button:hover{
 	left: 36px;
 }
 
+#signout-button-container {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	text-align: right;
+}
+
+#signout-button {
+	background-color: #fcd43e;
+	border: none;
+	font-size: 22px;
+	width: 105px;
+	height: 45px;
+	padding: 5px 10px 5px 10px;
+}
+
 #rolling-hills {
 	display: none;
 }
@@ -84,6 +100,14 @@ button:hover{
     h1 {
    		font-size: 65px;
    		margin-bottom: 70px;
+    }
+    #signout-button-container {
+    	text-align: center;
+    	bottom: 70px;
+    }
+    #signout-button {
+		font-size: 25px;
+		width: 112px;
     }
   	#rolling-hills {
   		display: inline;

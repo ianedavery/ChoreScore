@@ -37,6 +37,34 @@ button {
 	background-color: #f05928;
 }
 
+.back-button-container {
+	position: relative;
+	width: 100%;
+	text-align: center;
+}
+
+.done-button {
+	background-color: #a3bd3e;
+	border: none; 
+	position: fixed;
+	bottom: 50px;
+	z-index: 3;
+	width: auto;
+}
+
+.arrow-back {
+	margin: auto;
+  	width: 0; 
+	height: 0; 
+	border-bottom: 30px solid transparent;
+ 	border-top: 30px solid transparent;
+	border-right: 30px solid #fcd43e;
+}
+
+.arrow-back:hover {
+	cursor: pointer;
+}
+
 img {
 	width: 100%;
 	height: 250px;
