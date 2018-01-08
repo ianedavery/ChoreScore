@@ -55,11 +55,10 @@ fieldset {
 
 .legend {
 	position: absolute;
-	color: #ffffff;
+	color: black;
 	text-align: center;
 	top: -20px;
 	font-size: 24px;
-	text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
 }
 
 .three-field-legend {
@@ -140,10 +139,17 @@ fieldset {
 }
 
 .new-box {
-	width: 60%;
+	width: 80%;
 	margin: auto;
 	text-align: center;
 	background-color: #ffffff;
+	border-radius: 500px;
+	position: relative;
+	height: auto;
+}
+
+.new-avatar-box {
+	height: 66px;
 }
 
 .zero-field-create-container .new-box {
@@ -154,9 +160,21 @@ fieldset {
 	margin-bottom: 60px;
 }
 
+.avatar, p {
+  display: inline-block;
+}
+
+.avatar {
+  position: absolute;
+  left: 1px;
+  bottom: 1px;
+}
+
 p {
-	font-size: 22px;
-	margin: 0;
+  margin-bottom: 0;
+  padding-top: 3px;
+  font-size: 20px;
+  line-height: 28px;
 }
 
 .back-button-container {
@@ -165,27 +183,27 @@ p {
 	text-align: center;
 }
 
-.done-button, 
-.one-field-done-button {
+.done-button {
 	background-color: #a3bd3e;
 	border: none; 
-	position: absolute;
-	bottom: -250px;
+	position: fixed;
+	bottom: 50px;
 	z-index: 3;
 	width: auto;
 }
 
-.zero-field-done-button {
+/*.zero-field-done-button {
 	bottom: -510px;
-}
+}*/
 
-.one-field-done-button {
-	bottom: -307px;
-}
+/*.one-field-done-button {
+	position: fixed;
+	bottom: 50px;
+}*/
 
-.three-field-done-button {
+/*.three-field-done-button {
 	bottom: -262px;
-}
+}*/
 
 .arrow-back {
 	margin: auto;
@@ -254,13 +272,14 @@ p {
 	.new-box {
 	    width: 30%;
     }
-    .zero-field-done-button {
+    /*.zero-field-done-button {
 		bottom: -504px;
 	}
     .one-field-done-button {
-		bottom: -304px;
+		position: fixed;
+		bottom: 50px;
 	}
 	.three-field-done-button {
 		bottom: -246px;
-	}
+	}*/
 }

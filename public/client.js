@@ -185,8 +185,9 @@ function checkIfFamilyAlreadyExists(name) {
 			}
 			else {
 				createFamily(name);
+				let avatar = 'https://ui-avatars.com/api/?uppercase=false&rounded=true&background=f05928&color=ffffff&name=' + name.name;
 				let messageName = name.name;
-				let message = `<div class='new-box'><p>${messageName}</br>Created<p></div>`;
+				let message = `<div class='new-box new-avatar-box'><img src=${avatar} alt='avatar' class='avatar'><p>${messageName}</br>Created<p></div>`;
 				$('.create-container').html(message)
 			}
 		}		
@@ -1226,7 +1227,7 @@ function populateBadgeDashboard() {
 			success: function(badge) {
 				let badgeList = [];
 				if(badge.length === 0) {
-					$('.dashboard-container').html(`<div class='dashboard-list'><p id='sorry-message'>You currently have no prizes. To create a prize, select the menu to the right and click 'Create Prize'.</p></div>`);
+					$('.dashboard-container').html(`<div class='dashboard-list'><p id='sorry-message'>No prizes. To create a prize, select the menu to the right and click 'Create Prize'.</p></div>`);
 				}
 				else {
 					for(let i=0; i<badge.length; i++) {
@@ -1263,7 +1264,7 @@ function populateChoreDashboard() {
 				console.log(chores);
 				let choreList = [];
 				if(chores.length === 0) {
-					$('.dashboard-container').html(`<div class='dashboard-list'><p id='sorry-message'>You currently have no chores. To create a chore, select the menu to the right and click 'Create Chore'.</p></div>`);
+					$('.dashboard-container').html(`<div class='dashboard-list'><p id='sorry-message'>No chores. To create a chore, select the menu to the right and click 'Create Chore'.</p></div>`);
 				}
 				else {
 					for(let i=0; i<chores.length; i++) {
@@ -1299,12 +1300,12 @@ function populateFamilyDashboard() {
 			success: function(members) {
 				let familyList = [];
 				if(members.length === 0) {
-					$('.dashboard-container').html(`<div class='dashboard-list'><p id='sorry-message'>You currently have no family. To add a family member, select the menu to the right and click 'Add Family'.</p></div>`);
+					$('.dashboard-container').html(`<div class='dashboard-list'><p id='sorry-message'>No Family Added. To add a family member, select the menu to the right and click 'Add Family'.</p></div>`);
 				}
 				else {
 					for(let i=0; i<members.length; i++) {
 						let avatar = 'https://ui-avatars.com/api/?uppercase=false&rounded=true&background=f05928&color=ffffff&name=' + members[i].name;
-						let family = `<div class='dashboard-list'><img src=${avatar} alt='avatar' class='avatar'><p>${members[i].name}<br>${members[i].pointsAccrued} Points Accrued</p><div>`;
+						let family = `<div class='dashboard-list'><img src=${avatar} alt='avatar' class='avatar'><p class='family-avatar'>${members[i].name}<br>${members[i].pointsAccrued} Points Accrued</p><div>`;
 						familyList.push(family);
 					}
 					$('.dashboard-container').html(familyList);	
@@ -1392,10 +1393,14 @@ $('.trigger').click(function() {
 
 $(handleLogInRequests);
 $(handleRegistrationRequests);
+
 $(handleBadgeButtonClicks);
 $(handleBadgeCreationClicks);
+
 $(handleFamilyButtonClicks);
 $(handleFamilyCreationClicks);
+$(populateFamilyDashboard);
+
 $(handleChoreCreationClicks);
 $(handleSplashLoginButtonClicks);
 $(handleBackButtonClicks);
@@ -1420,7 +1425,6 @@ $(populateViewCompletedChoresPage);
 $(populateBadgeDashboard);
 $(handleChoreButtonClicks);
 $(populateChoreDashboard);
-$(populateFamilyDashboard);
 $(handleBadgeDashboardDoneButtonClicks);
 $(handleChoreDashboardDoneButtonClicks);
 $(handleFamilyDashboardDoneButtonClicks);

@@ -143,18 +143,18 @@ a {
 }
 
 .dashboard-list {
-  width: 70%;
+  width: 80%;
   margin: auto;
   margin-bottom: 20px;
   text-align: center;
   background-color: #ffffff;
   border-radius: 500px;
   position: relative;
-  height: 66px;
+  min-height: 66px;
 }
 
 #sorry-message {
-  font-size: 20px;
+  font-size: 21px;
   padding: 10px;
 }
 
@@ -190,10 +190,13 @@ a {
 
 p {
   margin-bottom: 0;
-  padding-left: 48px;
   padding-top: 3px;
   font-size: 20px;
   line-height: 28px;
+}
+
+.family-avatar {
+  padding-left: 48px;
 }
 
 #rolling-hills {
@@ -232,7 +235,7 @@ p {
       top: 220px;
     }
     #sorry-message {
-      font-size: 22px;
+      font-size: 20px;
       padding: 10px;
   }
 }
