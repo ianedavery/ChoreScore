@@ -1246,9 +1246,7 @@ function handleBadgeButtonClicks() {
 	$('#badges').on('click', event => {
 		$.get({
 			url: BADGE_DASHBOARD_URL,
-			success: function() {
-				window.location.href = '/badgedashboard';
-			}
+			success: setTimeout(function() {window.location.href = '/badgedashboard'}, 100)
 		});
 	});
 }
@@ -1283,9 +1281,7 @@ function handleChoreButtonClicks() {
 	$('#chores').on('click', event => {
 		$.get({
 			url: CHORE_DASHBOARD_URL,
-			success: function() {
-				window.location.href = 'choredashboard';
-			}
+			success: setTimeout(function() {window.location.href = '/choredashboard'}, 100)
 		});
 	});
 }
@@ -1320,9 +1316,7 @@ function handleFamilyButtonClicks() {
 	$('#family').on('click', event => {
 		$.get({
 			url: FAMILY_DASHBOARD_URL,
-			success: function() {
-				window.location.href = '/familydashboard';
-			}
+			success: setTimeout(function() {window.location.href = '/familydashboard'}, 100)
 		});
 	});
 }
