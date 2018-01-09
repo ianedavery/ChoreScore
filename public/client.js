@@ -54,13 +54,14 @@ function renderDashboard() {
 }
 
 function userLogIn(user) {
+	console.log(user);
 	$.ajax({
 		method: 'POST',
 		url: USER_LOGIN_URL,
 		data: JSON.stringify(user),
 		datatype: 'json',
 		contentType: 'application/json',
-		success: function() {
+		success: function() { 
 			renderDashboard();
 		}
 	});
