@@ -7,6 +7,19 @@ const {User} = require('./models');
 const router = express.Router();
 const jsonParser = bodyParser.json();
 
+
+router.get('/', (req, res) => {
+	User
+		.find()
+		.then(users => {
+			res.json(users.map(user => user.serialize()))
+		})
+	  	.catch(err => {
+	  		console.error(err);
+	  		res.status(500).json({message: 'Internal Server Error'});
+	 	});
+});
+
 //create a new user
 router.post('/', jsonParser, (req, res) => {
 	//checking that all required fields are included in request body

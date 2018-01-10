@@ -28,6 +28,7 @@ const FAMILY_DASHBOARD_URL = '/familydashboard';
 const SPLASH_URL = '/';
 
 function userRegistration(user) {
+	console.log(user);
 	$.ajax({
 		method: 'POST',
 		url: USER_REGISTRATION_URL,
@@ -131,7 +132,24 @@ function handleRegistrationRequests() {
 		user.username = username;
 		user.password = password;
 		console.log(user);
-		userRegistration(user);
+		$.get({
+			url: USER_REGISTRATION_URL,
+			success: function(users) {
+				console.log(users[0]);
+				console.log(user.username);
+				let usersArray = [];
+				let newUser = user.username;
+				for(let i=0; i<users.length; i++) {
+					usersArray.push(users[i].username);
+				}
+				if(usersArray.includes(newUser)) {
+					alert('That username already exists. Please choose another.');
+				}
+				else {
+					userRegistration(user);
+				}
+			}		
+		});
 	});
 }
 
@@ -183,7 +201,7 @@ function checkIfFamilyAlreadyExists(name) {
 				familyArray.push(family[i].name);
 			}
 			if(familyArray.includes(newName)) {
-				alert('user already exists');
+				alert('name already exists');
 			}
 			else {
 				createFamily(name);
