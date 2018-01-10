@@ -9,7 +9,7 @@ const should = chai.should();
 const {TEST_DATABASE_URL} = require('../config');
 const {Badge, Chore, Family} = require('../models');
 
-let cookie = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6IjVhMzAyOTEyMzc2Y2U0NWE4YzIxZmU2YyIsInVzZXJuYW1lIjoiZ3JlZW5zZXJ2byIsImZpcnN0TmFtZSI6IiIsImxhc3ROYW1lIjoiIn0sImlhdCI6MTUxNDQ5NDgwMywiZXhwIjoxNTE1MDk5NjAzLCJzdWIiOiJncmVlbnNlcnZvIn0.qDbUE6UAOqaXsaOgGKFSae-gw1xqPJvTKv6UowBRR14';
+let cookie = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6IjVhMzAyOTEyMzc2Y2U0NWE4YzIxZmU2YyIsInVzZXJuYW1lIjoiZ3JlZW5zZXJ2byJ9LCJpYXQiOjE1MTU2MDIzMDEsImV4cCI6MTUxNjIwNzEwMSwic3ViIjoiZ3JlZW5zZXJ2byJ9.m7DCvSkHFMrYD7mcLd_9w4FQohVPJAOPDSUTzSx1tH4';
 
 chai.use(chaiHttp);
 
@@ -30,7 +30,7 @@ describe('Root', function() {
 	});
 });
 
-/*function tearDownDb() {
+function tearDownDb() {
   return new Promise((resolve, reject) => {
     console.warn('Deleting database');
     mongoose.connection.dropDatabase()
@@ -69,7 +69,7 @@ describe('badge API resource', function() {
   	it('should return all existing badges', function() {
   		let res;
   		return chai.request(app)
-  			.get('/api/api/badge')
+  			.get('/badge')
   			.set('Authorization', 'Bearer ' + cookie)
   			.then(_res => {
   				res = _res;
@@ -89,7 +89,7 @@ describe('badge API resource', function() {
       		badgeCost: 10
     	};
     	return chai.request(app)
-    		.post('/api/api/badge')
+    		.post('/badge')
         .set('Authorization', 'Bearer ' + cookie)
     		.send(newBadge)
     		.then(function(res) {
@@ -108,7 +108,7 @@ describe('badge API resource', function() {
   			.then(post => {
   				updateData.id = post.id;
   				return chai.request(app)
-  					.put(`/api/api/badge/${post.id}`)
+  					.put(`/badge/${post.id}`)
             .set('Authorization', 'Bearer ' + cookie)
   					.send(updateData);
   			})
@@ -125,7 +125,7 @@ describe('badge API resource', function() {
   			.then(_post => {
   				post = _post;
   				return chai.request(app)
-  				.delete(`/api/api/badge/${post.id}`)
+  				.delete(`/badge/${post.id}`)
           .set('Authorization', 'Bearer ' + cookie)
   			})
   			.then(res => {
@@ -165,7 +165,7 @@ describe('chore API resource', function() {
   	it('should return all existing chores', function() {
   		let res;
   		return chai.request(app)
-  			.get('/api/api/chore')
+  			.get('/chore')
         .set('Authorization', 'Bearer ' + cookie)
   			.then(_res => {
   				res = _res;
@@ -185,7 +185,7 @@ describe('chore API resource', function() {
       		pointValue: 10
     	};
     	return chai.request(app)
-    		.post('/api/api/chore')
+    		.post('/chore')
         .set('Authorization', 'Bearer ' + cookie)
     		.send(newChore)
     		.then(function(res) {
@@ -204,7 +204,7 @@ describe('chore API resource', function() {
   			.then(post => {
   				updateData.id = post.id;
   				return chai.request(app)
-  					.put(`/api/api/chore/${post.id}`)
+  					.put(`/chore/${post.id}`)
             .set('Authorization', 'Bearer ' + cookie)
   					.send(updateData);
   			})
@@ -221,7 +221,7 @@ describe('chore API resource', function() {
   			.then(_post => {
   				post = _post;
   				return chai.request(app)
-  				.delete(`/api/api/chore/${post.id}`)
+  				.delete(`/chore/${post.id}`)
           .set('Authorization', 'Bearer ' + cookie)
   			})
   			.then(res => {
@@ -261,7 +261,7 @@ describe('family API resource', function() {
   	it('should return all existing family members', function() {
   		let res;
   		return chai.request(app)
-  			.get('/api/api/family')
+  			.get('/family')
         .set('Authorization', 'Bearer ' + cookie)
   			.then(_res => {
   				res = _res;
@@ -281,7 +281,7 @@ describe('family API resource', function() {
       		pointsAccrued: 10,
     	};
     	return chai.request(app)
-    		.post('/api/api/family')
+    		.post('/family')
         .set('Authorization', 'Bearer ' + cookie)
     		.send(newFamily)
     		.then(function(res) {
@@ -300,7 +300,7 @@ describe('family API resource', function() {
   			.then(post => {
   				updateData.id = post.id;
   				return chai.request(app)
-  					.put(`/api/api/family/${post.id}`)
+  					.put(`/family/${post.id}`)
             .set('Authorization', 'Bearer ' + cookie)
   					.send(updateData);
   			})
@@ -317,7 +317,7 @@ describe('family API resource', function() {
   			.then(_post => {
   				post = _post;
   				return chai.request(app)
-  				.delete(`/api/api/family/${post.id}`)
+  				.delete(`/family/${post.id}`)
           .set('Authorization', 'Bearer ' + cookie)
   			})
   			.then(res => {
@@ -325,4 +325,4 @@ describe('family API resource', function() {
   			});
   	});
   });
-});*/
+});

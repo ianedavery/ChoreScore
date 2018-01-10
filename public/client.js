@@ -165,7 +165,25 @@ function handleLogInRequests() {
 		let user = {};
 		user.username = username;
 		user.password = password;
-		userLogIn(user);
+		$.get({
+			url: USER_REGISTRATION_URL,
+			success: function(users) {
+				console.log(users[0]);
+				console.log(user.username);
+				let usersArray = [];
+				let newUser = user.username;
+				for(let i=0; i<users.length; i++) {
+					usersArray.push(users[i].username);
+				}
+				if(!(usersArray.includes(newUser))) {
+					alert('Incorrect username or password.');
+				}
+				else {
+					userLogIn(user);
+
+				}
+			}		
+		});
 	});
 }
 
@@ -1430,40 +1448,40 @@ $('.trigger').click(function() {
 
 $(handleLogInRequests);
 $(handleRegistrationRequests);
+$(handleSplashLoginButtonClicks);
+$(handleBackButtonClicks);
+$(handleLoginBackButtonClicks);
+$(handleSignout);
 
 $(handleBadgeButtonClicks);
 $(handleBadgeCreationClicks);
-
-$(handleFamilyButtonClicks);
-$(handleFamilyCreationClicks);
-$(populateFamilyDashboard);
-
-$(handleChoreCreationClicks);
-$(handleSplashLoginButtonClicks);
-$(handleBackButtonClicks);
 $(handleBadgeEditItButtonClicks);
 $(populateEditBadgePage);
 $(populateRedeemBadgePage);
 $(handleRedeemItClicks);
 $(populateDeleteBadgePage);
 $(handleBadgeDeleteItButtonClicks);
-$(populateDeleteChorePage);
-$(handleChoreDeleteItButtonClicks);
+$(populateViewRedeemedBadgesPage);
+$(populateBadgeDashboard);
+$(handleBadgeDashboardDoneButtonClicks);
+
+$(handleFamilyButtonClicks);
+$(handleFamilyCreationClicks);
+$(populateFamilyDashboard);
 $(populateDeleteFamilyPage);
 $(handleFamilyDeleteItButtonClicks);
-$(populateEditChorePage);
-$(handleChoreEditItButtonClicks);
 $(populateEditFamilyPage);
 $(handleFamilyEditItButtonClicks);
+$(handleFamilyDashboardDoneButtonClicks);
+
+$(handleChoreCreationClicks);
+$(populateDeleteChorePage);
+$(handleChoreDeleteItButtonClicks);
+$(populateEditChorePage);
+$(handleChoreEditItButtonClicks);
 $(populateCompleteChorePage);
 $(handleChoreCompleteItClicks);
-$(populateViewRedeemedBadgesPage);
 $(populateViewCompletedChoresPage);
-$(populateBadgeDashboard);
 $(handleChoreButtonClicks);
 $(populateChoreDashboard);
-$(handleBadgeDashboardDoneButtonClicks);
 $(handleChoreDashboardDoneButtonClicks);
-$(handleFamilyDashboardDoneButtonClicks);
-$(handleLoginBackButtonClicks);
-$(handleSignout);

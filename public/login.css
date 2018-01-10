@@ -46,8 +46,8 @@ button {
 .done-button {
 	background-color: #a3bd3e;
 	border: none; 
-	position: absolute;
-	bottom: -232px;
+	position: fixed;
+	bottom: 50px;
 	z-index: 3;
 	width: auto;
 }
