@@ -1036,13 +1036,12 @@ function handleFamilyDeleteItButtonClicks() {
 function populateDeleteFamilyPage() {
 	$('#delete-family-form').load('/views/deleteFamily.html', event => {
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-		$.get({
+		setTimeout(function() {$.get({
 			url: FAMILY_URL,
 			beforeSend: function(xhr, settings) { 
 				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
 			},
 			success: function(members) {
-				console.log(members);
 				let familyList = [];
 				for(let i=0; i<members.length; i++) {
 					let family = `<option>${members[i].name}</option>`;
@@ -1050,7 +1049,7 @@ function populateDeleteFamilyPage() {
 				}
 				$('#family-delete-dropdown').html(familyList);
 			}
-		});
+		});},1000);
 	});
 }
 
@@ -1297,7 +1296,6 @@ function populateChoreDashboard() {
 				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
 			},
 			success: function(chores) {
-				console.log(chores);
 				let choreList = [];
 				if(chores.length === 0) {
 					$('.dashboard-container').html(`<div class='dashboard-list'><p id='sorry-message'>No chores. To create a chore, select the menu to the right and click 'Create Chore'.</p></div>`);
