@@ -142,7 +142,7 @@ function seedChoreData() {
     seedData.push({
       chore: faker.lorem.sentence(),
       pointValue: 10,
-      createdBy: '5a302912376ce45a8c21fe6c'
+      createdBy: '5a506e1197293100144aebb1'
     });
   }
   return Chore.insertMany(seedData);
@@ -238,7 +238,7 @@ function seedFamilyData() {
     seedData.push({
       name: faker.name.firstName(),
       pointsAccrued: 10,
-      createdBy: '5a302912376ce45a8c21fe6c'
+      createdBy: '5a506e1197293100144aebb1'
     });
   }
   return Family.insertMany(seedData);
