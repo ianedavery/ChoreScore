@@ -8,9 +8,6 @@ const bodyParser = require('body-parser');
 const {Badge} = require('./models');
 const router = express.Router();
 const jsonParser = bodyParser.json();
-const mongoose = require('mongoose');
-
-mongoose.Promise = global.Promise;
 
 router.use(bodyParser.json());
 
