@@ -1036,7 +1036,7 @@ function handleFamilyDeleteItButtonClicks() {
 function populateDeleteFamilyPage() {
 	$('#delete-family-form').load('/views/deleteFamily.html', event => {
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-		setTimeout(function() {$.get({
+		$.get({
 			url: FAMILY_URL,
 			beforeSend: function(xhr, settings) { 
 				xhr.setRequestHeader('Authorization','Bearer ' + cookieValue); 
@@ -1049,7 +1049,7 @@ function populateDeleteFamilyPage() {
 				}
 				$('#family-delete-dropdown').html(familyList);
 			}
-		});},1000);
+		});
 	});
 }
 
@@ -1322,7 +1322,7 @@ function handleChoreButtonClicks() {
 }
 
 function populateFamilyDashboard() {
-	$('#child-pic').load('/views/deleteFamily.html', event => {
+	$('#family').load('/views/deleteFamily.html', event => {
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
 			url: FAMILY_URL,
