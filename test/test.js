@@ -9,7 +9,7 @@ const should = chai.should();
 const {TEST_DATABASE_URL} = require('../config');
 const {Badge, Chore, Family} = require('../models');
 
-let cookie = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6IjVhMzAyOTEyMzc2Y2U0NWE4YzIxZmU2YyIsInVzZXJuYW1lIjoiZ3JlZW5zZXJ2byJ9LCJpYXQiOjE1MTU2MDIzMDEsImV4cCI6MTUxNjIwNzEwMSwic3ViIjoiZ3JlZW5zZXJ2byJ9.m7DCvSkHFMrYD7mcLd_9w4FQohVPJAOPDSUTzSx1tH4';
+let cookie = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJJZCI6IjVhNTA2ZTExOTcyOTMxMDAxNDRhZWJiMSIsInVzZXJuYW1lIjoiam9lIn0sImlhdCI6MTUyNDA3NjUxMCwiZXhwIjoxNTI0NjgxMzEwLCJzdWIiOiJqb2UifQ.h2cdTKVCZuHH-bx8wrHDJtqTt7satHUiE1GQhHclvGE';
 
 chai.use(chaiHttp);
 
