@@ -9,7 +9,7 @@ Screenshots:
 
 ## Get your kids excited about doing their chores.
 
-With ChoreScore you can add chores with associated point values. When a chore is compeleted ChoreScore will assign those points to whoever completed the chore. 
+With ChoreScore, you can add chores with associated point values. When a chore is compeleted ChoreScore will assign those points to whoever completed the chore. 
 
 Those points can be redeemed for prizes of your choosing.
 
