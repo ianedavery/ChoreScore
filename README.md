@@ -44,7 +44,7 @@ Returns json data about all user's family members.
       });
     ```
 
-###Create new family member
+### Create new family member
 
 Add a new family member to the user's account.
 
