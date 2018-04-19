@@ -1322,7 +1322,7 @@ function handleChoreButtonClicks() {
 }
 
 function populateFamilyDashboard() {
-	$('#family-dashboard').load('/views/deleteFamily.html', setTimeout(function(event) {
+	$('#family-dashboard').load('../views/deleteFamily.html', event => {
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
 			url: FAMILY_URL,
@@ -1343,8 +1343,8 @@ function populateFamilyDashboard() {
 					$('.dashboard-container').html(familyList);	
 				}
 			}	
-		},1000);
-	}));
+		});
+	});
 }
 
 function handleFamilyButtonClicks() {
