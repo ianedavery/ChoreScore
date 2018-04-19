@@ -1321,7 +1321,7 @@ function handleChoreButtonClicks() {
 	});
 }
 
-function populateFamilyDashboard() {
+setTimeout( function populateFamilyDashboard() {
 	$('#family-dashboard').load('/views/deleteFamily.html', event => {
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
@@ -1345,7 +1345,7 @@ function populateFamilyDashboard() {
 			}	
 		});
 	});
-}
+},1000);
 
 function handleFamilyButtonClicks() {
 	$('#family').on('click', event => {
