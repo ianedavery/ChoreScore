@@ -1344,7 +1344,7 @@ function populateFamilyDashboard() {
 				}
 			}	
 		},1000);
-	});
+	}));
 }
 
 function handleFamilyButtonClicks() {
