@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req,res) => {
-  res.sendFile(__dirname +  '/views/redeemBadge.html');
+  res.sendFile(__dirname + '/views/redeemBadge.html');
 });
 
 module.exports = router;

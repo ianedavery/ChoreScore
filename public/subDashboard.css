@@ -136,7 +136,7 @@ a {
   	opacity: 1;
 }
 
-.dashboard-container {
+.dashboard-container, #badge-dashboard-container, #family-dashboard-container {
   position: absolute;
   width: 100%;
   top: 200px;

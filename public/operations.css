@@ -114,11 +114,30 @@ fieldset {
 	cursor: pointer;
 }
 
-.create-container {
+.create-container,
+.add-family-create-container, 
+#create-badge-create-container,
+.delete-family-create-container,
+.delete-badge-create-container,
+.create-chore-create-container,
+.edit-chore-create-container,
+.complete-chore-create-container,
+.delete-chore-create-container, 
+#edit-badge-create-container, 
+#redeem-badge-create-container,
+#edit-family-create-container {
 	position: absolute;
 	width: 100%;
 	z-index: 3;	
 	bottom: -124px;
+}
+
+#edit-family-create-container {
+	bottom: -153px;
+}
+
+#edit-badge-create-container {
+	bottom: -170px;
 }
 
 .zero-field-create-container {
@@ -127,7 +146,7 @@ fieldset {
 	z-index: 0;
     overflow-x: hidden;
     overflow-y: auto;
-	height: 350px;
+	height: 400px;
 }
 
 .one-field-create-container {
