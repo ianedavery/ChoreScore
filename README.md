@@ -153,6 +153,47 @@ Edits a user's family member.
       });
     ```
 
+### Delete a Family Member
+
+Delete a user's family member.
+
+  * **URL**
+    /family/:id
+
+  * **Method:**
+    `DELETE`
+
+  * **Success Response:**
+    * **Code:** 204 No Content
+
+  * **Error Response:**
+    * **Code:** 500 <br />
+      **Content:** `{message: 'Internal Server Error'}`
+
+    OR
+
+    * **Code:** 404 Not Found <br />
+      **Content:** `{message: 'Not Found'}`
+
+    OR
+
+    * **Code:** 401 Unauthorize <br />
+      **Content:** `{message: 'Unauthorized'}`
+
+  * **Sample Call:**
+
+    ```javascript
+      $.ajax({
+        url: '/family/' + id,
+        type: 'DELETE',
+        headers: {
+          'Authorization': 'Bearer ' + token
+        },
+        success: function(r) {
+          console.log(r);
+        }
+      });
+    ```
 
 Screenshots:
 
