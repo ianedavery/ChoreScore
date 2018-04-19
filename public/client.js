@@ -1322,7 +1322,7 @@ function handleChoreButtonClicks() {
 }
 
 function populateFamilyDashboard() {
-	$('#family-dashboard').load('../views/familyDashboard.html', event => {
+	$('#family-dashboard').load('familyDashboard.html', event => {
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
 			url: FAMILY_URL,
