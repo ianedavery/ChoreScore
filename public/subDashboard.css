@@ -142,6 +142,10 @@ a {
   top: 200px;
 }
 
+#badge-dashboard-container {
+  padding-top: 20px;
+}
+
 .dashboard-list {
   width: 80%;
   margin: auto;

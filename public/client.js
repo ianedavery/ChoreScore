@@ -1034,7 +1034,7 @@ function handleFamilyDeleteItButtonClicks() {
 }
 
 function populateDeleteFamilyPage() {
-	$('#delete-family-form').load('/views/deleteFamily.html', event => {
+	//$('#delete-family-form').load('/views/deleteFamily.html', event => {
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
 			url: FAMILY_URL,
@@ -1050,7 +1050,7 @@ function populateDeleteFamilyPage() {
 				$('#family-delete-dropdown').html(familyList);
 			}
 		});
-	});
+	//});
 }
 
 function handleChoreDeletion(choreId) {
@@ -1254,7 +1254,7 @@ function populateEditBadgePage() {
 }
 
 function populateBadgeDashboard() {
-	$('#badge-pic').load('/views/badgeDashboard.html', event => {
+	//$('#badge-pic').load('/views/badgeDashboard.html', event => {
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
 			url: BADGE_LIST_URL,
@@ -1271,11 +1271,11 @@ function populateBadgeDashboard() {
 						let badges = `<div class='dashboard-list'><p>${badge[i].badgename}</br><span>${badge[i].badgeCost} Points</span></p></div>`;
 						badgeList.push(badges);
 					}
-					$('.dashboard-container').html(badgeList);	
+					$('#badge-dashboard-container').html(badgeList);	
 				}
 			}	
 		});
-	});
+	//});
 }
 
 function handleBadgeButtonClicks() {
@@ -1288,7 +1288,7 @@ function handleBadgeButtonClicks() {
 }
 
 function populateChoreDashboard() {
-	$('#chores-pic').load('/views/choreDashboard.html', event => {
+	//$('#chores-pic').load('/views/choreDashboard.html', event => {
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
 			url: CHORE_LIST_URL,
@@ -1305,11 +1305,11 @@ function populateChoreDashboard() {
 						let chore = `<div class='dashboard-list'><p>${chores[i].chore}</br><span>${chores[i].pointValue} Points</span></p></div>`;
 						choreList.push(chore);
 					}
-					$('.dashboard-container').html(choreList);	
+					$('#chores-dashboard-container').html(choreList);	
 				}
 			}	
 		});
-	});
+	//});
 }
 
 function handleChoreButtonClicks() {
@@ -1321,8 +1321,8 @@ function handleChoreButtonClicks() {
 	});
 }
 
-setTimeout( function populateFamilyDashboard() {
-	$('#family-dashboard').load('/views/deleteFamily.html', event => {
+function populateFamilyDashboard() {
+	//$('#family-dashboard').load('/familyDashboard.html', function(event) {
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
 			url: FAMILY_URL,
@@ -1344,8 +1344,8 @@ setTimeout( function populateFamilyDashboard() {
 				}
 			}	
 		});
-	});
-},1000);
+	//});
+}
 
 function handleFamilyButtonClicks() {
 	$('#family').on('click', event => {
