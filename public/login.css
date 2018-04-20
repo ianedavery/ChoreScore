@@ -3,6 +3,10 @@ html, body {
 	font-family: 'Average Sans', sans-serif;
 }
 
+body {
+	position: relative;
+}
+
 h1 {
 	font-size: 55px;
 	text-align: center;
@@ -35,6 +39,17 @@ button {
 	width: 100%;
 	margin-top: 12px;
 	background-color: #f05928;
+}
+
+#demouser-container {
+	margin-top: 20px;
+	text-align: center;
+	position: absolute;
+	width: 100%;
+}
+
+#demouser {
+	font-size: 20px;
 }
 
 .back-button-container {
