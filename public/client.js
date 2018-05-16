@@ -278,7 +278,6 @@ function handleBackButtonClicks() {
 }
 
 function populateViewRedeemedBadgesPage() {
-	//$('#populate-redeemed-prizes-trigger').ready(function(event) {
 	if($('#populate-redeemed-prizes-trigger').length) {
 		let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		$.get({
@@ -295,7 +294,6 @@ function populateViewRedeemedBadgesPage() {
 				$('#view-redeemed-badges-container').html(badgeList);
 			}
 		});
-	//});
 	}
 }
 
