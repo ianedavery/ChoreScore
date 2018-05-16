@@ -106,16 +106,13 @@ header p {
 
 .slider {
   	position: absolute;
-  	width: 100vw;
   	height: 100vh;
   	top: 0;
   	overflow: hidden;
-  	background-color: white;
   	transition: all 1s;
 }
 
 .slider.close {
-  	top: 100vh;
   	height: 0;
 }
 
@@ -123,8 +120,7 @@ header p {
 	height: 100%;
 }
 
-#inner-left-container, 
-#inner-right-container {
+#inner-left-container {
 	border: none;
 	padding: 0;
 }
